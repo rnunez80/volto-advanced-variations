@@ -13,7 +13,7 @@ MAKEFLAGS+=--no-builtin-rules
 # Project settings
 
 DIR=$(shell basename $$(pwd))
-ADDON ?= "@plone-collective/volto-advanced-variations"
+ADDON ?= "volto-advanced-variations"
 
 # Recipe snippets for reuse
 

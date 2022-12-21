@@ -1,5 +1,5 @@
 {
-  "name": "@plone-collective/volto-advanced-variations",
+  "name": "volto-advanced-variations",
   "version": "0.1.0",
   "description": "volto-advanced-variations: Volto add-on",
   "main": "src/index.js",
