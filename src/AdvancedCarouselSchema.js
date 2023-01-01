@@ -52,6 +52,10 @@ export const advancedCarouselSchema = (props) => {
         ],
         default: 1,
       },
+       autoPlay: {
+        title: 'Auto Play',
+        type: 'boolean',
+      },
       autoplaySpeed: {
         title: 'Speed Autoplay',
         type: 'number',

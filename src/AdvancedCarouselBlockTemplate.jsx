@@ -144,7 +144,7 @@ const AdvancedCarouselBlockTemplate = ({
   const intl = useIntl();
   const TitleTag = titleTag ? titleTag : 'h3';
   const HeaderTag = headerTag ? headerTag : 'h3';
-  const AutoPlay = autoPlay ? autoPlay : '1';
+  const AutoPlay = autoPlay ? autoPlay : 'True';
   const AutoPlaySpeed = autoplaySpeed ? autoplaySpeed : '3';
   const sliderRef = React.createRef();
   const refForwarder = (ref) => {

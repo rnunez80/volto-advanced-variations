@@ -10,6 +10,7 @@ import {Grid, Image} from 'semantic-ui-react';
 import moment from 'moment';
 import {useIntl} from 'react-intl';
 
+
 const AdvancedListingBlockTemplate = ({
                                         items,
                                         moreLinkText,
