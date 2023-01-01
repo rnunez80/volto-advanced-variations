@@ -17,7 +17,7 @@ export const advancedCarouselSchema = (props) => {
       {
         id: 'carousel',
         title: 'Carousel/Slider Options',
-        fields: ['howManyColumns', 'slidesToScroll', 'autoPlay', 'autoplaySpeed', 'align'],
+        fields: ['howManyColumns', 'slidesToScroll', 'autoPlay', 'autoplaySpeed'],
       },
       {
         id: 'carouselDisplay',

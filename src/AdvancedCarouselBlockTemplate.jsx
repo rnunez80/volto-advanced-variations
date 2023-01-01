@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {ConditionalLink} from '@plone/volto/components';
 import {flattenToAppURL} from '@plone/volto/helpers';
 
 import DefaultImageSVG from './placeholder.png';
 import {isInternalURL} from '@plone/volto/helpers/Url/Url';
-import {Grid, Image, Label, Icon} from 'semantic-ui-react';
+import {Grid, Image, Label, Icon, Button} from 'semantic-ui-react';
 import moment from 'moment';
 import {useIntl} from 'react-intl';
 import loadable from '@loadable/component';
@@ -146,6 +146,19 @@ const AdvancedCarouselBlockTemplate = ({
   const HeaderTag = headerTag ? headerTag : 'h3';
   const AutoPlay = autoPlay ? autoPlay : '1';
   const AutoPlaySpeed = autoplaySpeed ? autoplaySpeed : '3';
+  const sliderRef = React.createRef();
+  const refForwarder = (ref) => {
+    sliderRef.current = ref;
+  };
+  const [isPlaying, setIsPlaying] = useState(true);
+  const togglePlay = () => {
+    if (isPlaying) {
+      sliderRef.current.slickPause();
+    } else {
+      sliderRef.current.slickPlay();
+    }
+    setIsPlaying(!isPlaying);
+  }
   moment.locale(intl.locale);
   return (
     <div className="advancedView">
@@ -153,7 +166,8 @@ const AdvancedCarouselBlockTemplate = ({
         {headerLink ? headerLink : header}
       </HeaderTag>}
 
-      <Slider className={'column' + howManyColumns}
+      <Slider ref={refForwarder}
+              className={'column' + howManyColumns}
               dots={true}
               infinite={true}
               lazyLoad={true}
@@ -162,7 +176,7 @@ const AdvancedCarouselBlockTemplate = ({
               slidesToScroll={slidesToScroll ? slidesToScroll : 1}
               autoplay={AutoPlay}
               autoplaySpeed={AutoPlaySpeed * 1000}
-              pauseOnHover={true}
+              pauseOnHover={false}
               arrows={true}
               responsive={howManyColumns >= 3 ? [
                 {
@@ -196,7 +210,7 @@ const AdvancedCarouselBlockTemplate = ({
               ]}
       >
         {['background'].includes(imageSide) && (
-          items.map((item) => (
+          items.map((item, index) => (
             <div className="backgroundimage">
               <ConditionalLink item={item} condition={!isEditMode}>
                 <div className="focuspoint">
@@ -326,6 +340,13 @@ const AdvancedCarouselBlockTemplate = ({
         )}
 
       </Slider>
+      <button className="ui circular button playpause" onClick={togglePlay}>
+        {isPlaying ? (<Image
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+"
+          alt="Pause"/>) : (<Image
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+"
+          alt="Play"/>)}
+      </button>
 
     </div>
   );
