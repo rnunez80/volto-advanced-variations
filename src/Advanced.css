@@ -26,6 +26,8 @@
 .backgroundimage .info-text h3,
 .backgroundimage .info-text h4 {
   color: #fff;
+  padding-left: 5px;
+  margin-left: -5px;
   margin-bottom: 5px;
   text-shadow: -1px -1px 4px #000, 1px -1px 4px #000, -1px 1px 4px #000, 1px 1px 4px #000;
 }
@@ -167,6 +169,12 @@
 
 /*  }*/
 /*}*/
+
+.backgroundimage a:hover img {
+  filter: blur(3px);
+  transition: 1s;
+}
+
 @media only screen and (max-width: 991px) {
   .advancedCarousel.has--stretch--stretch .advancedView {
     margin-left: 0;
@@ -216,8 +224,9 @@
     left: calc(50% - 50vw);
   }
 }
-@media screen and (min-width: 1791px){
-    body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar-collapsed) .stretch {
+
+@media screen and (min-width: 1791px) {
+  body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar-collapsed) .stretch {
     left: calc(50% - 80px);
   }
 
@@ -227,7 +236,7 @@
 }
 
 @media screen and (max-width: 766px) {
-    .view-editview .advancedView {
+  .view-editview .advancedView {
     max-width: calc(100vw - 28px) !important;
   }
 
@@ -236,6 +245,7 @@
     width: 100vw !important;
     margin: 0 !important
   }
+
   .advancedView .slick-prev {
     z-index: 2;
     transform: translateX(0);
@@ -306,9 +316,11 @@
 .slick-dots {
   bottom: 0em !important;
 }
+
 .advancedView.advancedList {
-    padding: 0 0.5em !important;
+  padding: 0 0.5em !important;
 }
+
 /* End Slick */
 
 /* start listing */
