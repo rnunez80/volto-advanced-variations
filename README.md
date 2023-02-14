@@ -36,6 +36,9 @@ Item Display Options
 2. `eventLocation` (_boolean_): Show event location.
 3. `effectiveDate` (_boolean_): Show effective date.
 
+## Screenshots
+[![screen recording](https://img.youtube.com/vi/KhnCCyNOu28/0.jpg)](https://youtu.be/KhnCCyNOu28)
+
 ## Example
 
 ![listing options](./listing-options.png)
