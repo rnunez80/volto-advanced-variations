@@ -1,7 +1,7 @@
 # volto-advanced-variations
 
 A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.org/volto/blocks/index.html) [add-on](https://6.dev-docs.plone.org/volto/addons/index.html) that add two new variations to the listing and search blocks.
-Based on codesyntax/volto-listingadvanced-variation this addon add events options including dates times and location, displaying this listing or search as a courusel, slider or image gallery.
+Based on codesyntax/volto-listingadvanced-variation this addon add events options including dates times and location, displaying this listing or search as a carousel/slider or image gallery.
 
 ## Advanced Listing properties
 
