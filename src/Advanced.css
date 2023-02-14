@@ -393,5 +393,5 @@
 button.ui.circular.button.playpause {
   position: absolute;
   background: transparent;
-  transform: translate(0, -80px);
+  transform: translate(0, -38px);
 }
