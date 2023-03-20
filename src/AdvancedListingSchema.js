@@ -17,7 +17,7 @@ export const advancedListingSchema = (props) => {
       {
         id: 'listingDisplay',
         title: intl.formatMessage(messages.itemDisplayOptions),
-        fields: ['titleTag', 'howManyColumns', 'imageSide', 'imageWidth', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate'],
+        fields: ['titleTag', 'howManyColumns', 'imageSide', 'imageWidth', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate','quote'],
       },
     ],
     properties: {
@@ -89,6 +89,10 @@ export const advancedListingSchema = (props) => {
       },
       eventLocation: {
         title: intl.formatMessage(messages.eventLocation),
+        type: 'boolean',
+      },
+      quote: {
+        title: 'Show as Quote',
         type: 'boolean',
       },
     },
