@@ -258,12 +258,14 @@ const AdvancedListingBlockTemplate = ({
                         />)}
                     </div>
                     <div className='info-text'>
-                {quote && <><blockquote>
-                  {item.description}</blockquote>
-                  <div className="styled-slate right has--align--right align styled"><ConditionalLink item={item} condition={!isEditMode}>
-                    - {item.title ? item.title : item.id}
-                  </ConditionalLink></div>
-                </>}
+                      {quote && <>
+                        <blockquote>
+                          {item.description}</blockquote>
+                        <div className='styled-slate right has--align--right align styled'><ConditionalLink item={item}
+                                                                                                            condition={!isEditMode}>
+                          - {item.title ? item.title : item.id}
+                        </ConditionalLink></div>
+                      </>}
                       {eventCard && <>{getEventCard(item)}</>}
                       {item.location && eventDate | eventTime &&
                         <span class='event-when'>{eventDate && <span className='start-date'>{getEventDate(item)}</span>}

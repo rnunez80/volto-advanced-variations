@@ -1,7 +1,7 @@
 import messages from './messages';
 
 export const advancedCarouselSchema = (props) => {
-  const {intl, schema, formData} = props;
+  const { intl, schema, formData } = props;
   // const imageWidth = ['right', 'left'].includes(formData.imageSide)
   //   ? ['imageWidth']
   //   : [];
@@ -22,7 +22,7 @@ export const advancedCarouselSchema = (props) => {
       {
         id: 'carouselDisplay',
         title: intl.formatMessage(messages.itemDisplayOptions),
-        fields: ['titleTag', 'imageSide', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate'],
+        fields: ['titleTag', 'imageSide', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate','quote'],
       },
     ],
     properties: {
@@ -52,7 +52,7 @@ export const advancedCarouselSchema = (props) => {
         ],
         default: 1,
       },
-       autoPlay: {
+      autoPlay: {
         title: 'Auto Play',
         type: 'boolean',
       },
@@ -69,7 +69,7 @@ export const advancedCarouselSchema = (props) => {
           [9, '9'],
           [10, '10'],
         ],
-        default: 5000
+        default: 5000,
       },
       align: {
         title: 'Alignment',
@@ -113,6 +113,10 @@ export const advancedCarouselSchema = (props) => {
       },
       eventCard: {
         title: 'Show Event Card',
+        type: 'boolean',
+      },
+      quote: {
+        title: 'Show as Quote',
         type: 'boolean',
       },
     },
