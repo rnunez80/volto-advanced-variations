@@ -330,7 +330,7 @@
 }
 
 .ui.one.column.grid.advanced-item .column {
-  padding: 0.5em;
+  padding: 0 0.5em 1em 0.5em;
   margin: 0;
 }
 
