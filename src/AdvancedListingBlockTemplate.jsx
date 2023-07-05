@@ -186,7 +186,7 @@ const AdvancedListingBlockTemplate = ({
                     {item.title ? item.title : item.id}
                   </ConditionalLink>
                 </TitleTag>}
-                {item.location && eventDate | eventTime &&
+                {item.start && eventDate | eventTime &&
                   <p className='event-when'>{eventDate && <span className='start-date'>{getEventDate(item)}</span>}
                     {eventTime && eventDate && <span> | </span>}
                     {eventTime && <span className='start-time'>{getEventTime(item)}</span>}</p> || null}

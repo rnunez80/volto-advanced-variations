@@ -247,7 +247,7 @@ const AdvancedCarouselBlockTemplate = ({
                     </ConditionalLink></div>
                   </>}
                   {eventCard && <>{getEventCard(item)}</>}
-                  {item.location && eventDate | eventTime &&
+                  {item.start && eventDate | eventTime &&
                     <span class='event-when'>{eventDate && <span className='start-date'>{getEventDate(item)}</span>}
                       {eventTime && eventDate && <span> | </span>}
                       {eventTime && <span className='start-time'>{getEventTime(item)}</span>}</span> || null}
