@@ -18,6 +18,12 @@
     "type": "git",
     "url": "git@github.com:rnunez80/volto-advanced-variations.git"
   },
+  "addons": [
+    "@eeacms/volto-listing-block"
+  ],
+  "dependencies": {
+    "@eeacms/volto-listing-block": "*"
+  },
   "bugs": {
     "url": "https://github.com/rnunez80/volto-advanced-variations/issues"
   },
