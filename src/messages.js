@@ -17,17 +17,9 @@ const messages = defineMessages({
     id: 'Header url',
     defaultMessage: 'Header url or object',
   },
-  headerUrlDescription: {
-    id: 'Header url description',
-    defaultMessage: 'Paste an external link or a plone object',
-  },
   headerTag: {
     id: 'Header Tag',
     defaultMessage: 'Header Tag',
-  },
-  headerTagDescription: {
-    id: 'Header Tag description',
-    defaultMessage: 'Default HTML tag will be H3',
   },
   columnsConfiguration: {
     id: 'Columns configuration',
@@ -36,6 +28,18 @@ const messages = defineMessages({
   columnsCount: {
     id: 'Number of columns',
     defaultMessage: 'Number of columns',
+  },
+  slidesToScroll: {
+    id: 'Slides to scroll',
+    defaultMessage: 'Slides to scroll',
+  },
+  autoPlay: {
+    id: 'Auto Play',
+    defaultMessage: 'Auto Play',
+  },
+  speedAutoplay: {
+    id: 'Speed Autoplay',
+    defaultMessage: 'Speed Autoplay',
   },
   imageConfiguration: {
     id: 'Image position/size',
@@ -49,9 +53,41 @@ const messages = defineMessages({
     id: 'Left/Right image width (default 2/12)',
     defaultMessage: 'Left/Right image width (default 4/12)',
   },
+  alignment: {
+    id: 'Alignment',
+    defaultMessage: 'Alignment',
+  },
   imagePosition: {
     id: 'Image position',
     defaultMessage: 'Image position',
+  },
+  noImage: {
+    id: 'No image',
+    defaultMessage: 'No image',
+  },
+  background: {
+    id: 'background',
+    defaultMessage: 'background',
+  },
+  up: {
+    id: 'up',
+    defaultMessage: 'up',
+  },
+  left: {
+    id: 'left',
+    defaultMessage: 'left',
+  },
+  right: {
+    id: 'right',
+    defaultMessage: 'right',
+  },
+  down: {
+    id: 'down',
+    defaultMessage: 'down',
+  },
+  showTitle: {
+    id: 'Show Title',
+    defaultMessage: 'Show Title',
   },
   imagePositionDescription: {
     id: 'Default with no image',
@@ -68,10 +104,6 @@ const messages = defineMessages({
   titleTagDescription: {
     id: 'Default HTML tag will be H3',
     defaultMessage: 'Default HTML tag will be H3',
-  },
-  descriptionConfiguration: {
-    id: 'description',
-    defaultMessage: 'Description',
   },
   descriptionTitle: {
     id: 'descriptionTitle',
@@ -103,7 +135,11 @@ const messages = defineMessages({
   },
   moreLinkUrlDescription: {
     id: 'moreLinkUrlDescription',
-    defaultMessage: 'Paste an external link or a plone object',
+    defaultMessage: 'Paste an external link or a Plone object',
+  },
+  carouselSliderOptions: {
+    id: 'carouselSliderOptions',
+    defaultMessage: 'Carousel/Slider Options',
   },
   itemDisplayOptions: {
     id: 'itemDisplayOptions',
@@ -121,9 +157,29 @@ const messages = defineMessages({
     id: 'eventLocation',
     defaultMessage: 'Show Event Location',
   },
+  showEventCard: {
+    id: 'Show Event Card',
+    defaultMessage: 'Show Event Card',
+  },
+  showAsQuote: {
+    id: 'Show as Quote',
+    defaultMessage: 'Show as Quote',
+  },
   date: {
     id: 'date',
     defaultMessage: 'Show Effective Date',
+  },
+  thisContentHasNoImage: {
+    id: 'This content has no image, this is a default placeholder.',
+    defaultMessage: 'This content has no image, this is a default placeholder.',
+  },
+  pause: {
+    id: 'Pause',
+    defaultMessage: 'Pause',
+  },
+  play: {
+    id: 'Play',
+    defaultMessage: 'Play',
   },
 });
 

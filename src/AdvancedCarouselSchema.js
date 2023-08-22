@@ -17,7 +17,7 @@ export const advancedCarouselSchema = (props) => {
       ...schema.fieldsets,
       {
         id: 'carousel',
-        title: 'Carousel/Slider Options',
+        title: intl.formatMessage(messages.carouselSliderOptions),
         fields: ['howManyColumns', 'slidesToScroll', 'autoPlay', 'autoplaySpeed'],
       },
       {
@@ -44,7 +44,7 @@ export const advancedCarouselSchema = (props) => {
         default: 2,
       },
       slidesToScroll: {
-        title: 'Slides to scroll',
+        title: intl.formatMessage(messages.slidesToScroll),
         choices: [
           [1, '1'],
           [2, '2'],
@@ -54,11 +54,11 @@ export const advancedCarouselSchema = (props) => {
         default: 1,
       },
       autoPlay: {
-        title: 'Auto Play',
+        title: intl.formatMessage(messages.autoPlay),
         type: 'boolean',
       },
       autoplaySpeed: {
-        title: 'Speed Autoplay',
+        title: intl.formatMessage(messages.speedAutoplay),
         type: 'number',
         choices: [
           [3, '3'],
@@ -73,21 +73,21 @@ export const advancedCarouselSchema = (props) => {
         default: 5000,
       },
       align: {
-        title: 'Alignment',
+        title: intl.formatMessage(messages.alignment),
         widget: 'align',
         default: 'left',
       },
       imageSide: {
         title: intl.formatMessage(messages.imagePosition),
         choices: [
-          [null, 'No image'],
-          ['background', 'background'],
-          ['up', 'up'],
+          [null, intl.formatMessage(messages.noImage)],
+          ['background', intl.formatMessage(messages.background)],
+          ['up', intl.formatMessage(messages.up)],
         ],
         default: 'up',
       },
       showTitle: {
-        title: 'Show Title',
+        title: intl.formatMessage(messages.showTitle),
         type: 'boolean',
         default: true,
       },
@@ -113,11 +113,11 @@ export const advancedCarouselSchema = (props) => {
         type: 'boolean',
       },
       eventCard: {
-        title: 'Show Event Card',
+        title: intl.formatMessage(messages.showEventCard),
         type: 'boolean',
       },
       quote: {
-        title: 'Show as Quote',
+        title: intl.formatMessage(messages.showAsQuote),
         type: 'boolean',
       },
     },

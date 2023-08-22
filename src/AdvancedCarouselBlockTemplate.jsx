@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -7,10 +8,10 @@ import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { Grid, Image, Label, Icon, Button } from 'semantic-ui-react';
 import moment from 'moment';
-import { useIntl } from 'react-intl';
 import loadable from '@loadable/component';
 import Slider from 'react-slick';
 import './Advanced.css';
+import messages from './messages';
 
 //
 // import 'slick-carousel/slick/slick.css';
@@ -220,7 +221,7 @@ const AdvancedCarouselBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt='This content has no image, this is a default placeholder.'
+                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
                     </ConditionalLink>
@@ -274,7 +275,7 @@ const AdvancedCarouselBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt='This content has no image, this is a default placeholder.'
+                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
                     </ConditionalLink>
@@ -330,7 +331,7 @@ const AdvancedCarouselBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt='This content has no image, this is a default placeholder.'
+                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
                     </ConditionalLink>
@@ -360,9 +361,9 @@ const AdvancedCarouselBlockTemplate = ({
       <button className='ui circular button playpause' onClick={togglePlay}>
         {isPlaying ? (<Image
           src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
-          alt='Pause' />) : (<Image
+          alt={intl.formatMessage(messages.pause)} />) : (<Image
           src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
-          alt='Play' />)}
+          alt={intl.formatMessage(messages.play)} />)}
       </button>
 
     </div>
@@ -377,4 +378,4 @@ AdvancedCarouselBlockTemplate.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default AdvancedCarouselBlockTemplate;
+export default injectIntl(AdvancedCarouselBlockTemplate);

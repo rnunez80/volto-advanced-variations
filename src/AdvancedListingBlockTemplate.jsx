@@ -8,7 +8,8 @@ import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { Grid, Image } from 'semantic-ui-react';
 import moment from 'moment';
-import { useIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
+import messages from './messages';
 
 
 const AdvancedListingBlockTemplate = ({
@@ -151,7 +152,7 @@ const AdvancedListingBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt='This content has no image, this is a default placeholder.'
+                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
                     </ConditionalLink>
@@ -203,7 +204,7 @@ const AdvancedListingBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt='This content has no image, this is a default placeholder.'
+                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
                     </ConditionalLink>
@@ -240,7 +241,7 @@ const AdvancedListingBlockTemplate = ({
                           <Image
                             className='listImage'
                             src={DefaultImageSVG}
-                            alt='This content has no image, this is a default placeholder.'
+                            alt={intl.formatMessage(messages.thisContentHasNoImage)}
                             size='small'
                           />
                         </ConditionalLink>
@@ -297,4 +298,4 @@ AdvancedListingBlockTemplate.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default AdvancedListingBlockTemplate;
+export default injectIntl(AdvancedListingBlockTemplate);
