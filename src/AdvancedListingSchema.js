@@ -1,7 +1,7 @@
 import messages from './messages';
 
 export const advancedListingSchema = (props) => {
-  const {intl, schema, formData} = props;
+  const { intl, schema, formData } = props;
   // const imageWidth = ['right', 'left'].includes(formData.imageSide)
   //   ? ['imageWidth']
   //   : [];
@@ -18,7 +18,20 @@ export const advancedListingSchema = (props) => {
       {
         id: 'listingDisplay',
         title: intl.formatMessage(messages.itemDisplayOptions),
-        fields: ['titleTag', 'howManyColumns', 'imageSide', 'imageWidth', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate','quote'],
+        fields: [
+          'titleTag',
+          'howManyColumns',
+          'imageSide',
+          'imageWidth',
+          'showTitle',
+          'showDescription',
+          'eventCard',
+          'eventDate',
+          'eventTime',
+          'eventLocation',
+          'effectiveDate',
+          'quote',
+        ],
       },
     ],
     properties: {

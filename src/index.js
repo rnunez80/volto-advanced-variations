@@ -1,8 +1,8 @@
 import AdvancedListingBlockTemplate from './AdvancedListingBlockTemplate';
 import AdvancedCarouselBlockTemplate from './AdvancedCarouselBlockTemplate';
-import {advancedSchema} from './advancedSchema';
-import {advancedListingSchema} from './AdvancedListingSchema';
-import {advancedCarouselSchema} from './AdvancedCarouselSchema';
+import { advancedSchema } from './advancedSchema';
+import { advancedListingSchema } from './AdvancedListingSchema';
+import { advancedCarouselSchema } from './AdvancedCarouselSchema';
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.listing.variations = [

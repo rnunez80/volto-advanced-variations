@@ -18,12 +18,28 @@ export const advancedCarouselSchema = (props) => {
       {
         id: 'carousel',
         title: intl.formatMessage(messages.carouselSliderOptions),
-        fields: ['howManyColumns', 'slidesToScroll', 'autoPlay', 'autoplaySpeed'],
+        fields: [
+          'howManyColumns',
+          'slidesToScroll',
+          'autoPlay',
+          'autoplaySpeed',
+        ],
       },
       {
         id: 'carouselDisplay',
         title: intl.formatMessage(messages.itemDisplayOptions),
-        fields: ['titleTag', 'imageSide', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate','quote'],
+        fields: [
+          'titleTag',
+          'imageSide',
+          'showTitle',
+          'showDescription',
+          'eventCard',
+          'eventDate',
+          'eventTime',
+          'eventLocation',
+          'effectiveDate',
+          'quote',
+        ],
       },
     ],
     properties: {
