@@ -1,7 +1,7 @@
 import messages from './messages';
 
 export const advancedListingSchema = (props) => {
-  const {intl, schema, formData} = props;
+  const { intl, schema, formData } = props;
   // const imageWidth = ['right', 'left'].includes(formData.imageSide)
   //   ? ['imageWidth']
   //   : [];
@@ -18,7 +18,20 @@ export const advancedListingSchema = (props) => {
       {
         id: 'listingDisplay',
         title: intl.formatMessage(messages.itemDisplayOptions),
-        fields: ['titleTag', 'howManyColumns', 'imageSide', 'imageWidth', 'showTitle', 'showDescription', 'eventCard', 'eventDate', 'eventTime', 'eventLocation', 'effectiveDate','quote'],
+        fields: [
+          'titleTag',
+          'howManyColumns',
+          'imageSide',
+          'imageWidth',
+          'showTitle',
+          'showDescription',
+          'eventCard',
+          'eventDate',
+          'eventTime',
+          'eventLocation',
+          'effectiveDate',
+          'quote',
+        ],
       },
     ],
     properties: {
@@ -53,17 +66,17 @@ export const advancedListingSchema = (props) => {
       imageSide: {
         title: intl.formatMessage(messages.imagePosition),
         choices: [
-          [null, 'No image'],
-          ['background', 'background'],
-          ['up', 'up'],
-          ['left', 'left'],
-          ['right', 'right'],
-          ['down', 'down'],
+          [null, intl.formatMessage(messages.noImage)],
+          ['background', intl.formatMessage(messages.background)],
+          ['up', intl.formatMessage(messages.up)],
+          ['left', intl.formatMessage(messages.left)],
+          ['right', intl.formatMessage(messages.right)],
+          ['down', intl.formatMessage(messages.down)],
         ],
         default: 'up',
       },
       showTitle: {
-        title: 'Show Title',
+        title: intl.formatMessage(messages.showTitle),
         type: 'boolean',
         default: true,
       },
@@ -77,7 +90,7 @@ export const advancedListingSchema = (props) => {
         type: 'boolean',
       },
       eventCard: {
-        title: 'Show Event Card',
+        title: intl.formatMessage(messages.showEventCard),
         type: 'boolean',
       },
       eventDate: {
@@ -93,7 +106,7 @@ export const advancedListingSchema = (props) => {
         type: 'boolean',
       },
       quote: {
-        title: 'Show as Quote',
+        title: intl.formatMessage(messages.showAsQuote),
         type: 'boolean',
       },
     },

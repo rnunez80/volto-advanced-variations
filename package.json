@@ -1,19 +1,45 @@
 {
   "name": "volto-advanced-variations",
   "version": "0.1.2",
-  "description": "volto-advanced-variations: Volto add-on",
+  "description": "Advanced variations: Volto add-on",
   "main": "src/index.js",
+  "author": "Rafael Nunez",
   "license": "MIT",
+  "homepage": "https://github.com/rnunez80/volto-advanced-variations#readme",
   "keywords": [
     "volto-addon",
+    "advanced",
+    "variations",
     "volto",
     "plone",
     "react"
   ],
-  "scripts": {
-    "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rnunez80/volto-advanced-variations.git"
+  },
+  "addons": [
+    "@eeacms/volto-listing-block"
+  ],
+  "dependencies": {
+    "@eeacms/volto-listing-block": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/rnunez80/volto-advanced-variations/issues"
   },
   "devDependencies": {
-    "@plone/scripts": "*"
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@plone/scripts": "*",
+    "babel": "^6.23.0",
+    "glob": "^10.3.3",
+    "lodash": "^4.17.21",
+    "prettier": "^3.0.2",
+    "react-slick": "^0.29.0"
+  },
+  "scripts": {
+    "prettier": "make prettier",
+    "prettier:fix": "make prettier-fix",
+    "i18n": "make i18n"
   }
 }

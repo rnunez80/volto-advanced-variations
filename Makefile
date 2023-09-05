@@ -1,21 +1,7 @@
-# Yeoman Volto App development
-
-### Defensive settings for make:
-#     https://tech.davis-hansson.com/p/make/
-SHELL:=bash
-.ONESHELL:
-.SHELLFLAGS:=-xeu -o pipefail -O inherit_errexit -c
-.SILENT:
-.DELETE_ON_ERROR:
-MAKEFLAGS+=--warn-undefined-variables
-MAKEFLAGS+=--no-builtin-rules
-
-# Project settings
+SHELL=/bin/bash
 
 DIR=$(shell basename $$(pwd))
 ADDON ?= "volto-advanced-variations"
-
-# Recipe snippets for reuse
 
 # We like colors
 # From: https://coderwall.com/p/izxssa/colored-makefile-for-golang-projects
@@ -24,10 +10,6 @@ GREEN=`tput setaf 2`
 RESET=`tput sgr0`
 YELLOW=`tput setaf 3`
 
-
-# Top-level targets
-
-.PHONY: project
 project:
 	npm install -g yo
 	npm install -g @plone/generator-volto
@@ -40,7 +22,6 @@ project:
 	@echo "$(GREEN)Volto project is ready!$(RESET)"
 	@echo "$(RED)Now run: cd project && yarn start$(RESET)"
 
-.PHONY: all
 all: project
 
 .PHONY: start-test-backend
@@ -54,5 +35,25 @@ start-backend-docker:		## Starts a Docker-based backend
 	docker run -it --rm --name=plone -p 8080:8080 -e SITE=Plone -e ADDONS="plone.volto" -e ZCML="plone.volto.cors" plone
 
 .PHONY: help
-help:		## Show this help.
-	@echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
+help: ## Show this help.
+        @echo -e "$$(grep -hE '^\S+:.*##' $(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\x1b[36m\1\\x1b[m:\2/' | column -c2 -t -s :)"
+
+
+ifeq ($(wildcard ./project),)
+  NODE_MODULES = "./node_modules"
+else
+  NODE_MODULES = "./project/node_modules"
+endif
+
+.PHONY: prettier
+prettier:
+	$(NODE_MODULES)/.bin/prettier --single-quote --check 'src/**/*.{js,jsx,json,css,less,md}'
+
+.PHONY: prettier-fix
+prettier-fix:
+	$(NODE_MODULES)/.bin/prettier --single-quote  --write 'src/**/*.{js,jsx,json,css,less,md}'
+
+.PHONY: i18n
+i18n:
+	rm -rf build/messages
+	NODE_ENV=development $(NODE_MODULES)/.bin/i18n --addon
