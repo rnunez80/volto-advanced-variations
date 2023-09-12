@@ -25,7 +25,9 @@ const ResponsiveImage = ({ item, howManyColumns }) => {
     if (howManyColumns === 4) {
         sizes = '(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px';
     }
-
+    if (howManyColumns === 5) {
+        sizes = '(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px';
+    }
     return (
         <Image
             className='listImage'

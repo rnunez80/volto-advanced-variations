@@ -173,7 +173,7 @@ const AdvancedListingBlockTemplate = ({
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+                      <ResponsiveImage item={item} howManyColumns={['right', 'left'].includes(imageSide) ? 5 : howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
@@ -227,7 +227,7 @@ const AdvancedListingBlockTemplate = ({
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+                      <ResponsiveImage item={item} howManyColumns={['right', 'left'].includes(imageSide) ? 5 : howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
