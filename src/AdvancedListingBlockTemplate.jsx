@@ -183,9 +183,7 @@ const AdvancedListingBlockTemplate = ({
                   <>
                     <blockquote>{item.description}</blockquote>
                     <div className='styled-slate right has--align--right align styled'>
-                      <ConditionalLink item={item} condition={!isEditMode}>
-                        - {item.title ? item.title : item.id}
-                      </ConditionalLink>
+                      {item.title ? item.title : item.id}
                     </div>
                   </>
                 )}
@@ -264,12 +262,7 @@ const AdvancedListingBlockTemplate = ({
                         <>
                           <blockquote>{item.description}</blockquote>
                           <div className='styled-slate right has--align--right align styled'>
-                            <ConditionalLink
-                              item={item}
-                              condition={!isEditMode}
-                            >
-                              - {item.title ? item.title : item.id}
-                            </ConditionalLink>
+                            {item.title ? item.title : item.id}
                           </div>
                         </>
                       )}
