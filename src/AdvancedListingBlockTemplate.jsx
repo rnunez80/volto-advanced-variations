@@ -10,28 +10,30 @@ import { Grid, Image } from 'semantic-ui-react';
 import moment from 'moment';
 import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
+import ResponsiveImage from './ResponsiveImage';
+
 
 const AdvancedListingBlockTemplate = ({
-  items,
-  moreLinkText,
-  moreLinkUrl,
-  header,
-  headerUrl,
-  headerTag,
-  isEditMode,
-  imageSide,
-  imageWidth,
-  howManyColumns,
-  effectiveDate,
-  titleTag,
-  showDescription,
-  eventDate,
-  eventLocation,
-  eventTime,
-  showTitle,
-  eventCard,
-  quote,
-}) => {
+                                        items,
+                                        moreLinkText,
+                                        moreLinkUrl,
+                                        header,
+                                        headerUrl,
+                                        headerTag,
+                                        isEditMode,
+                                        imageSide,
+                                        imageWidth,
+                                        howManyColumns,
+                                        effectiveDate,
+                                        titleTag,
+                                        showDescription,
+                                        eventDate,
+                                        eventLocation,
+                                        eventTime,
+                                        showTitle,
+                                        eventCard,
+                                        quote,
+                                      }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
   if (isInternalURL(moreHref)) {
@@ -70,10 +72,10 @@ const AdvancedListingBlockTemplate = ({
         weekday: 'long',
       });
       return (
-        <div class="cal_date">
-          <span class="cal_month">{startMonth}</span>
-          <span class="cal_day">{startDay}</span>
-          <span class="cal_wkday">{startWeekday}</span>
+        <div class='cal_date'>
+          <span class='cal_month'>{startMonth}</span>
+          <span class='cal_day'>{startDay}</span>
+          <span class='cal_wkday'>{startWeekday}</span>
         </div>
       );
     } else {
@@ -129,23 +131,23 @@ const AdvancedListingBlockTemplate = ({
   };
   const hasImage = imageSide !== null;
   const oneColumnElement = ['up', 'down', 'background', null].includes(
-    imageSide
+    imageSide,
   );
   const columnSize = oneColumnElement ? 1 : 2;
   const imageGridWidth = oneColumnElement ? 12 : imageWidth ? imageWidth : 2;
   const contentGridWidth = oneColumnElement
     ? 12
     : hasImage
-    ? 12 - imageWidth
-    : 12;
+      ? 12 - imageWidth
+      : 12;
   const intl = useIntl();
   const TitleTag = titleTag ? titleTag : 'h3';
   const HeaderTag = headerTag ? headerTag : 'h3';
   moment.locale(intl.locale);
   return (
-    <div className="advancedView advancedList">
+    <div className='advancedView advancedList'>
       {headerLink && (
-        <HeaderTag className="listing-header">
+        <HeaderTag className='listing-header'>
           {headerLink ? headerLink : header}
         </HeaderTag>
       )}
@@ -156,45 +158,32 @@ const AdvancedListingBlockTemplate = ({
       >
         {!['background'].includes(imageSide) &&
           items.map((item) => (
-            <Grid columns={columnSize} className="advanced-item">
+            <Grid columns={columnSize} className='advanced-item'>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
                   {!item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
                       <Image
-                        className="listImage"
+                        className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size="small"
+                        size='small'
                       />
                     </ConditionalLink>
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className="listImage"
-                        srcset={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w'`
-                        )}
-                        sizes="(max-width: 2560px) 100vw, 2560px"
-                        alt={item.title}
-                        size="small"
-                        src={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/large`
-                        )}
-                      />
+                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
               )}
-              <Grid.Column width={contentGridWidth} verticalAlign="top">
+              <Grid.Column width={contentGridWidth} verticalAlign='top'>
                 {quote && (
                   <>
                     <blockquote>{item.description}</blockquote>
-                    <div className="styled-slate right has--align--right align styled">
-                      <ConditionalLink item={item} condition={!isEditMode}>
-                        - {item.title ? item.title : item.id}
-                      </ConditionalLink>
+                    <div className='styled-slate right has--align--right align styled'>
+                      {item.title ? item.title : item.id}
                     </div>
                   </>
                 )}
@@ -207,16 +196,16 @@ const AdvancedListingBlockTemplate = ({
                   </TitleTag>
                 )}
                 {(item.start && eventDate | eventTime && (
-                  <p className="event-when">
-                    {eventDate && (
-                      <span className="start-date">{getEventDate(item)}</span>
-                    )}
-                    {eventTime && eventDate && <span> | </span>}
-                    {eventTime && (
-                      <span className="start-time">{getEventTime(item)}</span>
-                    )}
-                  </p>
-                )) ||
+                    <p className='event-when'>
+                      {eventDate && (
+                        <span className='start-date'>{getEventDate(item)}</span>
+                      )}
+                      {eventTime && eventDate && <span> | </span>}
+                      {eventTime && (
+                        <span className='start-time'>{getEventTime(item)}</span>
+                      )}
+                    </p>
+                  )) ||
                   null}
                 {eventLocation && <p>{item.location}</p>}
                 {effectiveDate && <p>{moment(item.effective).format('L')}</p>}
@@ -229,27 +218,16 @@ const AdvancedListingBlockTemplate = ({
                   {!item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
                       <Image
-                        className="listImage"
+                        className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size="small"
+                        size='small'
                       />
                     </ConditionalLink>
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className="listImage"
-                        srcset={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w`
-                        )}
-                        sizes="(max-width: 2560px) 100vw, 2560px"
-                        alt={item.title}
-                        size="small"
-                        src={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/large`
-                        )}
-                      />
+                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
@@ -258,70 +236,55 @@ const AdvancedListingBlockTemplate = ({
           ))}
         {['background'].includes(imageSide) &&
           items.map((item) => (
-            <Grid columns={columnSize} className="advanced-item">
+            <Grid columns={columnSize} className='advanced-item'>
               <Grid.Column>
-                <div className="backgroundimage">
+                <div className='backgroundimage'>
                   <ConditionalLink item={item} condition={!isEditMode}>
-                    <div className="focuspoint">
+                    <div className='focuspoint'>
                       {!item.image_field && (
                         <ConditionalLink item={item} condition={!isEditMode}>
                           <Image
-                            className="listImage"
+                            className='listImage'
                             src={DefaultImageSVG}
                             alt={intl.formatMessage(
-                              messages.thisContentHasNoImage
+                              messages.thisContentHasNoImage,
                             )}
-                            size="small"
+                            size='small'
                           />
                         </ConditionalLink>
                       )}
                       {item.image_field && (
-                        <Image
-                          srcset={flattenToAppURL(
-                            `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w'`
-                          )}
-                          sizes="(max-width: 2560px) 100vw, 2560px"
-                          alt={item.title}
-                          size="small"
-                          src={flattenToAppURL(
-                            `${item['@id']}/@@images/${item.image_field}/large`
-                          )}
-                        />
+                        <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                       )}
                     </div>
-                    <div className="info-text">
+                    <div className='info-text'>
                       {quote && (
                         <>
                           <blockquote>{item.description}</blockquote>
-                          <div className="styled-slate right has--align--right align styled">
-                            <ConditionalLink
-                              item={item}
-                              condition={!isEditMode}
-                            >
-                              - {item.title ? item.title : item.id}
-                            </ConditionalLink>
+                          <div className='styled-slate right has--align--right align styled'>
+                            {item.title ? item.title : item.id}
                           </div>
                         </>
                       )}
                       {eventCard && <>{getEventCard(item)}</>}
                       {(item.location && eventDate | eventTime && (
-                        <span class="event-when">
+                          <span class='event-when'>
                           {eventDate && (
-                            <span className="start-date">
+                            <span className='start-date'>
                               {getEventDate(item)}
                             </span>
                           )}
-                          {eventTime && eventDate && <span> | </span>}
-                          {eventTime && (
-                            <span className="start-time">
+                            {eventTime && eventDate && <span> | </span>}
+                            {eventTime && (
+                              <span className='start-time'>
                               {getEventTime(item)}
                             </span>
-                          )}
+                            )}
                         </span>
-                      )) ||
+                        )) ||
                         null}
                       {showTitle && (
-                        <TitleTag className="limited-text">
+                        <TitleTag className='limited-text'>
                           {item.title ? item.title : item.id}
                         </TitleTag>
                       )}
@@ -339,7 +302,7 @@ const AdvancedListingBlockTemplate = ({
                           </span>
                         )}
                         {showDescription && item.description && (
-                          <span className="limited-text">
+                          <span className='limited-text'>
                             {item.description}
                           </span>
                         )}

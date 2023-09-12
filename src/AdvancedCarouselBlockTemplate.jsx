@@ -12,6 +12,7 @@ import loadable from '@loadable/component';
 import Slider from 'react-slick';
 import './Advanced.css';
 import messages from './messages';
+import ResponsiveImage from './ResponsiveImage';
 
 //
 // import 'slick-carousel/slick/slick.css';
@@ -241,17 +242,7 @@ const AdvancedCarouselBlockTemplate = ({
                     </ConditionalLink>
                   )}
                   {item.image_field && (
-                    <Image
-                      srcset={flattenToAppURL(
-                        `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w'`
-                      )}
-                      sizes="(max-width: 2560px) 100vw, 2560px"
-                      alt={item.title}
-                      size="small"
-                      src={flattenToAppURL(
-                        `${item['@id']}/@@images/${item.image_field}/large`
-                      )}
-                    />
+                    <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                   )}
                 </div>
                 <div className="info-text">
@@ -259,9 +250,7 @@ const AdvancedCarouselBlockTemplate = ({
                     <>
                       <blockquote>{item.description}</blockquote>
                       <div className="styled-slate right has--align--right align styled">
-                        <ConditionalLink item={item} condition={!isEditMode}>
-                          - {item.title ? item.title : item.id}
-                        </ConditionalLink>
+                        {item.title ? item.title : item.id}
                       </div>
                     </>
                   )}
@@ -321,18 +310,7 @@ const AdvancedCarouselBlockTemplate = ({
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        src={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/preview`
-                        )}
-                        className="listImage"
-                        srcset={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w'`
-                        )}
-                        sizes="(max-width: 2560px) 100vw, 2560px"
-                        alt={item.title}
-                        size="small"
-                      />
+                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
@@ -342,9 +320,7 @@ const AdvancedCarouselBlockTemplate = ({
                   <>
                     <blockquote>{item.description}</blockquote>
                     <div className="styled-slate right has--align--right align styled">
-                      <ConditionalLink item={item} condition={!isEditMode}>
-                        - {item.title ? item.title : item.id}
-                      </ConditionalLink>
+                      {item.title ? item.title : item.id}
                     </div>
                   </>
                 )}
@@ -388,18 +364,7 @@ const AdvancedCarouselBlockTemplate = ({
                   )}
                   {item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        src={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/large`
-                        )}
-                        className="listImage"
-                        srcset={flattenToAppURL(
-                          `${item['@id']}/@@images/${item.image_field}/mini 200w, ${item['@id']}/@@images/${item.image_field}/preview 400w, ${item['@id']}/@@images/${item.image_field}/teaser 600w, ${item['@id']}/@@images/${item.image_field}/large 800w, ${item['@id']}/@@images/${item.image_field}/larger 1000w, ${item['@id']}/@@images/${item.image_field}/great 1200w, ${item['@id']}/@@images/${item.image_field}/huge 1600w'`
-                        )}
-                        sizes="(max-width: 2560px) 100vw, 2560px"
-                        alt={item.title}
-                        size="small"
-                      />
+                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                     </ConditionalLink>
                   )}
                 </Grid.Column>
