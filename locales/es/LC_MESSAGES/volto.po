@@ -1,0 +1,246 @@
+# Translation of volto.pot to Spanish
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-20T18:38:33.091Z\n"
+"PO-Revision-Date: 2023-08-22 13:14-0400\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
+"Language: es\n"
+"Language-Team: ES <LL@li.org>\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Preferred-Encodings: utf-8\n"
+"Language-Code: es\n"
+"Language-Name: Español\n"
+"Domain: volto\n"
+"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: messages
+# defaultMessage: Alignment
+msgid "Alignment"
+msgstr "Alineación"
+
+#: messages
+# defaultMessage: Auto Play
+msgid "Auto Play"
+msgstr "Reproducción automática"
+
+#: messages
+# defaultMessage: Columns
+msgid "Columns configuration"
+msgstr "Columnas"
+
+#: messages
+# defaultMessage: Default HTML tag will be H3
+msgid "Default HTML tag will be H3"
+msgstr "La etiqueta HTML por defecto será H3"
+
+#: messages
+# defaultMessage: Default with no image
+msgid "Default with no image"
+msgstr "Predeterminado sin imagen"
+
+#: messages
+# defaultMessage: Header
+msgid "Header"
+msgstr "Encabezado"
+
+#: messages
+# defaultMessage: Header Tag
+msgid "Header Tag"
+msgstr "Etiqueta de encabezado"
+
+#: messages
+# defaultMessage: Header text
+msgid "Header text"
+msgstr "Texto de encabezado"
+
+#: messages
+# defaultMessage: Header url or object
+msgid "Header url"
+msgstr "URL de encabezado u objeto"
+
+#: messages
+# defaultMessage: Image position
+msgid "Image position"
+msgstr "Posición de la imagen"
+
+#: messages
+# defaultMessage: Image position/size
+msgid "Image position/size"
+msgstr "Posición/tamaño de la imagen"
+
+#: messages
+# defaultMessage: Image width
+msgid "Image width"
+msgstr "Ancho de la imagen"
+
+#: messages
+# defaultMessage: Left/Right image width (default 4/12)
+msgid "Left/Right image width (default 2/12)"
+msgstr "Anchura de imagen izquierda/derecha (por defecto 2/12)"
+
+#: messages
+# defaultMessage: No image
+msgid "No image"
+msgstr "Sin imagen"
+
+#: messages
+# defaultMessage: Number of columns
+msgid "Number of columns"
+msgstr "Número de columnas"
+
+#: messages
+# defaultMessage: Pause
+msgid "Pause"
+msgstr "Pausar"
+
+#: messages
+# defaultMessage: Play
+msgid "Play"
+msgstr "Reproducir"
+
+#: messages
+# defaultMessage: Query
+msgid "Query"
+msgstr "Consulta"
+
+#: messages
+# defaultMessage: Show Event Card
+msgid "Show Event Card"
+msgstr "Mostrar tarjeta de evento"
+
+#: messages
+# defaultMessage: Show Title
+msgid "Show Title"
+msgstr "Mostrar título"
+
+#: messages
+# defaultMessage: Show as Quote
+msgid "Show as Quote"
+msgstr "Mostrar como Cita"
+
+#: messages
+# defaultMessage: Show effectiveDate
+msgid "Show effectiveDate"
+msgstr "Mostrar fecha efectiva"
+
+#: messages
+# defaultMessage: Slides to scroll
+msgid "Slides to scroll"
+msgstr "Diapositivas para desplazarse"
+
+#: messages
+# defaultMessage: Speed Autoplay
+msgid "Speed Autoplay"
+msgstr "Velocidad de reproducción automática"
+
+#: messages
+# defaultMessage: This content has no image, this is a default placeholder.
+msgid "This content has no image, this is a default placeholder."
+msgstr "Este contenido no tiene imagen, es un marcador de posición por defecto."
+
+#: messages
+# defaultMessage: Title
+msgid "Title configuration"
+msgstr "Título"
+
+#: messages
+# defaultMessage: background
+msgid "background"
+msgstr "fondo"
+
+#: messages
+# defaultMessage: Carousel/Slider Options
+msgid "carouselSliderOptions"
+msgstr "Opciones de carrusel/control deslizante"
+
+#: messages
+# defaultMessage: Show Effective Date
+msgid "date"
+msgstr "fecha"
+
+#: messages
+# defaultMessage: If selected, the description will be shown
+msgid "descriptionDescription"
+msgstr "Si se selecciona, se mostrará la descripción"
+
+#: messages
+# defaultMessage: Description
+msgid "descriptionTitle"
+msgstr "Descripción"
+
+#: messages
+# defaultMessage: down
+msgid "down"
+msgstr "abajo"
+
+#: messages
+# defaultMessage: Show Event Date
+msgid "eventDate"
+msgstr "Mostrar fecha del evento"
+
+#: messages
+# defaultMessage: Show Event Location
+msgid "eventLocation"
+msgstr "Mostrar ubicación del evento"
+
+#: messages
+# defaultMessage: Show Event Time
+msgid "eventTime"
+msgstr "Mostrar hora del evento"
+
+#: messages
+# defaultMessage: Item Display Options
+msgid "itemDisplayOptions"
+msgstr "Opciones de mostrar elementos"
+
+#: messages
+# defaultMessage: left
+msgid "left"
+msgstr "izquierda"
+
+#: messages
+# defaultMessage: More link
+msgid "moreLinkConfiguration"
+msgstr "Enlace Más"
+
+#: messages
+# defaultMessage: Text
+msgid "moreLinkText"
+msgstr "Texto"
+
+#: messages
+# defaultMessage: More link text
+msgid "moreLinkTextDescription"
+msgstr "Texto de enlace Más"
+
+#: messages
+# defaultMessage: More link url or object
+msgid "moreLinkUrl"
+msgstr "URL de enlace Más u objeto"
+
+#: messages
+# defaultMessage: Paste an external link or a Plone object
+msgid "moreLinkUrlDescription"
+msgstr "Pegar un enlace externo o un objeto Plone"
+
+#: messages
+# defaultMessage: right
+msgid "right"
+msgstr "derecha"
+
+#: messages
+# defaultMessage: Title Level
+msgid "titleTag"
+msgstr "Nivel de título"
+
+#: messages
+# defaultMessage: up
+msgid "up"
+msgstr "arriba"

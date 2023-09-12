@@ -1,0 +1,239 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plone\n"
+"POT-Creation-Date: 2023-08-22T07:17:53.471Z\n"
+"Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8\n"
+"Domain: volto\n"
+
+#: messages
+# defaultMessage: Alignment
+msgid "Alignment"
+msgstr ""
+
+#: messages
+# defaultMessage: Auto Play
+msgid "Auto Play"
+msgstr ""
+
+#: messages
+# defaultMessage: Columns
+msgid "Columns configuration"
+msgstr ""
+
+#: messages
+# defaultMessage: Default HTML tag will be H3
+msgid "Default HTML tag will be H3"
+msgstr ""
+
+#: messages
+# defaultMessage: Default with no image
+msgid "Default with no image"
+msgstr ""
+
+#: messages
+# defaultMessage: Header
+msgid "Header"
+msgstr ""
+
+#: messages
+# defaultMessage: Header Tag
+msgid "Header Tag"
+msgstr ""
+
+#: messages
+# defaultMessage: Header text
+msgid "Header text"
+msgstr ""
+
+#: messages
+# defaultMessage: Header url or object
+msgid "Header url"
+msgstr ""
+
+#: messages
+# defaultMessage: Image position
+msgid "Image position"
+msgstr ""
+
+#: messages
+# defaultMessage: Image position/size
+msgid "Image position/size"
+msgstr ""
+
+#: messages
+# defaultMessage: Image width
+msgid "Image width"
+msgstr ""
+
+#: messages
+# defaultMessage: Left/Right image width (default 4/12)
+msgid "Left/Right image width (default 2/12)"
+msgstr ""
+
+#: messages
+# defaultMessage: No image
+msgid "No image"
+msgstr ""
+
+#: messages
+# defaultMessage: Number of columns
+msgid "Number of columns"
+msgstr ""
+
+#: messages
+# defaultMessage: Pause
+msgid "Pause"
+msgstr ""
+
+#: messages
+# defaultMessage: Play
+msgid "Play"
+msgstr ""
+
+#: messages
+# defaultMessage: Query
+msgid "Query"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Event Card
+msgid "Show Event Card"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Title
+msgid "Show Title"
+msgstr ""
+
+#: messages
+# defaultMessage: Show as Quote
+msgid "Show as Quote"
+msgstr ""
+
+#: messages
+# defaultMessage: Show effectiveDate
+msgid "Show effectiveDate"
+msgstr ""
+
+#: messages
+# defaultMessage: Slides to scroll
+msgid "Slides to scroll"
+msgstr ""
+
+#: messages
+# defaultMessage: Speed Autoplay
+msgid "Speed Autoplay"
+msgstr ""
+
+#: messages
+# defaultMessage: This content has no image, this is a default placeholder.
+msgid "This content has no image, this is a default placeholder."
+msgstr ""
+
+#: messages
+# defaultMessage: Title
+msgid "Title configuration"
+msgstr ""
+
+#: messages
+# defaultMessage: background
+msgid "background"
+msgstr ""
+
+#: messages
+# defaultMessage: Carousel/Slider Options
+msgid "carouselSliderOptions"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Effective Date
+msgid "date"
+msgstr ""
+
+#: messages
+# defaultMessage: If selected, the description will be shown
+msgid "descriptionDescription"
+msgstr ""
+
+#: messages
+# defaultMessage: Description
+msgid "descriptionTitle"
+msgstr ""
+
+#: messages
+# defaultMessage: down
+msgid "down"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Event Date
+msgid "eventDate"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Event Location
+msgid "eventLocation"
+msgstr ""
+
+#: messages
+# defaultMessage: Show Event Time
+msgid "eventTime"
+msgstr ""
+
+#: messages
+# defaultMessage: Item Display Options
+msgid "itemDisplayOptions"
+msgstr ""
+
+#: messages
+# defaultMessage: left
+msgid "left"
+msgstr ""
+
+#: messages
+# defaultMessage: More link
+msgid "moreLinkConfiguration"
+msgstr ""
+
+#: messages
+# defaultMessage: Text
+msgid "moreLinkText"
+msgstr ""
+
+#: messages
+# defaultMessage: More link text
+msgid "moreLinkTextDescription"
+msgstr ""
+
+#: messages
+# defaultMessage: More link url or object
+msgid "moreLinkUrl"
+msgstr ""
+
+#: messages
+# defaultMessage: Paste an external link or a Plone object
+msgid "moreLinkUrlDescription"
+msgstr ""
+
+#: messages
+# defaultMessage: right
+msgid "right"
+msgstr ""
+
+#: messages
+# defaultMessage: Title Level
+msgid "titleTag"
+msgstr ""
+
+#: messages
+# defaultMessage: up
+msgid "up"
+msgstr ""
