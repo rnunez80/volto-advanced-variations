@@ -30,6 +30,7 @@ export const advancedListingSchema = (props) => {
           'eventTime',
           'eventLocation',
           'effectiveDate',
+          'expirationDate',
           'quote',
         ],
       },
@@ -87,6 +88,10 @@ export const advancedListingSchema = (props) => {
       },
       effectiveDate: {
         title: intl.formatMessage(messages.date),
+        type: 'boolean',
+      },
+      expirationDate: {
+        title: intl.formatMessage(messages.expires),
         type: 'boolean',
       },
       eventCard: {

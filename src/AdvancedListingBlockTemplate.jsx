@@ -25,6 +25,7 @@ const AdvancedListingBlockTemplate = ({
                                         imageWidth,
                                         howManyColumns,
                                         effectiveDate,
+                                        expirationDate,
                                         titleTag,
                                         showDescription,
                                         eventDate,
@@ -209,6 +210,7 @@ const AdvancedListingBlockTemplate = ({
                   null}
                 {eventLocation && <p>{item.location}</p>}
                 {effectiveDate && <p>{moment(item.effective).format('L')}</p>}
+                {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
                 {showDescription && item.description && (
                   <p>{item.description}</p>
                 )}
@@ -298,6 +300,12 @@ const AdvancedListingBlockTemplate = ({
                         {effectiveDate && (
                           <span>
                             {moment(item.effective).format('L')}
+                            <br />
+                          </span>
+                        )}
+                        {expirationDate && (
+                          <span>
+                            Expiration: {moment(item.expires).format('L')}
                             <br />
                           </span>
                         )}

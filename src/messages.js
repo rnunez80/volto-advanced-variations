@@ -169,6 +169,10 @@ const messages = defineMessages({
     id: 'date',
     defaultMessage: 'Show Effective Date',
   },
+  expires: {
+    id: 'expires',
+    defaultMessage: 'Show Expiration Date',
+  },
   thisContentHasNoImage: {
     id: 'This content has no image, this is a default placeholder.',
     defaultMessage: 'This content has no image, this is a default placeholder.',

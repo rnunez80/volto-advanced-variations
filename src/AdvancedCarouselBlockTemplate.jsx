@@ -22,29 +22,30 @@ import UniversalCard from '@eeacms/volto-listing-block/components/UniversalCard/
 import ResponsiveContainer from '@eeacms/volto-listing-block/components/ResponsiveContainer';
 
 const AdvancedCarouselBlockTemplate = ({
-  items,
-  moreLinkText,
-  moreLinkUrl,
-  header,
-  headerUrl,
-  headerTag,
-  isEditMode,
-  imageSide,
-  imageWidth,
-  howManyColumns,
-  effectiveDate,
-  titleTag,
-  showTitle,
-  showDescription,
-  eventDate,
-  eventLocation,
-  eventTime,
-  slidesToScroll,
-  autoPlay,
-  autoplaySpeed,
-  eventCard,
-  quote,
-}) => {
+                                         items,
+                                         moreLinkText,
+                                         moreLinkUrl,
+                                         header,
+                                         headerUrl,
+                                         headerTag,
+                                         isEditMode,
+                                         imageSide,
+                                         imageWidth,
+                                         howManyColumns,
+                                         effectiveDate,
+                                         expirationDate,
+                                         titleTag,
+                                         showTitle,
+                                         showDescription,
+                                         eventDate,
+                                         eventLocation,
+                                         eventTime,
+                                         slidesToScroll,
+                                         autoPlay,
+                                         autoplaySpeed,
+                                         eventCard,
+                                         quote,
+                                       }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
   if (isInternalURL(moreHref)) {
@@ -83,10 +84,10 @@ const AdvancedCarouselBlockTemplate = ({
         weekday: 'long',
       });
       return (
-        <div class="cal_date">
-          <span class="cal_month">{startMonth}</span>
-          <span class="cal_day">{startDay}</span>
-          <span class="cal_wkday">{startWeekday}</span>
+        <div class='cal_date'>
+          <span class='cal_month'>{startMonth}</span>
+          <span class='cal_day'>{startDay}</span>
+          <span class='cal_wkday'>{startWeekday}</span>
         </div>
       );
     } else {
@@ -142,15 +143,15 @@ const AdvancedCarouselBlockTemplate = ({
   };
   const hasImage = imageSide !== null;
   const oneColumnElement = ['up', 'down', 'background', null].includes(
-    imageSide
+    imageSide,
   );
   const columnSize = oneColumnElement ? 1 : 2;
   const imageGridWidth = oneColumnElement ? 12 : imageWidth ? imageWidth : 2;
   const contentGridWidth = oneColumnElement
     ? 12
     : hasImage
-    ? 12 - imageWidth
-    : 12;
+      ? 12 - imageWidth
+      : 12;
   const intl = useIntl();
   const TitleTag = titleTag ? titleTag : 'h3';
   const HeaderTag = headerTag ? headerTag : 'h3';
@@ -171,9 +172,9 @@ const AdvancedCarouselBlockTemplate = ({
   };
   moment.locale(intl.locale);
   return (
-    <div className="advancedView">
+    <div className='advancedView'>
       {headerLink && (
-        <HeaderTag className="listing-header">
+        <HeaderTag className='listing-header'>
           {headerLink ? headerLink : header}
         </HeaderTag>
       )}
@@ -194,50 +195,50 @@ const AdvancedCarouselBlockTemplate = ({
         responsive={
           howManyColumns >= 3
             ? [
-                {
-                  breakpoint: 1169,
-                  settings: {
-                    slidesToShow: 3,
-                  },
+              {
+                breakpoint: 1169,
+                settings: {
+                  slidesToShow: 3,
                 },
-                {
-                  breakpoint: 991,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                  },
+              },
+              {
+                breakpoint: 991,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
                 },
-                {
-                  breakpoint: 767,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  },
+              },
+              {
+                breakpoint: 767,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
                 },
-              ]
+              },
+            ]
             : [
-                {
-                  breakpoint: 767,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                  },
+              {
+                breakpoint: 767,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
                 },
-              ]
+              },
+            ]
         }
       >
         {['background'].includes(imageSide) &&
           items.map((item, index) => (
-            <div className="backgroundimage">
+            <div className='backgroundimage'>
               <ConditionalLink item={item} condition={!isEditMode}>
-                <div className="focuspoint">
+                <div className='focuspoint'>
                   {!item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
                       <Image
-                        className="listImage"
+                        className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size="small"
+                        size='small'
                       />
                     </ConditionalLink>
                   )}
@@ -245,30 +246,30 @@ const AdvancedCarouselBlockTemplate = ({
                     <ResponsiveImage item={item} howManyColumns={howManyColumns} />
                   )}
                 </div>
-                <div className="info-text">
+                <div className='info-text'>
                   {quote && (
                     <>
                       <blockquote>{item.description}</blockquote>
-                      <div className="styled-slate right has--align--right align styled">
+                      <div className='styled-slate right has--align--right align styled'>
                         {item.title ? item.title : item.id}
                       </div>
                     </>
                   )}
                   {eventCard && <>{getEventCard(item)}</>}
                   {(item.start && eventDate | eventTime && (
-                    <span class="event-when">
+                      <span class='event-when'>
                       {eventDate && (
-                        <span className="start-date">{getEventDate(item)}</span>
+                        <span className='start-date'>{getEventDate(item)}</span>
                       )}
-                      {eventTime && eventDate && <span> | </span>}
-                      {eventTime && (
-                        <span className="start-time">{getEventTime(item)}</span>
-                      )}
+                        {eventTime && eventDate && <span> | </span>}
+                        {eventTime && (
+                          <span className='start-time'>{getEventTime(item)}</span>
+                        )}
                     </span>
-                  )) ||
+                    )) ||
                     null}
                   {showTitle && (
-                    <TitleTag className="limited-text">
+                    <TitleTag className='limited-text'>
                       {item.title ? item.title : item.id}
                     </TitleTag>
                   )}
@@ -285,8 +286,14 @@ const AdvancedCarouselBlockTemplate = ({
                         <br />
                       </span>
                     )}
+                    {expirationDate && (
+                      <span>
+                            Expiration: {moment(item.expires).format('L')}
+                        <br />
+                          </span>
+                    )}
                     {showDescription && item.description && (
-                      <span className="limited-text">{item.description}</span>
+                      <span className='limited-text'>{item.description}</span>
                     )}
                   </p>
                 </div>
@@ -297,14 +304,14 @@ const AdvancedCarouselBlockTemplate = ({
           items.map((item) => (
             <Grid columns={columnSize}>
               {['up', 'left'].includes(imageSide) && (
-                <Grid.Column width={imageGridWidth} className="advanced-item">
+                <Grid.Column width={imageGridWidth} className='advanced-item'>
                   {!item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
                       <Image
-                        className="listImage"
+                        className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size="small"
+                        size='small'
                       />
                     </ConditionalLink>
                   )}
@@ -315,11 +322,11 @@ const AdvancedCarouselBlockTemplate = ({
                   )}
                 </Grid.Column>
               )}
-              <Grid.Column width={contentGridWidth} verticalAlign="top">
+              <Grid.Column width={contentGridWidth} verticalAlign='top'>
                 {quote && (
                   <>
                     <blockquote>{item.description}</blockquote>
-                    <div className="styled-slate right has--align--right align styled">
+                    <div className='styled-slate right has--align--right align styled'>
                       {item.title ? item.title : item.id}
                     </div>
                   </>
@@ -333,19 +340,20 @@ const AdvancedCarouselBlockTemplate = ({
                   </TitleTag>
                 )}
                 {(item.location && eventDate | eventTime && (
-                  <div className="event-when">
-                    {eventDate && (
-                      <span className="start-date">{getEventDate(item)}</span>
-                    )}
-                    {eventTime && eventDate && <span> | </span>}
-                    {eventTime && (
-                      <span className="start-time">{getEventTime(item)}</span>
-                    )}
-                  </div>
-                )) ||
+                    <div className='event-when'>
+                      {eventDate && (
+                        <span className='start-date'>{getEventDate(item)}</span>
+                      )}
+                      {eventTime && eventDate && <span> | </span>}
+                      {eventTime && (
+                        <span className='start-time'>{getEventTime(item)}</span>
+                      )}
+                    </div>
+                  )) ||
                   null}
                 {eventLocation && <p>{item.location}</p>}
                 {effectiveDate && <p>{moment(item.effective).format('L')}</p>}
+                {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
                 {showDescription && item.description && (
                   <p>{item.description}</p>
                 )}
@@ -355,10 +363,10 @@ const AdvancedCarouselBlockTemplate = ({
                   {!item.image_field && (
                     <ConditionalLink item={item} condition={!isEditMode}>
                       <Image
-                        className="listImage"
+                        className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size="small"
+                        size='small'
                       />
                     </ConditionalLink>
                   )}
@@ -372,15 +380,15 @@ const AdvancedCarouselBlockTemplate = ({
             </Grid>
           ))}
       </Slider>
-      <button className="ui circular button playpause" onClick={togglePlay}>
+      <button className='ui circular button playpause' onClick={togglePlay}>
         {isPlaying ? (
           <Image
-            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+"
+            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
             alt={intl.formatMessage(messages.pause)}
           />
         ) : (
           <Image
-            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+"
+            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
             alt={intl.formatMessage(messages.play)}
           />
         )}

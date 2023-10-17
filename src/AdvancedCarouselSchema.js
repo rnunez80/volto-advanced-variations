@@ -38,6 +38,7 @@ export const advancedCarouselSchema = (props) => {
           'eventTime',
           'eventLocation',
           'effectiveDate',
+          'expirationDate',
           'quote',
         ],
       },
@@ -114,6 +115,10 @@ export const advancedCarouselSchema = (props) => {
       },
       effectiveDate: {
         title: intl.formatMessage(messages.date),
+        type: 'boolean',
+      },
+      expirationDate: {
+        title: intl.formatMessage(messages.expires),
         type: 'boolean',
       },
       eventDate: {
