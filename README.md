@@ -57,7 +57,7 @@ A example of Carousel options Sidebar, it look like the following capture:
 1. `eventTime` (_boolean_): Show event time.
 1. `eventLocation` (_boolean_): Show event location.
 1. `effectiveDate` (_boolean_): Show effective date.
-
+1. `expirationDate` (_boolean_): Show expiration date.
 
 ## Screen recording
 
