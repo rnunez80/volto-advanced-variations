@@ -64,21 +64,31 @@ const AdvancedListingBlockTemplate = ({
       startWeekday = '',
       startTime = '';
     if (item.start) {
-      const parsedDate = new Date(Date.parse(item.start));
-      startMonth = `${parsedDate.toLocaleString('default', {
-        month: 'long',
-      })}`;
-      startDay = parsedDate.getDate();
-      startWeekday = parsedDate.toLocaleString('default', {
-        weekday: 'long',
-      });
-      return (
-        <div class='cal_date'>
-          <span class='cal_month'>{startMonth}</span>
-          <span class='cal_day'>{startDay}</span>
-          <span class='cal_wkday'>{startWeekday}</span>
-        </div>
-      );
+      if (item.recurrence && item.recurrence.startsWith('DTSTART')) {
+        return (
+          <div class='cal_date'>
+            <span class='cal_month'>Recurring</span>
+            <span className='cal_day'>Event</span>
+            <span className='cal_wkday'>&nbsp;</span>
+          </div>
+        );
+      } else {
+        const parsedDate = new Date(Date.parse(item.start));
+        startMonth = `${parsedDate.toLocaleString('default', {
+          month: 'long',
+        })}`;
+        startDay = parsedDate.getDate();
+        startWeekday = parsedDate.toLocaleString('default', {
+          weekday: 'long',
+        });
+        return (
+          <div class='cal_date'>
+            <span class='cal_month'>{startMonth}</span>
+            <span class='cal_day'>{startDay}</span>
+            <span class='cal_wkday'>{startWeekday}</span>
+          </div>
+        );
+      }
     } else {
       return '';
     }
