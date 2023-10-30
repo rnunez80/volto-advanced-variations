@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
-
-// import DefaultImageSVG from '@plone/volto/components/manage/Blocks/Listing/default-image.svg';
 import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { Grid, Image } from 'semantic-ui-react';
@@ -12,6 +10,28 @@ import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 
+const renderImage = (item, isEditMode, howManyColumns) => {
+  const intl = useIntl();
+
+  if (!item.image_field) {
+    return (
+      <ConditionalLink item={item} condition={!isEditMode}>
+        <Image
+          className='listImage'
+          src={DefaultImageSVG}
+          alt={intl.formatMessage(messages.thisContentHasNoImage)}
+          size='small'
+        />
+      </ConditionalLink>
+    );
+  }
+
+  return (
+    <ConditionalLink item={item} condition={!isEditMode}>
+      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+    </ConditionalLink>
+  );
+};
 
 const AdvancedListingBlockTemplate = ({
                                         items,
@@ -66,8 +86,8 @@ const AdvancedListingBlockTemplate = ({
     if (item.start) {
       if (item.recurrence && item.recurrence.startsWith('DTSTART')) {
         return (
-          <div class='cal_date'>
-            <span class='cal_month'>Recurring</span>
+          <div className='cal_date'>
+            <span className='cal_month'>Recurring</span>
             <span className='cal_day'>Event</span>
             <span className='cal_wkday'>&nbsp;</span>
           </div>
@@ -82,10 +102,10 @@ const AdvancedListingBlockTemplate = ({
           weekday: 'long',
         });
         return (
-          <div class='cal_date'>
-            <span class='cal_month'>{startMonth}</span>
-            <span class='cal_day'>{startDay}</span>
-            <span class='cal_wkday'>{startWeekday}</span>
+          <div className='cal_date'>
+            <span className='cal_month'>{startMonth}</span>
+            <span className='cal_day'>{startDay}</span>
+            <span className='cal_wkday'>{startWeekday}</span>
           </div>
         );
       }
@@ -110,11 +130,7 @@ const AdvancedListingBlockTemplate = ({
         month: 'short',
       })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
     }
-    if (end == start) {
-      return start;
-    } else {
-      return start + ' - ' + end;
-    }
+    return end === start ? start : `${start} - ${end}`;
   };
   const getEventTime = (item) => {
     let start = '',
@@ -172,21 +188,7 @@ const AdvancedListingBlockTemplate = ({
             <Grid columns={columnSize} className='advanced-item'>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {!item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className='listImage'
-                        src={DefaultImageSVG}
-                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size='small'
-                      />
-                    </ConditionalLink>
-                  )}
-                  {item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-                    </ConditionalLink>
-                  )}
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
               <Grid.Column width={contentGridWidth} verticalAlign='top'>
@@ -206,7 +208,7 @@ const AdvancedListingBlockTemplate = ({
                     </ConditionalLink>
                   </TitleTag>
                 )}
-                {(item.start && eventDate | eventTime && (
+                {(item.start && eventDate || eventTime && (
                     <p className='event-when'>
                       {eventDate && (
                         <span className='start-date'>{getEventDate(item)}</span>
@@ -227,21 +229,7 @@ const AdvancedListingBlockTemplate = ({
               </Grid.Column>
               {['right', 'down'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {!item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className='listImage'
-                        src={DefaultImageSVG}
-                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size='small'
-                      />
-                    </ConditionalLink>
-                  )}
-                  {item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-                    </ConditionalLink>
-                  )}
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
             </Grid>
