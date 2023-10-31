@@ -29,7 +29,7 @@ export const advancedListingSchema = (props) => {
           'eventDate',
           'eventTime',
           'eventLocation',
-          // 'showRecurrence',
+          'showRecurrence',
           'effectiveDate',
           'expirationDate',
           'quote',

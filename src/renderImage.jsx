@@ -5,13 +5,12 @@ import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 import { Link } from 'react-router-dom';
-
 const renderImage = (item, isEditMode, howManyColumns) => {
   const intl = useIntl();
 
   if (!item.image_field) {
     return (
-      <Link to={item.url}>
+      <Link to={item.url} condition={!isEditMode}>
         <Image
           className='listImage'
           src={DefaultImageSVG}

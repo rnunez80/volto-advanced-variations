@@ -179,7 +179,7 @@ const messages = defineMessages({
   },
   showRecurrenceDescription: {
     id: 'recurranceDescription',
-    defaultMessage: 'If enable the next recurrence of the events will show up on the listing. In addtion, the query order will be overwritten to show items sorted by start dates. Note: listing with small batch size my present recurrence out of order due to results',
+    defaultMessage: 'If enable the next recurrence of the events will show up the date. In addtion, the query order will be overwritten to show items sorted by start dates. Note: listing with small batch size my present recurrence out of order due to results',
   },
   thisContentHasNoImage: {
     id: 'This content has no image, this is a default placeholder.',

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
@@ -12,6 +11,9 @@ import Slider from 'react-slick';
 import './Advanced.css';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
+import processItemsForRecurrence from './processItemsForRecurrence';
+import renderImage from './renderImage';
+import { Link } from 'react-router-dom';
 
 //
 // import 'slick-carousel/slick/slick.css';
@@ -20,28 +22,6 @@ import ResponsiveImage from './ResponsiveImage';
 import UniversalCard from '@eeacms/volto-listing-block/components/UniversalCard/UniversalCard';
 import ResponsiveContainer from '@eeacms/volto-listing-block/components/ResponsiveContainer';
 
-const renderImage = (item, isEditMode, howManyColumns) => {
-  const intl = useIntl();
-
-  if (!item.image_field) {
-    return (
-      <ConditionalLink item={item} condition={!isEditMode}>
-        <Image
-          className='listImage'
-          src={DefaultImageSVG}
-          alt={intl.formatMessage(messages.thisContentHasNoImage)}
-          size='small'
-        />
-      </ConditionalLink>
-    );
-  }
-
-  return (
-    <ConditionalLink item={item} condition={!isEditMode}>
-      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-    </ConditionalLink>
-  );
-};
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -67,14 +47,15 @@ const AdvancedCarouselBlockTemplate = ({
                                          autoplaySpeed,
                                          eventCard,
                                          quote,
+                                         showRecurrence,
                                        }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
   if (isInternalURL(moreHref)) {
     moreLink = (
-      <ConditionalLink to={flattenToAppURL(moreHref)} condition={!isEditMode}>
+      <Link to={flattenToAppURL(moreHref)} condition={!isEditMode}>
         {moreLinkText || moreHref}
-      </ConditionalLink>
+      </Link>
     );
   } else if (moreHref) {
     moreLink = <a href={moreHref}>{moreLinkText || moreHref}</a>;
@@ -84,9 +65,9 @@ const AdvancedCarouselBlockTemplate = ({
   let headerHref = headerUrl?.[0]?.['@id'] || '';
   if (isInternalURL(headerHref)) {
     headerLink = (
-      <ConditionalLink to={flattenToAppURL(headerHref)} condition={!isEditMode}>
+      <Link to={flattenToAppURL(headerHref)} condition={!isEditMode}>
         {header || headerHref}
-      </ConditionalLink>
+      </Link>
     );
   } else if (headerHref) {
     moreLink = <a href={headerHref}>{moreLinkText || headerHref}</a>;
@@ -188,6 +169,31 @@ const AdvancedCarouselBlockTemplate = ({
     }
     setIsPlaying(!isPlaying);
   };
+
+  // Process items for recurrence and future dates
+  // const processedItems = processItemsForRecurrence(items);
+  let processedItems = [];
+
+  if (showRecurrence) {
+    // Process items for recurrence and future dates if showRecurrence is true
+    processedItems = processItemsForRecurrence(items);
+  } else {
+    // Simply push the original items into processedItems if showRecurrence is false
+    processedItems = items.map((item) => ({
+      title: item.title,
+      start: item.start,
+      end: item.end,
+      url: flattenToAppURL(item['@id']),
+      effective: item.effective,
+      expires: item.expires,
+      description: item.description,
+      location: item.location,
+      ['@id']: `${item['@id']}`,
+      ['@type']: item['@type'],
+      image_field: item.image_field,
+    }));
+  }
+
   moment.locale(intl.locale);
   return (
     <div className='advancedView'>
@@ -246,19 +252,19 @@ const AdvancedCarouselBlockTemplate = ({
         }
       >
         {['background'].includes(imageSide) &&
-          items.map((item, index) => (
+          processedItems.map((item, index) => (
             <div className='backgroundimage'>
-              <ConditionalLink item={item} condition={!isEditMode}>
+              <Link to={item} condition={!isEditMode}>
                 <div className='focuspoint'>
                   {!item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
+                    <Link to={item} condition={!isEditMode}>
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
                         alt={intl.formatMessage(messages.thisContentHasNoImage)}
                         size='small'
                       />
-                    </ConditionalLink>
+                    </Link>
                   )}
                   {item.image_field && (
                     <ResponsiveImage item={item} howManyColumns={howManyColumns} />
@@ -315,11 +321,11 @@ const AdvancedCarouselBlockTemplate = ({
                     )}
                   </p>
                 </div>
-              </ConditionalLink>
+              </Link>
             </div>
           ))}
         {!['background'].includes(imageSide) &&
-          items.map((item) => (
+          processedItems.map((item) => (
             <Grid columns={columnSize}>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth} className='advanced-item'>
@@ -338,9 +344,9 @@ const AdvancedCarouselBlockTemplate = ({
                 {eventCard && <>{getEventCard(item)}</>}
                 {showTitle && (
                   <TitleTag>
-                    <ConditionalLink item={item} condition={!isEditMode}>
+                    <Link to={item} condition={!isEditMode}>
                       {item.title ? item.title : item.id}
-                    </ConditionalLink>
+                    </Link>
                   </TitleTag>
                 )}
                 {(item.location && eventDate || eventTime && (

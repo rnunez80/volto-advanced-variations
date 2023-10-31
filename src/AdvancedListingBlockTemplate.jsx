@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
@@ -40,9 +39,9 @@ const AdvancedListingBlockTemplate = ({
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
   if (isInternalURL(moreHref)) {
     moreLink = (
-      <ConditionalLink to={flattenToAppURL(moreHref)} condition={!isEditMode}>
+      <Link to={flattenToAppURL(moreHref)} condition={!isEditMode}>
         {moreLinkText || moreHref}
-      </ConditionalLink>
+      </Link>
     );
   } else if (moreHref) {
     moreLink = <a href={moreHref}>{moreLinkText || moreHref}</a>;
@@ -52,9 +51,9 @@ const AdvancedListingBlockTemplate = ({
   let headerHref = headerUrl?.[0]?.['@id'] || '';
   if (isInternalURL(headerHref)) {
     headerLink = (
-      <ConditionalLink to={flattenToAppURL(headerHref)} condition={!isEditMode}>
+      <Link to={flattenToAppURL(headerHref)} condition={!isEditMode}>
         {header || headerHref}
-      </ConditionalLink>
+      </Link>
     );
   } else if (headerHref) {
     moreLink = <a href={headerHref}>{moreLinkText || headerHref}</a>;
@@ -153,28 +152,28 @@ const AdvancedListingBlockTemplate = ({
   const HeaderTag = headerTag ? headerTag : 'h3';
 
   // Process items for recurrence and future dates
-  const processedItems = processItemsForRecurrence(items);
-  // let processedItems = [];
-  //
-  // if (showRecurrence) {
-  //   // Process items for recurrence and future dates if showRecurrence is true
-  //   processedItems = processItemsForRecurrence(items);
-  // } else {
-  //   // Simply push the original items into processedItems if showRecurrence is false
-  //   processedItems = items.map((item) => ({
-  //     title: item.title,
-  //     start: item.start,
-  //     end: item.end,
-  //     url: flattenToAppURL(item['@id']),
-  //     effective: item.effective,
-  //     expires: item.expires,
-  //     description: item.description,
-  //     location: item.location,
-  //     ['@id']: `${item['@id']}`,
-  //     ['@type']: item['@type'],
-  //     image_field: item.image_field,
-  //   }));
-  // }
+  // const processedItems = processItemsForRecurrence(items);
+  let processedItems = [];
+
+  if (showRecurrence) {
+    // Process items for recurrence and future dates if showRecurrence is true
+    processedItems = processItemsForRecurrence(items);
+  } else {
+    // Simply push the original items into processedItems if showRecurrence is false
+    processedItems = items.map((item) => ({
+      title: item.title,
+      start: item.start,
+      end: item.end,
+      url: flattenToAppURL(item['@id']),
+      effective: item.effective,
+      expires: item.expires,
+      description: item.description,
+      location: item.location,
+      ['@id']: `${item['@id']}`,
+      ['@type']: item['@type'],
+      image_field: item.image_field,
+    }));
+  }
 
   moment.locale(intl.locale);
   return (
@@ -209,7 +208,7 @@ const AdvancedListingBlockTemplate = ({
                 {eventCard && <>{getEventCard(item)}</>}
                 {showTitle && (
                   <TitleTag>
-                    <Link to={item.url}>
+                    <Link to={item.url} condition={!isEditMode}>
                       {item.title ? item.title : item.id}
                     </Link>
                   </TitleTag>
@@ -245,10 +244,10 @@ const AdvancedListingBlockTemplate = ({
             <Grid columns={columnSize} className='advanced-item'>
               <Grid.Column>
                 <div className='backgroundimage'>
-                  <Link to={item.url}>
+                  <Link to={item.url} condition={!isEditMode}>
                     <div className='focuspoint'>
                       {!item.image_field && (
-                        <Link to={item.url}>
+                        <Link to={item.url} condition={!isEditMode}>
                           <Image
                             className='listImage'
                             src={DefaultImageSVG}

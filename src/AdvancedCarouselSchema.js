@@ -37,6 +37,7 @@ export const advancedCarouselSchema = (props) => {
           'eventDate',
           'eventTime',
           'eventLocation',
+          'showRecurrence',
           'effectiveDate',
           'expirationDate',
           'quote',
@@ -58,7 +59,7 @@ export const advancedCarouselSchema = (props) => {
           [3, '3'],
           [4, '4'],
         ],
-        default: 2,
+        default: 1,
       },
       slidesToScroll: {
         title: intl.formatMessage(messages.slidesToScroll),
@@ -73,6 +74,7 @@ export const advancedCarouselSchema = (props) => {
       autoPlay: {
         title: intl.formatMessage(messages.autoPlay),
         type: 'boolean',
+        default: true,
       },
       autoplaySpeed: {
         title: intl.formatMessage(messages.speedAutoplay),
@@ -87,7 +89,7 @@ export const advancedCarouselSchema = (props) => {
           [9, '9'],
           [10, '10'],
         ],
-        default: 5000,
+        default: 5,
       },
       align: {
         title: intl.formatMessage(messages.alignment),
@@ -139,6 +141,11 @@ export const advancedCarouselSchema = (props) => {
       },
       quote: {
         title: intl.formatMessage(messages.showAsQuote),
+        type: 'boolean',
+      },
+      showRecurrence: {
+        title: intl.formatMessage(messages.showRecurrence),
+        description: intl.formatMessage(messages.showRecurrenceDescription),
         type: 'boolean',
       },
     },
