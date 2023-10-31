@@ -7,6 +7,7 @@ A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.or
 
 Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider or image gallery.
 
+NEW in 0.2.0: Added event recurrence support and option. if enable the event will show all future recurrence of the events and will overwrite the order of the items.
 ### Listing options
 
 A example of Listing options Sidebar, it look like the following capture:

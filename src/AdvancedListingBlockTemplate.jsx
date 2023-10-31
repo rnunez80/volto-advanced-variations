@@ -10,27 +10,28 @@ import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 import { RRule, rrulestr } from 'rrule';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 
 const renderImage = (item, isEditMode, howManyColumns) => {
   const intl = useIntl();
 
   if (!item.image_field) {
     return (
-      <ConditionalLink item={item} condition={!isEditMode}>
+      <Link to={item.url}>
         <Image
           className='listImage'
           src={DefaultImageSVG}
           alt={intl.formatMessage(messages.thisContentHasNoImage)}
           size='small'
         />
-      </ConditionalLink>
+      </Link>
     );
   }
 
   return (
-    <ConditionalLink item={item} condition={!isEditMode}>
+    <Link to={item.url} condition={!isEditMode}>
       <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-    </ConditionalLink>
+    </Link>
   );
 };
 
@@ -65,13 +66,13 @@ const processItemsForRecurrence = (originalItems) => {
             start: startStr,
             end: endStr,
             url: flattenToAppURL(item['@id']),
-            groupId: item['@id'],
             effective: item.effective,
             expires: item.expires,
             description: item.description,
             location: item.location,
-            id: item['@id'],
-            type: item['@type'],
+            ['@id']: `${item['@id']}#${startStr}`,
+            ['@type']: item['@type'],
+            image_field: item.image_field,
           });
         }
       });
@@ -261,12 +262,12 @@ const AdvancedListingBlockTemplate = ({
                 {eventCard && <>{getEventCard(item)}</>}
                 {showTitle && (
                   <TitleTag>
-                    <ConditionalLink item={item} condition={!isEditMode}>
+                    <Link to={item.url}>
                       {item.title ? item.title : item.id}
-                    </ConditionalLink>
+                    </Link>
                   </TitleTag>
                 )}
-                {(item.start && eventDate || eventTime && (
+                {(item.start && eventDate | eventTime && (
                     <p className='event-when'>
                       {eventDate && (
                         <span className='start-date'>{getEventDate(item)}</span>
@@ -297,10 +298,10 @@ const AdvancedListingBlockTemplate = ({
             <Grid columns={columnSize} className='advanced-item'>
               <Grid.Column>
                 <div className='backgroundimage'>
-                  <ConditionalLink item={item} condition={!isEditMode}>
+                  <Link to={item.url}>
                     <div className='focuspoint'>
                       {!item.image_field && (
-                        <ConditionalLink item={item} condition={!isEditMode}>
+                        <Link to={item.url}>
                           <Image
                             className='listImage'
                             src={DefaultImageSVG}
@@ -309,7 +310,7 @@ const AdvancedListingBlockTemplate = ({
                             )}
                             size='small'
                           />
-                        </ConditionalLink>
+                        </Link>
                       )}
                       {item.image_field && (
                         <ResponsiveImage item={item} howManyColumns={howManyColumns} />
@@ -372,7 +373,7 @@ const AdvancedListingBlockTemplate = ({
                         )}
                       </p>
                     </div>
-                  </ConditionalLink>
+                  </Link>
                 </div>
               </Grid.Column>
             </Grid>

@@ -3,7 +3,7 @@ import { Image } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 const ResponsiveImage = ({ item, howManyColumns }) => {
-    const imageUrl = flattenToAppURL(`${item['@id']}/@@images/${item.image_field}`);
+    const imageUrl = flattenToAppURL(`${item.url}/@@images/${item.image_field}`);
     let srcset = `
         ${imageUrl}/mini 200w,
         ${imageUrl}/preview 400w,
