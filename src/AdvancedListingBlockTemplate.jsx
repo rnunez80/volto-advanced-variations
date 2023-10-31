@@ -9,84 +9,9 @@ import moment from 'moment';
 import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
-import { RRule, rrulestr } from 'rrule';
-import { Link, NavLink, withRouter } from 'react-router-dom';
-
-const renderImage = (item, isEditMode, howManyColumns) => {
-  const intl = useIntl();
-
-  if (!item.image_field) {
-    return (
-      <Link to={item.url}>
-        <Image
-          className='listImage'
-          src={DefaultImageSVG}
-          alt={intl.formatMessage(messages.thisContentHasNoImage)}
-          size='small'
-        />
-      </Link>
-    );
-  }
-
-  return (
-    <Link to={item.url} condition={!isEditMode}>
-      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-    </Link>
-  );
-};
-
-const processItemsForRecurrence = (originalItems) => {
-  const today = new Date();
-  const newItems = [];
-
-  originalItems.forEach((item) => {
-    if (item.recurrence && item.recurrence.startsWith('DTSTART')) {
-      let recurrence = item.recurrence;
-      if (item.recurrence.indexOf('DTSTART') < 0) {
-        var dtstart = RRule.optionsToString({
-          dtstart: new Date(item.start),
-        });
-        recurrence = dtstart + '\n' + recurrence;
-      }
-
-      const rrule = rrulestr(recurrence, { unfold: true, forceset: true });
-
-      rrule.all().forEach((date) => {
-        let futureDate = new Date(date);
-        let dateStr = `${futureDate.getFullYear()}-${(futureDate.getMonth() + 1)
-          .toString()
-          .padStart(2, '0')}-${futureDate.getDate().toString().padStart(2, '0')}`;
-        let startStr = dateStr + item.start.slice(10);
-        let endStr = dateStr + item.end.slice(10);
-
-        // Only push if the date is in the future
-        if (futureDate > today) {
-          newItems.push({
-            title: item.title,
-            start: startStr,
-            end: endStr,
-            url: flattenToAppURL(item['@id']),
-            effective: item.effective,
-            expires: item.expires,
-            description: item.description,
-            location: item.location,
-            ['@id']: `${item['@id']}#${startStr}`,
-            ['@type']: item['@type'],
-            image_field: item.image_field,
-          });
-        }
-      });
-    } else {
-      newItems.push(item);
-    }
-  });
-
-  // Sort items by 'start'
-  newItems.sort((a, b) => new Date(a.start) - new Date(b.start));
-
-  return newItems;
-};
-
+import processItemsForRecurrence from './processItemsForRecurrence';
+import renderImage from './renderImage';
+import { Link } from 'react-router-dom';
 
 const AdvancedListingBlockTemplate = ({
                                         items,
