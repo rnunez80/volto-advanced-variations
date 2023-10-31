@@ -29,6 +29,7 @@ export const advancedListingSchema = (props) => {
           'eventDate',
           'eventTime',
           'eventLocation',
+          // 'showRecurrence',
           'effectiveDate',
           'expirationDate',
           'quote',
@@ -50,7 +51,7 @@ export const advancedListingSchema = (props) => {
           [3, '3'],
           [4, '4'],
         ],
-        default: 2,
+        default: 1,
       },
       imageWidth: {
         title: intl.formatMessage(messages.imageWidth),
@@ -112,6 +113,11 @@ export const advancedListingSchema = (props) => {
       },
       quote: {
         title: intl.formatMessage(messages.showAsQuote),
+        type: 'boolean',
+      },
+      showRecurrence: {
+        title: intl.formatMessage(messages.showRecurrence),
+        description: intl.formatMessage(messages.showRecurrenceDescription),
         type: 'boolean',
       },
     },

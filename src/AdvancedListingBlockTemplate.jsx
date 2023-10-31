@@ -34,6 +34,7 @@ const AdvancedListingBlockTemplate = ({
                                         showTitle,
                                         eventCard,
                                         quote,
+                                        showRecurrence,
                                       }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
@@ -153,6 +154,27 @@ const AdvancedListingBlockTemplate = ({
 
   // Process items for recurrence and future dates
   const processedItems = processItemsForRecurrence(items);
+  // let processedItems = [];
+  //
+  // if (showRecurrence) {
+  //   // Process items for recurrence and future dates if showRecurrence is true
+  //   processedItems = processItemsForRecurrence(items);
+  // } else {
+  //   // Simply push the original items into processedItems if showRecurrence is false
+  //   processedItems = items.map((item) => ({
+  //     title: item.title,
+  //     start: item.start,
+  //     end: item.end,
+  //     url: flattenToAppURL(item['@id']),
+  //     effective: item.effective,
+  //     expires: item.expires,
+  //     description: item.description,
+  //     location: item.location,
+  //     ['@id']: `${item['@id']}`,
+  //     ['@type']: item['@type'],
+  //     image_field: item.image_field,
+  //   }));
+  // }
 
   moment.locale(intl.locale);
   return (
