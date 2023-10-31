@@ -9,6 +9,7 @@ import moment from 'moment';
 import { injectIntl, useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
+import { RRule, rrulestr } from 'rrule';
 
 const renderImage = (item, isEditMode, howManyColumns) => {
   const intl = useIntl();
@@ -32,6 +33,59 @@ const renderImage = (item, isEditMode, howManyColumns) => {
     </ConditionalLink>
   );
 };
+
+const processItemsForRecurrence = (originalItems) => {
+  const today = new Date();
+  const newItems = [];
+
+  originalItems.forEach((item) => {
+    if (item.recurrence && item.recurrence.startsWith('DTSTART')) {
+      let recurrence = item.recurrence;
+      if (item.recurrence.indexOf('DTSTART') < 0) {
+        var dtstart = RRule.optionsToString({
+          dtstart: new Date(item.start),
+        });
+        recurrence = dtstart + '\n' + recurrence;
+      }
+
+      const rrule = rrulestr(recurrence, { unfold: true, forceset: true });
+
+      rrule.all().forEach((date) => {
+        let futureDate = new Date(date);
+        let dateStr = `${futureDate.getFullYear()}-${(futureDate.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}-${futureDate.getDate().toString().padStart(2, '0')}`;
+        let startStr = dateStr + item.start.slice(10);
+        let endStr = dateStr + item.end.slice(10);
+
+        // Only push if the date is in the future
+        if (futureDate > today) {
+          newItems.push({
+            title: item.title,
+            start: startStr,
+            end: endStr,
+            url: flattenToAppURL(item['@id']),
+            groupId: item['@id'],
+            effective: item.effective,
+            expires: item.expires,
+            description: item.description,
+            location: item.location,
+            id: item['@id'],
+            type: item['@type'],
+          });
+        }
+      });
+    } else {
+      newItems.push(item);
+    }
+  });
+
+  // Sort items by 'start'
+  newItems.sort((a, b) => new Date(a.start) - new Date(b.start));
+
+  return newItems;
+};
+
 
 const AdvancedListingBlockTemplate = ({
                                         items,
@@ -170,6 +224,10 @@ const AdvancedListingBlockTemplate = ({
   const intl = useIntl();
   const TitleTag = titleTag ? titleTag : 'h3';
   const HeaderTag = headerTag ? headerTag : 'h3';
+
+  // Process items for recurrence and future dates
+  const processedItems = processItemsForRecurrence(items);
+
   moment.locale(intl.locale);
   return (
     <div className='advancedView advancedList'>
@@ -184,7 +242,7 @@ const AdvancedListingBlockTemplate = ({
         className={'column' + howManyColumns}
       >
         {!['background'].includes(imageSide) &&
-          items.map((item) => (
+          processedItems.map((item) => (
             <Grid columns={columnSize} className='advanced-item'>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
@@ -235,7 +293,7 @@ const AdvancedListingBlockTemplate = ({
             </Grid>
           ))}
         {['background'].includes(imageSide) &&
-          items.map((item) => (
+          processedItems.map((item) => (
             <Grid columns={columnSize} className='advanced-item'>
               <Grid.Column>
                 <div className='backgroundimage'>

@@ -3,7 +3,6 @@ import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
-
 import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { Grid, Image, Label, Icon, Button } from 'semantic-ui-react';
@@ -20,6 +19,29 @@ import ResponsiveImage from './ResponsiveImage';
 
 import UniversalCard from '@eeacms/volto-listing-block/components/UniversalCard/UniversalCard';
 import ResponsiveContainer from '@eeacms/volto-listing-block/components/ResponsiveContainer';
+
+const renderImage = (item, isEditMode, howManyColumns) => {
+  const intl = useIntl();
+
+  if (!item.image_field) {
+    return (
+      <ConditionalLink item={item} condition={!isEditMode}>
+        <Image
+          className='listImage'
+          src={DefaultImageSVG}
+          alt={intl.formatMessage(messages.thisContentHasNoImage)}
+          size='small'
+        />
+      </ConditionalLink>
+    );
+  }
+
+  return (
+    <ConditionalLink item={item} condition={!isEditMode}>
+      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+    </ConditionalLink>
+  );
+};
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -111,11 +133,7 @@ const AdvancedCarouselBlockTemplate = ({
         month: 'short',
       })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
     }
-    if (end == start) {
-      return start;
-    } else {
-      return start + ' - ' + end;
-    }
+    return end === start ? start : `${start} - ${end}`;
   };
   const getEventTime = (item) => {
     let start = '',
@@ -256,7 +274,7 @@ const AdvancedCarouselBlockTemplate = ({
                     </>
                   )}
                   {eventCard && <>{getEventCard(item)}</>}
-                  {(item.start && eventDate | eventTime && (
+                  {(item.start && eventDate || eventTime && (
                       <span class='event-when'>
                       {eventDate && (
                         <span className='start-date'>{getEventDate(item)}</span>
@@ -305,21 +323,7 @@ const AdvancedCarouselBlockTemplate = ({
             <Grid columns={columnSize}>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth} className='advanced-item'>
-                  {!item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className='listImage'
-                        src={DefaultImageSVG}
-                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size='small'
-                      />
-                    </ConditionalLink>
-                  )}
-                  {item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-                    </ConditionalLink>
-                  )}
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
               <Grid.Column width={contentGridWidth} verticalAlign='top'>
@@ -339,7 +343,7 @@ const AdvancedCarouselBlockTemplate = ({
                     </ConditionalLink>
                   </TitleTag>
                 )}
-                {(item.location && eventDate | eventTime && (
+                {(item.location && eventDate || eventTime && (
                     <div className='event-when'>
                       {eventDate && (
                         <span className='start-date'>{getEventDate(item)}</span>
@@ -360,21 +364,7 @@ const AdvancedCarouselBlockTemplate = ({
               </Grid.Column>
               {['right', 'down'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {!item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <Image
-                        className='listImage'
-                        src={DefaultImageSVG}
-                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
-                        size='small'
-                      />
-                    </ConditionalLink>
-                  )}
-                  {item.image_field && (
-                    <ConditionalLink item={item} condition={!isEditMode}>
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-                    </ConditionalLink>
-                  )}
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
             </Grid>
