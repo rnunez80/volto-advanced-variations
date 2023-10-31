@@ -220,7 +220,10 @@ const AdvancedListingBlockTemplate = ({
                       )}
                       {eventTime && eventDate && <span> | </span>}
                       {eventTime && (
-                        <span className='start-time'>{getEventTime(item)}</span>
+                        <span className='start-time'>
+                          {getEventTime(item) === '12:00 AM - 11:59 PM' ? 'All Day' : getEventTime(item)}
+                        </span>
+
                       )}
                     </p>
                   )) ||
