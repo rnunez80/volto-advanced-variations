@@ -254,10 +254,10 @@ const AdvancedCarouselBlockTemplate = ({
         {['background'].includes(imageSide) &&
           processedItems.map((item, index) => (
             <div className='backgroundimage'>
-              <Link to={item} condition={!isEditMode}>
+              <Link to={item.url} condition={!isEditMode}>
                 <div className='focuspoint'>
                   {!item.image_field && (
-                    <Link to={item} condition={!isEditMode}>
+                    <Link to={item.url} condition={!isEditMode}>
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
@@ -346,7 +346,7 @@ const AdvancedCarouselBlockTemplate = ({
                 {eventCard && <>{getEventCard(item)}</>}
                 {showTitle && (
                   <TitleTag>
-                    <Link to={item} condition={!isEditMode}>
+                    <Link to={item.url} condition={!isEditMode}>
                       {item.title ? item.title : item.id}
                     </Link>
                   </TitleTag>
