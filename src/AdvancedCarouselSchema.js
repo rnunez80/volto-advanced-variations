@@ -31,6 +31,7 @@ export const advancedCarouselSchema = (props) => {
         fields: [
           'titleTag',
           'imageSide',
+          'imageWidth',
           'showTitle',
           'showDescription',
           'eventCard',
@@ -96,12 +97,27 @@ export const advancedCarouselSchema = (props) => {
         widget: 'align',
         default: 'left',
       },
+            imageWidth: {
+        title: intl.formatMessage(messages.imageWidth),
+        description: intl.formatMessage(messages.imageWidthDescription),
+        choices: [
+          [2, '2/12'],
+          [3, '3/12'],
+          [4, '4/12'],
+          [5, '5/12'],
+          [6, '6/12'],
+        ],
+        default: 4,
+      },
       imageSide: {
         title: intl.formatMessage(messages.imagePosition),
         choices: [
           [null, intl.formatMessage(messages.noImage)],
           ['background', intl.formatMessage(messages.background)],
           ['up', intl.formatMessage(messages.up)],
+          ['left', intl.formatMessage(messages.left)],
+          ['right', intl.formatMessage(messages.right)],
+          ['down', intl.formatMessage(messages.down)],
         ],
         default: 'up',
       },
