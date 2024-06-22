@@ -411,11 +411,20 @@
 button.ui.circular.button.playpause {
   position: absolute;
   background: transparent;
-  transform: translate(0, -38px);
+  transform: translate(0, -28px);
+  opacity: .25;
+}
+
+button.ui.circular.button.playpause:hover {
+  opacity: 1;
 }
 @media only screen and (max-width: 767px) {
   .advancedView > .ui.stackable.grid > .column:not(.row),
   .ui.stackable.grid > .column.grid > .column {
     padding: 0 0 0.5em 0 !important;
   }
+}
+
+.playpause .image {
+  height: 15px;
 }
