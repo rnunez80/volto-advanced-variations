@@ -58,6 +58,10 @@ const AdvancedCarouselBlockTemplate = ({
   const getEventDate = (item) => moment(item.start).format('L');
   const getEventTime = (item) => moment(item.start).format('LT');
 
+  // Calculate the grid widths based on the number of columns
+  const imageGridWidth = imageWidth || 4; // Default to 4 if not provided
+  const textGridWidth = 16 - imageGridWidth; // Semantic UI grid is 16 columns wide
+
   return (
     <div className='advanced-carousel-block'>
       <Suspense fallback={<div>Loading...</div>}>
