@@ -33,6 +33,7 @@ const ResponsiveImage = ({ item, howManyColumns }) => {
             sizes={sizes}
             alt={item.title}
             size='small'
+            width='100%'
             src={imageUrl + '/preview'}
         />
     );
