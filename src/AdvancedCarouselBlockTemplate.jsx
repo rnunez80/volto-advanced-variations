@@ -9,11 +9,10 @@ import { Link } from 'react-router-dom';
 import './Advanced.css';
 import messages from './messages';
 
-// Lazy load components
 const DefaultImageSVG = React.lazy(() => import('./placeholder.png'));
 const ResponsiveImage = React.lazy(() => import('./ResponsiveImage'));
 const processItemsForRecurrence = React.lazy(() => import('./processItemsForRecurrence'));
-const renderImage = React.lazy(() => import('./renderImage').then(module => ({ default: module.default || module })));
+const RenderImage = React.lazy(() => import('./renderImage'));
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -53,15 +52,14 @@ const AdvancedCarouselBlockTemplate = ({
     slidesToShow: howManyColumns || 3,
     slidesToScroll: slidesToScroll || 1,
     autoplay: isPlaying,
-    autoplaySpeed: autoplaySpeed || 3000,
+    autoplaySpeed: autoplaySpeed || 5000, // Set a reasonable autoplay speed
   };
 
   const getEventDate = (item) => moment(item.start).format('L');
   const getEventTime = (item) => moment(item.start).format('LT');
 
-  // Calculate the grid widths based on the number of columns
-  const imageGridWidth = imageWidth || 4; // Default to 4 if not provided
-  const textGridWidth = 16 - imageGridWidth; // Semantic UI grid is 16 columns wide
+  const imageGridWidth = imageWidth || 4;
+  const textGridWidth = 16 - imageGridWidth;
 
   return (
     <div className='advanced-carousel-block'>
@@ -71,7 +69,7 @@ const AdvancedCarouselBlockTemplate = ({
             <Grid key={item['@id']} className='carousel-item' stackable>
               {['left', 'up'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {renderImage(item, isEditMode, howManyColumns)}
+                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                 </Grid.Column>
               )}
               <Grid.Column width={textGridWidth}>
@@ -102,7 +100,7 @@ const AdvancedCarouselBlockTemplate = ({
               </Grid.Column>
               {['right', 'down'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {renderImage(item, isEditMode, howManyColumns)}
+                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                 </Grid.Column>
               )}
             </Grid>
