@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom';
 import './Advanced.css';
 import messages from './messages';
 
+// Lazy load components
 const DefaultImageSVG = React.lazy(() => import('./placeholder.png'));
 const ResponsiveImage = React.lazy(() => import('./ResponsiveImage'));
 const processItemsForRecurrence = React.lazy(() => import('./processItemsForRecurrence'));
-const renderImage = React.lazy(() => import('./renderImage'));
+const renderImage = React.lazy(() => import('./renderImage').then(module => ({ default: module.default || module })));
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
