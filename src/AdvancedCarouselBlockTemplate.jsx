@@ -1,15 +1,18 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { isInternalURL } from '@plone/volto/helpers/Url/Url';
+import { Grid, Image } from 'semantic-ui-react';
 import moment from 'moment';
 import Slider from 'react-slick';
-import './Advanced.css';
-import renderImage from './renderImage';
 import { Link } from 'react-router-dom';
+import './Advanced.css';
+import messages from './messages';
 
+const DefaultImageSVG = React.lazy(() => import('./placeholder.png'));
 const ResponsiveImage = React.lazy(() => import('./ResponsiveImage'));
+const processItemsForRecurrence = React.lazy(() => import('./processItemsForRecurrence'));
+const renderImage = React.lazy(() => import('./renderImage'));
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -36,110 +39,92 @@ const AdvancedCarouselBlockTemplate = ({
                                          eventCard,
                                        }) => {
   const intl = useIntl();
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
 
   const settings = {
-    slidesToShow: howManyColumns,
-    slidesToScroll: slidesToScroll,
-    autoplay: autoPlay,
-    autoplaySpeed: autoplaySpeed,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: howManyColumns || 3,
+    slidesToScroll: slidesToScroll || 1,
+    autoplay: isPlaying,
+    autoplaySpeed: autoplaySpeed || 3000,
   };
+
+  const getEventDate = (item) => moment(item.start).format('L');
+  const getEventTime = (item) => moment(item.start).format('LT');
 
   return (
     <div className='advanced-carousel-block'>
-      {header && (
-        <header className='header'>
-          {headerUrl ? (
-            <Link to={headerUrl}>
-              <h2 className={`header-title ${headerTag}`}>{header}</h2>
-            </Link>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Slider {...settings}>
+          {items.map((item) => (
+            <Grid key={item['@id']} className='carousel-item' stackable>
+              {['left', 'up'].includes(imageSide) && (
+                <Grid.Column width={imageGridWidth}>
+                  {renderImage(item, isEditMode, howManyColumns)}
+                </Grid.Column>
+              )}
+              <Grid.Column width={textGridWidth}>
+                {showTitle && (
+                  <header className={headerTag}>
+                    <Link to={flattenToAppURL(item['@id'])}>
+                      {item.title}
+                    </Link>
+                  </header>
+                )}
+                {eventDate && (
+                  <div>
+                    <span className='start-date'>{getEventDate(item)}</span>
+                    {eventTime && eventDate && <span> | </span>}
+                    {eventTime && (
+                      <span className='start-time'>{getEventTime(item)}</span>
+                    )}
+                  </div>
+                )}
+                {eventLocation && <p>{item.location}</p>}
+                {effectiveDate && <p>{moment(item.effective).format('L')}</p>}
+                {expirationDate && (
+                  <p>Expiration: {moment(item.expires).format('L')}</p>
+                )}
+                {showDescription && item.description && (
+                  <p>{item.description}</p>
+                )}
+              </Grid.Column>
+              {['right', 'down'].includes(imageSide) && (
+                <Grid.Column width={imageGridWidth}>
+                  {renderImage(item, isEditMode, howManyColumns)}
+                </Grid.Column>
+              )}
+            </Grid>
+          ))}
+        </Slider>
+        <button className='ui circular button playpause' onClick={togglePlay}>
+          {isPlaying ? (
+            <Image
+              src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjRoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
+              alt={intl.formatMessage(messages.pause)}
+            />
           ) : (
-            <h2 className={`header-title ${headerTag}`}>{header}</h2>
+            <Image
+              src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
+              alt={intl.formatMessage(messages.play)}
+            />
           )}
-        </header>
-      )}
-      <Slider {...settings}>
-        {items.map((item, index) => {
-          const url = flattenToAppURL(item.url);
-          const image = renderImage(item.image, imageWidth);
-          const isInternal = isInternalURL(url);
-          const target = isInternal ? '_self' : '_blank';
-
-          return (
-            <div key={index} className='carousel-item'>
-              <Suspense fallback={<div>Loading...</div>}>
-                <ResponsiveImage image={image} alt={item.title || ' '} />
-              </Suspense>
-              {showTitle && <h3>{item.title}</h3>}
-              {showDescription && <p>{item.description}</p>}
-              {eventDate && (
-                <div className='event-date'>
-                  {moment(item.start).format('MMM DD, YYYY')}
-                </div>
-              )}
-              {eventLocation && <div className='event-location'>{item.location}</div>}
-              {eventTime && (
-                <div className='event-time'>{moment(item.start).format('h:mm A')}</div>
-              )}
-              {moreLinkUrl && (
-                <Link to={moreLinkUrl} target={target} className='more-link'>
-                  {moreLinkText}
-                </Link>
-              )}
-            </div>
-          );
-        })}
-      </Slider>
+        </button>
+      </Suspense>
     </div>
   );
 };
 
 AdvancedCarouselBlockTemplate.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moreLinkText: PropTypes.string,
-  moreLinkUrl: PropTypes.string,
-  header: PropTypes.string,
-  headerUrl: PropTypes.string,
-  headerTag: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.any).isRequired,
+  linkMore: PropTypes.any,
   isEditMode: PropTypes.bool,
-  imageSide: PropTypes.string,
-  imageWidth: PropTypes.string,
-  howManyColumns: PropTypes.number,
-  effectiveDate: PropTypes.string,
-  expirationDate: PropTypes.string,
-  titleTag: PropTypes.string,
-  showTitle: PropTypes.bool,
-  showDescription: PropTypes.bool,
-  eventDate: PropTypes.bool,
-  eventLocation: PropTypes.bool,
-  eventTime: PropTypes.bool,
-  slidesToScroll: PropTypes.number,
-  autoPlay: PropTypes.bool,
-  autoplaySpeed: PropTypes.number,
-  eventCard: PropTypes.bool,
-};
-
-AdvancedCarouselBlockTemplate.defaultProps = {
-  moreLinkText: '',
-  moreLinkUrl: '',
-  header: '',
-  headerUrl: '',
-  headerTag: 'h2',
-  isEditMode: false,
-  imageSide: 'left',
-  imageWidth: '100%',
-  howManyColumns: 1,
-  effectiveDate: '',
-  expirationDate: '',
-  titleTag: 'h3',
-  showTitle: true,
-  showDescription: true,
-  eventDate: false,
-  eventLocation: false,
-  eventTime: false,
-  slidesToScroll: 1,
-  autoPlay: false,
-  autoplaySpeed: 3000,
-  eventCard: false,
 };
 
 export default injectIntl(AdvancedCarouselBlockTemplate);
