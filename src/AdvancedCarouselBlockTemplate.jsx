@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
-import { FormattedMessage, injectIntl, useIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import DefaultImageSVG from './placeholder.png';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
-import { Grid, Image, Label, Icon, Button } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 import moment from 'moment';
-import loadable from '@loadable/component';
 import Slider from 'react-slick';
 import './Advanced.css';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 import processItemsForRecurrence from './processItemsForRecurrence';
-import renderImage from './renderImage';
+import { RenderImage } from './renderImage'; // Updated import statement
 import { Link } from 'react-router-dom';
 
-//
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
-
-import UniversalCard from '@eeacms/volto-listing-block/components/UniversalCard/UniversalCard';
-import ResponsiveContainer from '@eeacms/volto-listing-block/components/ResponsiveContainer';
-
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -42,12 +36,14 @@ const AdvancedCarouselBlockTemplate = ({
                                          eventDate,
                                          eventLocation,
                                          eventTime,
-                                         slidesToScroll,
-                                         autoPlay,
-                                         autoplaySpeed,
-                                         eventCard,
-                                         quote,
-                                         showRecurrence,
+                                         showReadMore,
+                                         moreLinkType,
+                                         imageGridWidth, // Ensure this is declared only once
+                                         imageSize,
+                                         imageRounded,
+                                         showNoImage,
+                                         onClick,
+                                         // other props...
                                        }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
@@ -331,7 +327,7 @@ const AdvancedCarouselBlockTemplate = ({
             <Grid columns={columnSize}>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth} className='advanced-item'>
-                  {renderImage(item, isEditMode, howManyColumns)}
+                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                 </Grid.Column>
               )}
               <Grid.Column width={contentGridWidth} verticalAlign='top'>
@@ -372,7 +368,7 @@ const AdvancedCarouselBlockTemplate = ({
               </Grid.Column>
               {['right', 'down'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  {renderImage(item, isEditMode, howManyColumns)}
+                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                 </Grid.Column>
               )}
             </Grid>
