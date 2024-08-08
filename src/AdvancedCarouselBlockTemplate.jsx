@@ -11,11 +11,13 @@ import './Advanced.css';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 import processItemsForRecurrence from './processItemsForRecurrence';
-import { RenderImage } from './renderImage'; // Updated import statement
+import renderImage from './renderImage';
 import { Link } from 'react-router-dom';
 
+//
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
+
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -36,14 +38,12 @@ const AdvancedCarouselBlockTemplate = ({
                                          eventDate,
                                          eventLocation,
                                          eventTime,
-                                         showReadMore,
-                                         moreLinkType,
-                                         imageGridWidth, // Ensure this is declared only once
-                                         imageSize,
-                                         imageRounded,
-                                         showNoImage,
-                                         onClick,
-                                         // other props...
+                                         slidesToScroll,
+                                         autoPlay,
+                                         autoplaySpeed,
+                                         eventCard,
+                                         quote,
+                                         showRecurrence,
                                        }) => {
   let moreLink = null;
   let moreHref = moreLinkUrl?.[0]?.['@id'] || '';
@@ -327,7 +327,7 @@ const AdvancedCarouselBlockTemplate = ({
             <Grid columns={columnSize}>
               {['up', 'left'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth} className='advanced-item'>
-                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
               <Grid.Column width={contentGridWidth} verticalAlign='top'>
@@ -368,7 +368,7 @@ const AdvancedCarouselBlockTemplate = ({
               </Grid.Column>
               {['right', 'down'].includes(imageSide) && (
                 <Grid.Column width={imageGridWidth}>
-                  <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                  {renderImage(item, isEditMode, howManyColumns)}
                 </Grid.Column>
               )}
             </Grid>
