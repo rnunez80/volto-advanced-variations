@@ -37,7 +37,6 @@ const ResponsiveImage = React.memo(({ item, howManyColumns }) => {
             srcSet={srcset}
             sizes={sizes}
             alt={item.title || 'Image'}
-            size='small'
             width='100%'
             src={imageUrl + '/preview'}
             loading='lazy'
