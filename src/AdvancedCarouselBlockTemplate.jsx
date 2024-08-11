@@ -14,11 +14,6 @@ import processItemsForRecurrence from './processItemsForRecurrence';
 import renderImage from './renderImage';
 import { Link } from 'react-router-dom';
 
-//
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-
-
 const AdvancedCarouselBlockTemplate = ({
                                          items,
                                          moreLinkText,
