@@ -338,4 +338,4 @@ AdvancedListingBlockTemplate.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default injectIntl(AdvancedListingBlockTemplate);
+export default injectIntl(React.memo(AdvancedListingBlockTemplate));

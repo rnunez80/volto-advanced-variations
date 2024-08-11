@@ -392,4 +392,4 @@ AdvancedCarouselBlockTemplate.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default injectIntl(AdvancedCarouselBlockTemplate);
+export default injectIntl(React.memo(AdvancedCarouselBlockTemplate));
