@@ -13,7 +13,7 @@ import ResponsiveImage from './ResponsiveImage';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import renderImage from './renderImage';
 import { Link } from 'react-router-dom';
-
+import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -64,74 +64,74 @@ const AdvancedCarouselBlockTemplate = ({
   } else if (headerHref) {
     moreLink = <a href={headerHref}>{moreLinkText || headerHref}</a>;
   }
-  const getEventCard = (item) => {
-    let startMonth = '',
-      startDay = '',
-      startWeekday = '',
-      startTime = '';
-    if (item.start) {
-      const parsedDate = new Date(Date.parse(item.start));
-      startMonth = `${parsedDate.toLocaleString('default', {
-        month: 'long',
-      })}`;
-      startDay = parsedDate.getDate();
-      startWeekday = parsedDate.toLocaleString('default', {
-        weekday: 'long',
-      });
-      return (
-        <div class='cal_date'>
-          <span class='cal_month'>{startMonth}</span>
-          <span class='cal_day'>{startDay}</span>
-          <span class='cal_wkday'>{startWeekday}</span>
-        </div>
-      );
-    } else {
-      return '';
-    }
-  };
-  const getEventDate = (item) => {
-    let start = '',
-      end = '';
-
-    if (item.start) {
-      const parsedDate = new Date(Date.parse(item.start));
-      start = `${parsedDate.toLocaleString('default', {
-        month: 'short',
-      })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
-    }
-
-    if (item.end) {
-      const parsedDate = new Date(Date.parse(item.end));
-      end = `${parsedDate.toLocaleString('default', {
-        month: 'short',
-      })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
-    }
-    return end === start ? start : `${start} - ${end}`;
-  };
-  const getEventTime = (item) => {
-    let start = '',
-      end = '';
-
-    if (item.start) {
-      const parsedDate = new Date(Date.parse(item.start));
-      start = `${parsedDate.toLocaleString('default', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })}`;
-    }
-
-    if (item.end) {
-      const parsedDate = new Date(Date.parse(item.end));
-      end = ` - ${parsedDate.toLocaleString('default', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      })}`;
-    }
-
-    return start + end;
-  };
+  // const getEventCard = (item) => {
+  //   let startMonth = '',
+  //     startDay = '',
+  //     startWeekday = '',
+  //     startTime = '';
+  //   if (item.start) {
+  //     const parsedDate = new Date(Date.parse(item.start));
+  //     startMonth = `${parsedDate.toLocaleString('default', {
+  //       month: 'long',
+  //     })}`;
+  //     startDay = parsedDate.getDate();
+  //     startWeekday = parsedDate.toLocaleString('default', {
+  //       weekday: 'long',
+  //     });
+  //     return (
+  //       <div class='cal_date'>
+  //         <span class='cal_month'>{startMonth}</span>
+  //         <span class='cal_day'>{startDay}</span>
+  //         <span class='cal_wkday'>{startWeekday}</span>
+  //       </div>
+  //     );
+  //   } else {
+  //     return '';
+  //   }
+  // };
+  // const getEventDate = (item) => {
+  //   let start = '',
+  //     end = '';
+  //
+  //   if (item.start) {
+  //     const parsedDate = new Date(Date.parse(item.start));
+  //     start = `${parsedDate.toLocaleString('default', {
+  //       month: 'short',
+  //     })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
+  //   }
+  //
+  //   if (item.end) {
+  //     const parsedDate = new Date(Date.parse(item.end));
+  //     end = `${parsedDate.toLocaleString('default', {
+  //       month: 'short',
+  //     })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
+  //   }
+  //   return end === start ? start : `${start} - ${end}`;
+  // };
+  // const getEventTime = (item) => {
+  //   let start = '',
+  //     end = '';
+  //
+  //   if (item.start) {
+  //     const parsedDate = new Date(Date.parse(item.start));
+  //     start = `${parsedDate.toLocaleString('default', {
+  //       hour: 'numeric',
+  //       minute: 'numeric',
+  //       hour12: true,
+  //     })}`;
+  //   }
+  //
+  //   if (item.end) {
+  //     const parsedDate = new Date(Date.parse(item.end));
+  //     end = ` - ${parsedDate.toLocaleString('default', {
+  //       hour: 'numeric',
+  //       minute: 'numeric',
+  //       hour12: true,
+  //     })}`;
+  //   }
+  //
+  //   return start + end;
+  // };
   const hasImage = imageSide !== null;
   const oneColumnElement = ['up', 'down', 'background', null].includes(
     imageSide,
@@ -253,7 +253,7 @@ const AdvancedCarouselBlockTemplate = ({
                       <Image
                         className='listImage'
                         src={DefaultImageSVG}
-                        alt={intl.formatMessage(messages.thisContentHasNoImage)}
+                        alt=' '
                         size='small'
                       />
                     </Link>

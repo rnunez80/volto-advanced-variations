@@ -1,3 +1,4 @@
+
 export const getEventCard = (item) => {
   let startMonth = '', startDay = '', startWeekday = '', startTime = '';
   if (item.start) {
@@ -23,7 +24,6 @@ export const getEventCard = (item) => {
       <span className='cal_month'>{startMonth}</span>
       <span className='cal_day'>{startDay}</span>
       <span className='cal_wkday'>{startWeekday}</span>
-      <span className='cal_time'>{startTime}</span>
     </div>
   );
 };
