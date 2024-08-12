@@ -14,6 +14,7 @@ import processItemsForRecurrence from './processItemsForRecurrence';
 import renderImage from './renderImage';
 import { Link } from 'react-router-dom';
 
+
 const AdvancedCarouselBlockTemplate = ({
                                          items,
                                          moreLinkText,
