@@ -1,4 +1,3 @@
-
 export const getEventCard = (item) => {
   let startMonth = '', startDay = '', startWeekday = '', startTime = '';
   if (item.start) {
@@ -38,7 +37,12 @@ export const getEventDate = (item) => {
     const parsedEndDate = new Date(Date.parse(item.end));
     end = `${parsedEndDate.toLocaleString('default', { month: 'short' })} ${parsedEndDate.getDate()}`;
   }
-  return end ? `${start} - ${end}` : start;
+  //if start and end are the same day, only show the start date
+  if (start === end) {
+    return end ? `${start}` : start;
+  } else {
+    return end ? `${start} - ${end}` : start;
+  }
 };
 
 export const getEventTime = (item) => {
