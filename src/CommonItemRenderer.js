@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useIntl } from 'react-intl';
 import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
+import processItemsForRecurrence from './processItemsForRecurrence';
+import renderImage from './renderImage'; // Ensure this is imported
 
 const CommonItemRenderer = ({
                               items,
@@ -20,10 +22,12 @@ const CommonItemRenderer = ({
                               effectiveDate,
                               expirationDate,
                               isEditMode,
+                              imageSide,
+                              imageWidth,
+                              howManyColumns,
                             }) => {
   const intl = useIntl();
 
-  // Memoize processed items to avoid unnecessary recalculations
   const processedItems = useMemo(() => {
     if (showRecurrence) {
       return processItemsForRecurrence(items);
@@ -75,7 +79,15 @@ const CommonItemRenderer = ({
   return (
     <>
       {processedItems.map(item => (
-        <div key={item['@id']}>{renderContent(item)}</div>
+        <div key={item['@id']} class='ui one column grid advanced-item'>
+          {['up', 'left'].includes(imageSide) && (
+            <div class='twelve wide column advancedImage'>{renderImage(item, isEditMode, howManyColumns)}</div>
+          )}
+          {renderContent(item)}
+          {['right', 'down'].includes(imageSide) && (
+            <div class='twelve wide column advancedImage'>{renderImage(item, isEditMode, howManyColumns)}</div>
+          )}
+        </div>
       ))}
     </>
   );
@@ -95,6 +107,9 @@ CommonItemRenderer.propTypes = {
   effectiveDate: PropTypes.bool,
   expirationDate: PropTypes.bool,
   isEditMode: PropTypes.bool,
+  imageSide: PropTypes.string,
+  imageWidth: PropTypes.number,
+  howManyColumns: PropTypes.number,
 };
 
 export default CommonItemRenderer;

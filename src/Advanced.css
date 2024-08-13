@@ -30,7 +30,7 @@
   margin-left: -5px;
   margin-bottom: 5px;
   text-shadow: -1px -1px 4px #000, 1px -1px 4px #000, -1px 1px 4px #000,
-    1px 1px 4px #000;
+  1px 1px 4px #000;
 }
 
 .card h2,
@@ -158,16 +158,16 @@
 }
 
 .listing.advancedCarousel.has--stretch--stretch
-  .advancedView
-  .column1
-  .slick-slide {
+.advancedView
+.column1
+.slick-slide {
   padding: 0;
 }
 
 .listing.advancedCarousel.has--stretch--stretch
-  .advancedView:hover
-  .column1
-  .slick-next {
+.advancedView:hover
+.column1
+.slick-next {
   transform: translateX(-58px);
 }
 
@@ -225,7 +225,7 @@
 
 @media screen and (min-width: 767px) {
   body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar-collapsed)
-    .stretch {
+  .stretch {
     max-width: 100vw !important;
     width: calc(100vw - 80px) !important;
     margin: 0 0 0 40px !important;
@@ -233,7 +233,7 @@
   }
 
   body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar)
-    .stretch {
+  .stretch {
     max-width: 100vw !important;
     width: calc(100vw - 20px) !important;
     margin: 0 0 0 10px !important;
@@ -243,12 +243,12 @@
 
 @media screen and (min-width: 1791px) {
   body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar-collapsed)
-    .stretch {
+  .stretch {
     left: calc(50% - 80px);
   }
 
   body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar)
-    .stretch {
+  .stretch {
     left: calc(50% - 20px);
   }
 }
@@ -377,6 +377,8 @@
   border-radius: 0.5em;
   min-width: 4.4em;
   margin: 0 1em 0.5em 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .cal_month {
@@ -408,16 +410,17 @@
 }
 
 /* end eventCard */
-button.ui.circular.button.playpause {
+.playpause {
   position: absolute;
   background: transparent;
-  transform: translate(0, -28px);
+  transform: translate(10px, -18px);
   opacity: .25;
 }
 
-button.ui.circular.button.playpause:hover {
+.playpause:hover {
   opacity: 1;
 }
+
 @media only screen and (max-width: 767px) {
   .advancedView > .ui.stackable.grid > .column:not(.row),
   .ui.stackable.grid > .column.grid > .column {
@@ -427,4 +430,8 @@ button.ui.circular.button.playpause:hover {
 
 .playpause .image {
   height: 15px;
+}
+
+.advancedImage {
+  padding: 0 0 1em 0 !important;
 }

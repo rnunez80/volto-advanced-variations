@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { Image } from 'semantic-ui-react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import CommonItemRenderer from './CommonItemRenderer';
-import { renderImage } from './renderImage';
+import DefaultImageSVG from './placeholder.png'; // Ensure this is imported
+import ResponsiveImage from './ResponsiveImage'; // Ensure this is imported
+import PropTypes from 'prop-types';
+import './Advanced.css';
+
+const useSliderControls = () => {
+  const sliderRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      sliderRef.current.slickPause();
+    } else {
+      sliderRef.current.slickPlay();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  return { sliderRef, isPlaying, togglePlay };
+};
 
 const AdvancedCarouselBlockTemplate = ({
                                          items,
@@ -29,6 +52,17 @@ const AdvancedCarouselBlockTemplate = ({
                                          quote,
                                          showRecurrence,
                                        }) => {
+  const { sliderRef, isPlaying, togglePlay } = useSliderControls();
+
+  const getLink = (url, text) => {
+    if (!url) return null;
+    return isInternalURL(url) ? (
+      <Link to={flattenToAppURL(url)}>{text || url}</Link>
+    ) : (
+      <a href={url}>{text || url}</a>
+    );
+  };
+
   const moreLink = getLink(moreLinkUrl?.[0]?.['@id'], moreLinkText);
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
 
@@ -37,30 +71,134 @@ const AdvancedCarouselBlockTemplate = ({
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
 
       <Slider
-        // (slider settings)
+        ref={sliderRef}
+        className={`column${howManyColumns}`}
+        dots
+        infinite
+        lazyLoad
+        speed={500}
+        slidesToShow={howManyColumns || 1}
+        slidesToScroll={slidesToScroll || 1}
+        autoplay={autoPlay}
+        autoplaySpeed={autoplaySpeed * 1000}
+        pauseOnHover={false}
+        arrows
+        responsive={
+          howManyColumns >= 3
+            ? [
+              { breakpoint: 1169, settings: { slidesToShow: 3 } },
+              { breakpoint: 991, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+              { breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+            ]
+            : [{ breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } }]
+        }
       >
-        <CommonItemRenderer
-          items={items}
-          showRecurrence={showRecurrence}
-          quote={quote}
-          showTitle={showTitle}
-          eventCard={eventCard}
-          titleTag={titleTag}
-          eventDate={eventDate}
-          eventTime={eventTime}
-          eventLocation={eventLocation}
-          showDescription={showDescription}
-          effectiveDate={effectiveDate}
-          expirationDate={expirationDate}
-          isEditMode={isEditMode}
-        />
+        {items.map(item => (
+          <div key={item['@id']}>
+            {imageSide === 'background' ? (
+              <div className='backgroundimage'>
+                <Link to={item.url} condition={!isEditMode}>
+                  <div className='focuspoint'>
+                    {!item.image_field ? (
+                      <Image
+                        className='listImage'
+                        src={DefaultImageSVG}
+                        alt=' '
+                        size='small'
+                      />
+                    ) : (
+                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+                    )}
+                  </div>
+                  <div className='info-text'>
+                    <CommonItemRenderer
+                      items={[item]}
+                      showRecurrence={showRecurrence}
+                      quote={quote}
+                      showTitle={showTitle}
+                      eventCard={eventCard}
+                      titleTag={titleTag}
+                      eventDate={eventDate}
+                      eventTime={eventTime}
+                      eventLocation={eventLocation}
+                      showDescription={showDescription}
+                      effectiveDate={effectiveDate}
+                      expirationDate={expirationDate}
+                      isEditMode={isEditMode}
+                    />
+                  </div>
+                </Link>
+              </div>
+            ) : (
+              <CommonItemRenderer
+                items={[item]}
+                showRecurrence={showRecurrence}
+                quote={quote}
+                showTitle={showTitle}
+                eventCard={eventCard}
+                titleTag={titleTag}
+                eventDate={eventDate}
+                eventTime={eventTime}
+                eventLocation={eventLocation}
+                showDescription={showDescription}
+                effectiveDate={effectiveDate}
+                expirationDate={expirationDate}
+                isEditMode={isEditMode}
+                imageSide={imageSide}
+                imageWidth={imageWidth}
+                howManyColumns={howManyColumns}
+              />
+            )}
+          </div>
+        ))}
       </Slider>
+
+      <a className='playpause' onClick={togglePlay}>
+        {isPlaying ? (
+          <Image
+            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
+            alt='Pause Slideshow'
+            width='24'
+            height='24'
+          />
+        ) : (
+          <Image
+            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
+            alt='Play Slideshow'
+            width='24'
+            height='24'
+          />
+        )}
+      </a>
     </div>
   );
 };
 
 AdvancedCarouselBlockTemplate.propTypes = {
-  // (props definition)
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moreLinkText: PropTypes.string,
+  moreLinkUrl: PropTypes.array,
+  header: PropTypes.string,
+  headerUrl: PropTypes.array,
+  headerTag: PropTypes.string,
+  isEditMode: PropTypes.bool,
+  imageSide: PropTypes.string,
+  imageWidth: PropTypes.number,
+  howManyColumns: PropTypes.number,
+  effectiveDate: PropTypes.bool,
+  expirationDate: PropTypes.bool,
+  titleTag: PropTypes.string,
+  showTitle: PropTypes.bool,
+  showDescription: PropTypes.bool,
+  eventDate: PropTypes.bool,
+  eventLocation: PropTypes.bool,
+  eventTime: PropTypes.bool,
+  slidesToScroll: PropTypes.number,
+  autoPlay: PropTypes.bool,
+  autoplaySpeed: PropTypes.number,
+  eventCard: PropTypes.bool,
+  quote: PropTypes.bool,
+  showRecurrence: PropTypes.bool,
 };
 
 export default React.memo(AdvancedCarouselBlockTemplate);

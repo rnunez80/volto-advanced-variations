@@ -16,7 +16,6 @@ const renderImage = (item, isEditMode, howManyColumns) => {
           className='listImage'
           src={DefaultImageSVG}
           alt={intl.formatMessage(messages.thisContentHasNoImage)}
-          size='small'
           width='100%'
         />
       </Link>
