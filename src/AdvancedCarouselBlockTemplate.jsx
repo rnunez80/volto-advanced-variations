@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import CommonItemRenderer from './CommonItemRenderer';
-import DefaultImageSVG from './placeholder.png'; // Ensure this is imported
-import ResponsiveImage from './ResponsiveImage'; // Ensure this is imported
-import PropTypes from 'prop-types';
-import './Advanced.css';
+import PropTypes from 'prop-types'; // Import PropTypes
+import './Advanced.css'; // Import the CSS file
 
 const useSliderControls = () => {
   const sliderRef = useRef(null);
@@ -67,7 +65,7 @@ const AdvancedCarouselBlockTemplate = ({
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
 
   return (
-    <div className='advancedView'>
+    <div className='advancedView advancedSlider'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
 
       <Slider
@@ -95,81 +93,42 @@ const AdvancedCarouselBlockTemplate = ({
       >
         {items.map(item => (
           <div key={item['@id']}>
-            {imageSide === 'background' ? (
-              <div className='backgroundimage'>
-                <Link to={item.url} condition={!isEditMode}>
-                  <div className='focuspoint'>
-                    {!item.image_field ? (
-                      <Image
-                        className='listImage'
-                        src={DefaultImageSVG}
-                        alt=' '
-                        size='small'
-                      />
-                    ) : (
-                      <ResponsiveImage item={item} howManyColumns={howManyColumns} />
-                    )}
-                  </div>
-                  <div className='info-text'>
-                    <CommonItemRenderer
-                      items={[item]}
-                      showRecurrence={showRecurrence}
-                      quote={quote}
-                      showTitle={showTitle}
-                      eventCard={eventCard}
-                      titleTag={titleTag}
-                      eventDate={eventDate}
-                      eventTime={eventTime}
-                      eventLocation={eventLocation}
-                      showDescription={showDescription}
-                      effectiveDate={effectiveDate}
-                      expirationDate={expirationDate}
-                      isEditMode={isEditMode}
-                    />
-                  </div>
-                </Link>
-              </div>
-            ) : (
-              <CommonItemRenderer
-                items={[item]}
-                showRecurrence={showRecurrence}
-                quote={quote}
-                showTitle={showTitle}
-                eventCard={eventCard}
-                titleTag={titleTag}
-                eventDate={eventDate}
-                eventTime={eventTime}
-                eventLocation={eventLocation}
-                showDescription={showDescription}
-                effectiveDate={effectiveDate}
-                expirationDate={expirationDate}
-                isEditMode={isEditMode}
-                imageSide={imageSide}
-                imageWidth={imageWidth}
-                howManyColumns={howManyColumns}
-              />
-            )}
+            <CommonItemRenderer
+              items={[item]}
+              showRecurrence={showRecurrence}
+              quote={quote}
+              showTitle={showTitle}
+              eventCard={eventCard}
+              titleTag={titleTag}
+              eventDate={eventDate}
+              eventTime={eventTime}
+              eventLocation={eventLocation}
+              eventLocation={eventLocation}
+              showDescription={showDescription}
+              effectiveDate={effectiveDate}
+              expirationDate={expirationDate}
+              isEditMode={isEditMode}
+              imageSide={imageSide} // Pass the image side information
+              imageWidth={imageWidth} // Pass the image width information
+              howManyColumns={howManyColumns} // Pass the column configuration
+            />
           </div>
         ))}
       </Slider>
 
-      <a className='playpause' onClick={togglePlay}>
+      <button className='ui circular button playpause' onClick={togglePlay}>
         {isPlaying ? (
           <Image
             src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
             alt='Pause Slideshow'
-            width='24'
-            height='24'
           />
         ) : (
           <Image
             src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
             alt='Play Slideshow'
-            width='24'
-            height='24'
           />
         )}
-      </a>
+      </button>
     </div>
   );
 };

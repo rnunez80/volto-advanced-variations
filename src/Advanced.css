@@ -412,8 +412,8 @@
 /* end eventCard */
 .playpause {
   position: absolute;
-  background: transparent;
-  transform: translate(10px, -18px);
+  background: transparent !important;
+  transform: translate(10px, -24px);
   opacity: .25;
 }
 
@@ -421,6 +421,26 @@
   opacity: 1;
 }
 
+.advancedImage {
+  padding: 0 0 0 0 !important;
+}
+
+.slick-slide, .column.background {
+  padding: 0 !important;
+}
+
+.threelines {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.advancedList .ui.one.column.grid.advanced-item .column {
+  padding: 4px;
+}
 p.effectiveDate {
   margin: 0;
   color: #00000075;

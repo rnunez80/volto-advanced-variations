@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // Import PropTypes
 import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import CommonItemRenderer from './CommonItemRenderer';
-import './Advanced.css';
+import './Advanced.css'; // Import the CSS file
 
 const AdvancedListingBlockTemplate = ({
                                         items,
@@ -43,7 +43,7 @@ const AdvancedListingBlockTemplate = ({
   const moreLink = getLink(moreLinkUrl?.[0]?.['@id'], moreLinkText);
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
 
-  const hasImage = imageSide !== null; // Define hasImage based on imageSide being non-null
+  const hasImage = imageSide !== null;
   const oneColumnElement = ['up', 'down', 'background', null].includes(imageSide);
   const columnSize = oneColumnElement ? 1 : 2;
   const imageGridWidth = oneColumnElement ? 12 : imageWidth || 2;
@@ -53,24 +53,28 @@ const AdvancedListingBlockTemplate = ({
     <div className='advancedView advancedList'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
       <Grid columns={howManyColumns || 1} stackable className={`column${howManyColumns}`}>
-        <CommonItemRenderer
-          items={items}
-          showRecurrence={showRecurrence}
-          quote={quote}
-          showTitle={showTitle}
-          eventCard={eventCard}
-          titleTag={titleTag}
-          eventDate={eventDate}
-          eventTime={eventTime}
-          eventLocation={eventLocation}
-          showDescription={showDescription}
-          effectiveDate={effectiveDate}
-          expirationDate={expirationDate}
-          isEditMode={isEditMode}
-          imageSide={imageSide} // Pass the image side information
-          imageWidth={imageWidth} // Pass the image width information
-          howManyColumns={howManyColumns} // Pass the column configuration
-        />
+        {items.map((item) => (
+          <div className='ui one column grid advanced-item' key={item['@id']}>
+            <CommonItemRenderer
+              items={[item]}
+              showRecurrence={showRecurrence}
+              quote={quote}
+              showTitle={showTitle}
+              eventCard={eventCard}
+              titleTag={titleTag}
+              eventDate={eventDate}
+              eventTime={eventTime}
+              eventLocation={eventLocation}
+              showDescription={showDescription}
+              effectiveDate={effectiveDate}
+              expirationDate={expirationDate}
+              isEditMode={isEditMode}
+              imageSide={imageSide} // Pass the image side information
+              imageWidth={imageWidth} // Pass the image width information
+              howManyColumns={howManyColumns} // Pass the column configuration
+            />
+          </div>
+        ))}
       </Grid>
       {moreLink && <div className='more-link'>{moreLink}</div>}
     </div>

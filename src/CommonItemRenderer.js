@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useIntl } from 'react-intl';
 import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
-import renderImage from './renderImage'; // Ensure this is imported
+import renderImage from './renderImage';
 
 const CommonItemRenderer = ({
                               items,
@@ -35,6 +35,7 @@ const CommonItemRenderer = ({
     return items.map(item => ({
       ...item,
       url: flattenToAppURL(item['@id']),
+      imageSrc: item.image_field ? `${flattenToAppURL(item['@id'])}/@@images/preview_image` : null,  // Correct the image URL
     }));
   }, [items, showRecurrence]);
 
@@ -63,31 +64,77 @@ const CommonItemRenderer = ({
 
       {eventCard && getEventCard(item)}
       {showTitle && (
-        <TitleTag>
-          <Link to={item.url}>{item.title || item.id}</Link>
+        <TitleTag className='threelines'>
+          {imageSide === 'background' ? (
+            item.title || item.id
+          ) : (
+            <Link to={item.url} condition={!isEditMode}>
+              {item.title ? item.title : item.id}
+            </Link>
+          )}
         </TitleTag>
       )}
       {(eventDate || eventTime) && (
-        <p className='event-when'>{renderMetadata(item)}</p>
+        <p>{renderMetadata(item)}</p>
       )}
       {eventLocation && <p>{item.location}</p>}
       {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
-      {showDescription && item.description && <p>{item.description}</p>}
+      {showDescription && item.description && (
+        <p>{item.description}</p>
+      )}
     </>
   );
 
   return (
     <>
       {processedItems.map(item => (
-        <div key={item['@id']} class='ui one column grid advanced-item'>
-          {['up', 'left'].includes(imageSide) && (
-            <div class='twelve wide column advancedImage'>{renderImage(item, isEditMode, howManyColumns)}</div>
-          )}
-          {renderContent(item)}
-          {['right', 'down'].includes(imageSide) && (
-            <div class='twelve wide column advancedImage'>{renderImage(item, isEditMode, howManyColumns)}</div>
-          )}
+        <div key={item['@id']} className='ui one column grid advanced-item'>
+          <div className={`column ${imageSide}`}>
+            {imageSide === 'background' ? (
+              <div className='backgroundimage'>
+                <Link to={item.url} condition={!isEditMode}>
+                  <div className='focuspoint'>
+                    {item.imageSrc ? (
+                      <img
+                        sizes='(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px'
+                        srcSet={`
+                          ${item.imageSrc}/mini 200w,
+                          ${item.imageSrc}/preview 400w,
+                          ${item.imageSrc}/teaser 600w,
+                          ${item.imageSrc}/large 800w,
+                          ${item.imageSrc}/larger 1000w,
+                          ${item.imageSrc}/great 1200w,
+                          ${item.imageSrc}/huge 1600w
+                        `}
+                        src={`${item.imageSrc}/preview`}
+                        alt={item.title || ''}
+                        className='ui image listImage'
+                        loading='lazy'
+                      />
+                    ) : (
+                      renderImage(item, isEditMode, howManyColumns)
+                    )}
+                  </div>
+                  <div className='info-text'>{renderContent(item)}</div>
+                </Link>
+              </div>
+            ) : (
+              <>
+                {['up', 'left'].includes(imageSide) && (
+                  <div className='twelve wide column advancedImage'>
+                    {renderImage(item, isEditMode, howManyColumns)}
+                  </div>
+                )}
+                {renderContent(item)}
+                {['right', 'down'].includes(imageSide) && (
+                  <div className='twelve wide column advancedImage'>
+                    {renderImage(item, isEditMode, howManyColumns)}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       ))}
     </>
