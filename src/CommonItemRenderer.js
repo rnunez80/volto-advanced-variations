@@ -60,6 +60,7 @@ const CommonItemRenderer = ({
           </div>
         </>
       )}
+
       {eventCard && getEventCard(item)}
       {showTitle && (
         <TitleTag>
@@ -70,7 +71,7 @@ const CommonItemRenderer = ({
         <p className='event-when'>{renderMetadata(item)}</p>
       )}
       {eventLocation && <p>{item.location}</p>}
-      {effectiveDate && <p>{moment(item.effective).format('L')}</p>}
+      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
       {showDescription && item.description && <p>{item.description}</p>}
     </>
