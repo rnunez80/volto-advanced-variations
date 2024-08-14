@@ -8,6 +8,21 @@ import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import renderImage from './renderImage';
 
+const columnClassMap = {
+  1: 'one',
+  2: 'two',
+  3: 'three',
+  4: 'four',
+  5: 'five',
+  6: 'six',
+  7: 'seven',
+  8: 'eight',
+  9: 'nine',
+  10: 'ten',
+  11: 'eleven',
+  12: 'twelve',
+};
+
 const CommonItemRenderer = ({
                               items,
                               showRecurrence,
@@ -23,7 +38,7 @@ const CommonItemRenderer = ({
                               expirationDate,
                               isEditMode,
                               imageSide,
-                              imageWidth,
+                              imageWidth = 4, // Set a default width if not provided
                               howManyColumns,
                             }) => {
   const intl = useIntl();
@@ -35,7 +50,9 @@ const CommonItemRenderer = ({
     return items.map(item => ({
       ...item,
       url: flattenToAppURL(item['@id']),
-      imageSrc: item.image_field ? `${flattenToAppURL(item['@id'])}/@@images/preview_image` : null,  // Correct the image URL
+      imageSrc: item.image_field
+        ? `${flattenToAppURL(item['@id'])}/@@images/preview_image`
+        : null, // Correct the image URL
     }));
   }, [items, showRecurrence]);
 
@@ -68,21 +85,21 @@ const CommonItemRenderer = ({
           {imageSide === 'background' ? (
             item.title || item.id
           ) : (
-            <Link to={item.url} condition={!isEditMode}>
-              {item.title ? item.title : item.id}
-            </Link>
+            !isEditMode ? (
+              <Link to={item.url}>
+                {item.title ? item.title : item.id}
+              </Link>
+            ) : (
+              item.title || item.id
+            )
           )}
         </TitleTag>
       )}
-      {(eventDate || eventTime) && (
-        <p>{renderMetadata(item)}</p>
-      )}
+      {(eventDate || eventTime) && <p>{renderMetadata(item)}</p>}
       {eventLocation && <p>{item.location}</p>}
       {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
-      {showDescription && item.description && (
-        <p>{item.description}</p>
-      )}
+      {showDescription && item.description && <p>{item.description}</p>}
     </>
   );
 
@@ -120,19 +137,27 @@ const CommonItemRenderer = ({
                 </Link>
               </div>
             ) : (
-              <>
+              <div className='ui grid'>
                 {['up', 'left'].includes(imageSide) && (
-                  <div className='twelve wide column advancedImage'>
+                  <div className={`${
+                    ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
+                  } wide column advancedImage`}>
                     {renderImage(item, isEditMode, howManyColumns)}
                   </div>
                 )}
-                {renderContent(item)}
+                <div className={`${
+                  ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[12 - imageWidth]
+                } wide column`}>
+                  {renderContent(item)}
+                </div>
                 {['right', 'down'].includes(imageSide) && (
-                  <div className='twelve wide column advancedImage'>
+                  <div className={`${
+                    ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
+                  } wide column advancedImage`}>
                     {renderImage(item, isEditMode, howManyColumns)}
                   </div>
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>

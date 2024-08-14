@@ -348,10 +348,14 @@
 }
 
 .ui.one.column.grid.advanced-item .column {
-  padding: 0 0.5em 1em 0.5em;
+  padding: 0 7px 14px 7px !important;
   margin: 0;
 }
 
+.ui.one.column.grid.advanced-item .column.background {
+  padding: 0 0 0 0 !important;
+  margin: 0;
+}
 .block.listing.advanced .ui.stackable.one.column.grid,
 .block.listing.advanced .ui.stackable.two.column.grid,
 .block.listing.advanced .ui.stackable.three.column.grid,
@@ -425,9 +429,9 @@
   padding: 0 0 0 0 !important;
 }
 
-.slick-slide, .column.background {
-  padding: 0 !important;
-}
+/*.slick-slide, .column.background {*/
+/*  padding: 0 !important;*/
+/*}*/
 
 .threelines {
   text-overflow: ellipsis;
@@ -438,9 +442,10 @@
   white-space: normal;
 }
 
-.advancedList .ui.one.column.grid.advanced-item .column {
-  padding: 4px;
-}
+/*.advancedList .ui.one.column.grid.advanced-item .column {*/
+/*  padding-left: 4px;*/
+/*  padding-right: 4px;*/
+/*}*/
 p.effectiveDate {
   margin: 0;
   color: #00000075;
