@@ -448,8 +448,9 @@
 /*}*/
 p.effectiveDate {
   margin: 0;
-  color: #00000075;
+  color: #000000a8;
   font-size: 14px;
+  line-height: 1em !important;
 }
 
 @media only screen and (max-width: 767px) {
