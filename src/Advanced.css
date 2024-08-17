@@ -458,3 +458,20 @@ p.effectiveDate {
 .slick-slider .advancedImage {
   padding: 0 0 1em 0 !important;
 }
+
+/* Prevent interaction with hidden slides */
+.slick-slide[aria-hidden="true"] {
+  pointer-events: none; /* Disable pointer events */
+  visibility: hidden; /* Optionally hide the slide visually */
+}
+
+/* Ensure focusable elements within hidden slides are not focusable */
+.slick-slide[aria-hidden="true"] a,
+.slick-slide[aria-hidden="true"] button,
+.slick-slide[aria-hidden="true"] input,
+.slick-slide[aria-hidden="true"] select,
+.slick-slide[aria-hidden="true"] textarea,
+.slick-slide[aria-hidden="true"] [tabindex] {
+  pointer-events: none;
+  outline: none; /* Remove focus outlines */
+}

@@ -115,25 +115,27 @@ const CommonItemRenderer = ({
                 <Link to={item.url} condition={!isEditMode}>
                   <div className='focuspoint'>
                     {item.imageSrc ? (
-                      <img
-                        sizes='(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px'
-                        srcSet={`
-                          ${item.imageSrc}/mini 200w,
-                          ${item.imageSrc}/preview 400w,
-                          ${item.imageSrc}/teaser 600w,
-                          ${item.imageSrc}/large 800w,
-                          ${item.imageSrc}/larger 1000w,
-                          ${item.imageSrc}/great 1200w,
-                          ${item.imageSrc}/huge 1600w
-                        `}
-                        src={`${item.imageSrc}/preview`}
-                        alt={item.title || ''}
-                        className='ui image listImage'
-                        loading='lazy'
-                        width='100%'
-                        height='auto'
-                        style={{ aspectRatio: '16/9' }}
-                      />
+                      <Link to={item.url}>
+                        <img
+                          sizes='(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px'
+                          srcSet={`
+                            ${item.imageSrc}/mini 200w,
+                            ${item.imageSrc}/preview 400w,
+                            ${item.imageSrc}/teaser 600w,
+                            ${item.imageSrc}/large 800w,
+                            ${item.imageSrc}/larger 1000w,
+                            ${item.imageSrc}/great 1200w,
+                            ${item.imageSrc}/huge 1600w
+                          `}
+                          src={`${item.imageSrc}/preview`}
+                          alt={item.title || ''}
+                          className='ui image listImage'
+                          loading='lazy'
+                          width='100%'
+                          height='auto'
+                          style={{ aspectRatio: '16/9' }}
+                        />
+                      </Link>
                     ) : (
                       <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                     )}
@@ -147,7 +149,9 @@ const CommonItemRenderer = ({
                   <div className={`${
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
-                    <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                    <Link to={item.url}>
+                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                    </Link>
                   </div>
                 )}
                 <div className={`${
@@ -159,7 +163,9 @@ const CommonItemRenderer = ({
                   <div className={`${
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
-                    <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                    <Link to={item.url}>
+                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                    </Link>
                   </div>
                 )}
               </div>
