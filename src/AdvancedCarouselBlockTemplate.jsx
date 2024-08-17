@@ -57,7 +57,7 @@ const AdvancedCarouselBlockTemplate = ({
     return isInternalURL(url) ? (
       <Link to={flattenToAppURL(url)}>{text || url}</Link>
     ) : (
-      <a href={url}>{text || url}</a>
+      <a href={url} target='_blank'>{text || url}</a>
     );
   };
 
@@ -102,7 +102,6 @@ const AdvancedCarouselBlockTemplate = ({
               titleTag={titleTag}
               eventDate={eventDate}
               eventTime={eventTime}
-              eventLocation={eventLocation}
               eventLocation={eventLocation}
               showDescription={showDescription}
               effectiveDate={effectiveDate}

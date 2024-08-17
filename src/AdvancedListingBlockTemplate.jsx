@@ -36,7 +36,7 @@ const AdvancedListingBlockTemplate = ({
     return isInternalURL(url) ? (
       <Link to={flattenToAppURL(url)}>{text || url}</Link>
     ) : (
-      <a href={url}>{text || url}</a>
+      <a href={url} target='_blank'>{text || url}</a>
     );
   };
 

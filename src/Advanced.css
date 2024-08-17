@@ -429,10 +429,6 @@
   padding: 0 0 0 0 !important;
 }
 
-/*.slick-slide, .column.background {*/
-/*  padding: 0 !important;*/
-/*}*/
-
 .threelines {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -441,11 +437,6 @@
   -webkit-box-orient: vertical;
   white-space: normal;
 }
-
-/*.advancedList .ui.one.column.grid.advanced-item .column {*/
-/*  padding-left: 4px;*/
-/*  padding-right: 4px;*/
-/*}*/
 p.effectiveDate {
   margin: 0;
   color: #000000a8;

@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useIntl } from 'react-intl';
 import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
-import renderImage from './renderImage';
+import RenderImage from './renderImage';
 
 const columnClassMap = {
   1: 'one',
@@ -38,7 +38,7 @@ const CommonItemRenderer = ({
                               expirationDate,
                               isEditMode,
                               imageSide,
-                              imageWidth = 4, // Set a default width if not provided
+                              imageWidth = 4,
                               howManyColumns,
                             }) => {
   const intl = useIntl();
@@ -52,21 +52,23 @@ const CommonItemRenderer = ({
       url: flattenToAppURL(item['@id']),
       imageSrc: item.image_field
         ? `${flattenToAppURL(item['@id'])}/@@images/preview_image`
-        : null, // Correct the image URL
+        : null,
     }));
   }, [items, showRecurrence]);
 
-  const renderMetadata = item => (
-    <>
-      {eventDate && <span className='start-date'>{getEventDate(item)}</span>}
-      {eventTime && eventDate && <span> | </span>}
-      {eventTime && (
-        <span className='start-time'>
-          {getEventTime(item) === '12:00 AM - 11:59 PM' ? 'All Day' : getEventTime(item)}
-        </span>
-      )}
-    </>
-  );
+  const renderMetadata = useMemo(() => {
+    return item => (
+      <>
+        {eventDate && <span className='start-date'>{getEventDate(item)}</span>}
+        {eventTime && eventDate && <span> | </span>}
+        {eventTime && (
+          <span className='start-time'>
+            {getEventTime(item) === '12:00 AM - 11:59 PM' ? 'All Day' : getEventTime(item)}
+          </span>
+        )}
+      </>
+    );
+  }, [eventDate, eventTime]);
 
   const renderContent = item => (
     <>
@@ -128,9 +130,12 @@ const CommonItemRenderer = ({
                         alt={item.title || ''}
                         className='ui image listImage'
                         loading='lazy'
+                        width='100%'
+                        height='auto'
+                        style={{ aspectRatio: '16/9' }}
                       />
                     ) : (
-                      renderImage(item, isEditMode, howManyColumns)
+                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                     )}
                   </div>
                   <div className='info-text'>{renderContent(item)}</div>
@@ -142,7 +147,7 @@ const CommonItemRenderer = ({
                   <div className={`${
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
-                    {renderImage(item, isEditMode, howManyColumns)}
+                    <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                   </div>
                 )}
                 <div className={`${
@@ -154,7 +159,7 @@ const CommonItemRenderer = ({
                   <div className={`${
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
-                    {renderImage(item, isEditMode, howManyColumns)}
+                    <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
                   </div>
                 )}
               </div>
