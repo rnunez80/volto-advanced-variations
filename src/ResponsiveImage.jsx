@@ -40,6 +40,7 @@ const ResponsiveImage = React.memo(({ item, howManyColumns }) => {
             width='100%'
             src={imageUrl + '/preview'}
             loading='eager'
+            fetchpriority='high'
         />
     );
 });
