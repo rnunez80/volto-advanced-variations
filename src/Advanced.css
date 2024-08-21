@@ -443,7 +443,6 @@ p.effectiveDate {
   font-size: 14px;
   line-height: 1em !important;
 }
-
 @media only screen and (max-width: 767px) {
   .advancedView > .ui.stackable.grid > .column:not(.row),
   .ui.stackable.grid > .column.grid > .column {
