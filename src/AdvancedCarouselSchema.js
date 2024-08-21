@@ -2,15 +2,20 @@ import messages from './messages';
 
 export const advancedCarouselSchema = (props) => {
   const { intl, schema, formData } = props;
-  // const imageWidth = ['right', 'left'].includes(formData.imageSide)
-  //   ? ['imageWidth']
-  //   : [];
+
   const headingChoices = [
     ['h2', 'H2'],
     ['h3', 'H3'],
     ['h4', 'H4'],
     ['p', 'P'],
   ];
+
+  const fetchPriorityChoices = [
+    ['auto', 'Auto'],
+    ['low', 'Low'],
+    ['high', 'High'],
+  ];
+
   return {
     ...schema,
     fieldsets: [
@@ -32,6 +37,7 @@ export const advancedCarouselSchema = (props) => {
           'titleTag',
           'imageSide',
           'imageWidth',
+          'fetchPriority',  // Added fetch priority field
           'showTitle',
           'showDescription',
           'eventCard',
@@ -97,7 +103,7 @@ export const advancedCarouselSchema = (props) => {
         widget: 'align',
         default: 'left',
       },
-            imageWidth: {
+      imageWidth: {
         title: intl.formatMessage(messages.imageWidth),
         description: intl.formatMessage(messages.imageWidthDescription),
         choices: [
@@ -163,6 +169,11 @@ export const advancedCarouselSchema = (props) => {
         title: intl.formatMessage(messages.showRecurrence),
         description: intl.formatMessage(messages.showRecurrenceDescription),
         type: 'boolean',
+      },
+      fetchPriority: {  // Added fetch priority property
+        title: intl.formatMessage(messages.fetchPriority),
+        choices: fetchPriorityChoices,
+        default: 'auto',
       },
     },
   };

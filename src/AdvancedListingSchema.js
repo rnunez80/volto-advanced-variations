@@ -2,15 +2,20 @@ import messages from './messages';
 
 export const advancedListingSchema = (props) => {
   const { intl, schema, formData } = props;
-  // const imageWidth = ['right', 'left'].includes(formData.imageSide)
-  //   ? ['imageWidth']
-  //   : [];
+
   const headingChoices = [
     ['h2', 'H2'],
     ['h3', 'H3'],
     ['h4', 'H4'],
     ['p', 'P'],
   ];
+
+  const fetchPriorityChoices = [
+    ['auto', 'Auto'],
+    ['low', 'Low'],
+    ['high', 'High'],
+  ];
+
   return {
     ...schema,
     fieldsets: [
@@ -23,6 +28,7 @@ export const advancedListingSchema = (props) => {
           'howManyColumns',
           'imageSide',
           'imageWidth',
+          'fetchPriority',  // New field added here
           'showTitle',
           'showDescription',
           'eventCard',
@@ -76,6 +82,11 @@ export const advancedListingSchema = (props) => {
           ['down', intl.formatMessage(messages.down)],
         ],
         default: 'up',
+      },
+      fetchPriority: {
+        title: intl.formatMessage(messages.fetchPriority),  // New property title
+        choices: fetchPriorityChoices,                      // New property choices
+        default: 'auto',                                    // Default value
       },
       showTitle: {
         title: intl.formatMessage(messages.showTitle),

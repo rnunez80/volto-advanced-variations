@@ -49,6 +49,7 @@ const AdvancedCarouselBlockTemplate = ({
                                          eventCard,
                                          quote,
                                          showRecurrence,
+                                         fetchPriority,
                                        }) => {
   const { sliderRef, isPlaying, togglePlay } = useSliderControls();
 
@@ -110,6 +111,7 @@ const AdvancedCarouselBlockTemplate = ({
               imageSide={imageSide} // Pass the image side information
               imageWidth={imageWidth} // Pass the image width information
               howManyColumns={howManyColumns} // Pass the column configuration
+              fetchPriority={fetchPriority} // Pass the fetch priority information
             />
           </div>
         ))}
@@ -157,6 +159,7 @@ AdvancedCarouselBlockTemplate.propTypes = {
   eventCard: PropTypes.bool,
   quote: PropTypes.bool,
   showRecurrence: PropTypes.bool,
+  fetchPriority: PropTypes.string,
 };
 
 export default React.memo(AdvancedCarouselBlockTemplate);

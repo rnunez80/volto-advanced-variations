@@ -5,11 +5,11 @@ import { useIntl } from 'react-intl';
 import messages from './messages';
 import ResponsiveImage from './ResponsiveImage';
 
-const RenderImage = ({ item, isEditMode, howManyColumns }) => {
+const RenderImage = ({ item, isEditMode, howManyColumns, fetchPriority }) => {
   const intl = useIntl();
 
   const imageContent = item.image_field ? (
-    <ResponsiveImage item={item} howManyColumns={howManyColumns} />
+    <ResponsiveImage item={item} howManyColumns={howManyColumns} fetchPriority={fetchPriority} />
   ) : (
     <Image
       className='listImage'

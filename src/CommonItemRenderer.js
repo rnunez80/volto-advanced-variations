@@ -40,6 +40,7 @@ const CommonItemRenderer = ({
                               imageSide,
                               imageWidth = 4,
                               howManyColumns,
+                              fetchPriority, // New prop added here
                             }) => {
   const intl = useIntl();
 
@@ -130,14 +131,20 @@ const CommonItemRenderer = ({
                           src={`${item.imageSrc}/preview`}
                           alt={item.title || ''}
                           className='ui image listImage'
-                          loading='lazy'
+                          loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
+                          fetchpriority={fetchPriority}
                           width='100%'
                           height='auto'
                           style={{ aspectRatio: '16/9' }}
                         />
                       </Link>
                     ) : (
-                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                      <RenderImage
+                        item={item}
+                        isEditMode={isEditMode}
+                        howManyColumns={howManyColumns}
+                        fetchPriority={fetchPriority}
+                      />
                     )}
                   </div>
                   <div className='info-text'>{renderContent(item)}</div>
@@ -150,7 +157,12 @@ const CommonItemRenderer = ({
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
                     <Link to={item.url}>
-                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                      <RenderImage
+                        item={item}
+                        isEditMode={isEditMode}
+                        howManyColumns={howManyColumns}
+                        fetchPriority={fetchPriority}
+                      />
                     </Link>
                   </div>
                 )}
@@ -166,7 +178,12 @@ const CommonItemRenderer = ({
                     ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
                   } wide column advancedImage`}>
                     <Link to={item.url}>
-                      <RenderImage item={item} isEditMode={isEditMode} howManyColumns={howManyColumns} />
+                      <RenderImage
+                        item={item}
+                        isEditMode={isEditMode}
+                        howManyColumns={howManyColumns}
+                        fetchPriority={fetchPriority}
+                      />
                     </Link>
                   </div>
                 )}
@@ -196,6 +213,7 @@ CommonItemRenderer.propTypes = {
   imageSide: PropTypes.string,
   imageWidth: PropTypes.number,
   howManyColumns: PropTypes.number,
+  fetchPriority: PropTypes.string,  // New prop type
 };
 
 export default CommonItemRenderer;

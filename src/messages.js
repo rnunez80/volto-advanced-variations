@@ -193,6 +193,10 @@ const messages = defineMessages({
     id: 'Play',
     defaultMessage: 'Play',
   },
+  fetchPriority: {
+    id: 'fetchPriority',
+    defaultMessage: 'Fetch Priority',
+  },
 });
 
 export default messages;

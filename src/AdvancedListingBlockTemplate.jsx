@@ -29,6 +29,7 @@ const AdvancedListingBlockTemplate = ({
                                         eventCard,
                                         quote,
                                         showRecurrence,
+                                        fetchPriority,
                                       }) => {
 
   const getLink = (url, text) => {
@@ -72,6 +73,7 @@ const AdvancedListingBlockTemplate = ({
               imageSide={imageSide} // Pass the image side information
               imageWidth={imageWidth} // Pass the image width information
               howManyColumns={howManyColumns} // Pass the column configuration
+              fetchPriority={fetchPriority} // Pass the fetch priority information
             />
           </div>
         ))}
@@ -103,6 +105,7 @@ AdvancedListingBlockTemplate.propTypes = {
   eventCard: PropTypes.bool,
   quote: PropTypes.bool,
   showRecurrence: PropTypes.bool,
+  fetchPriority: PropTypes.string,
 };
 
 export default React.memo(AdvancedListingBlockTemplate);
