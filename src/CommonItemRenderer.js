@@ -155,7 +155,9 @@ const CommonItemRenderer = ({
                   </div>
                 )}
                 <div className={`${
-                  ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[12 - imageWidth]
+                  ['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
+                    ? 'twelve'
+                    : columnClassMap[12 - imageWidth]
                 } wide column`}>
                   {renderContent(item)}
                 </div>
