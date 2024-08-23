@@ -15,14 +15,51 @@ const getSrcSet = (imageUrl) => `
 
 const getSizes = (howManyColumns) => {
   switch (howManyColumns) {
+    case 1:
+      // One-column layout: Image is full width at all breakpoints
+      return `
+        (max-width: 767px) 400px,
+        (min-width: 768px) and (max-width: 991px) 600px,
+        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 1200px) and (max-width: 1919px) 1000px,
+        (min-width: 1920px) 1200px
+      `;
     case 2:
-      return '(min-width: 768px) and (max-width: 991px) 355px, (min-width: 992px) and (max-width: 1199px) 460px, (min-width: 1200px) 557px';
+      // Two-column layout: Half-width images for larger breakpoints
+      return `
+        (max-width: 767px) 400px,
+        (min-width: 768px) and (max-width: 991px) 300px,
+        (min-width: 992px) and (max-width: 1199px) 400px,
+        (min-width: 1200px) and (max-width: 1919px) 500px,
+        (min-width: 1920px) 600px
+      `;
     case 3:
-      return '(min-width: 768px) and (max-width: 991px) 232px, (min-width: 992px) and (max-width: 1199px) 302px, (min-width: 1200px) 367px';
+      // Three-column layout: One-third width images for larger breakpoints
+      return `
+        (max-width: 767px) 400px,
+        (min-width: 768px) and (max-width: 991px) 200px,
+        (min-width: 992px) and (max-width: 1199px) 300px,
+        (min-width: 1200px) and (max-width: 1919px) 400px,
+        (min-width: 1920px) 500px
+      `;
     case 4:
-      return '(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px';
+      // Four-column layout: Quarter-width images for larger breakpoints
+      return `
+        (max-width: 767px) 400px,
+        (min-width: 768px) and (max-width: 991px) 150px,
+        (min-width: 992px) and (max-width: 1199px) 200px,
+        (min-width: 1200px) and (max-width: 1919px) 300px,
+        (min-width: 1920px) 400px
+      `;
     default:
-      return '(min-width: 768px) and (max-width: 991px) 1000px, (min-width: 992px) and (max-width: 1199px) 1200px';
+      // Default case: Use a conservative width for default handling
+      return `
+        (max-width: 767px) 400px,
+        (min-width: 768px) and (max-width: 991px) 600px,
+        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 1200px) and (max-width: 1919px) 1000px,
+        (min-width: 1920px) 1200px
+      `;
   }
 };
 
@@ -37,10 +74,12 @@ const ResponsiveImage = React.memo(({ item, howManyColumns, fetchPriority }) => 
       srcSet={srcset}
       sizes={sizes}
       alt={item.title || 'Image'}
-      width='100%'
       src={imageUrl + '/preview'}
       loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
       fetchpriority={fetchPriority}
+      width='200px'  // Adjusted width to 400px
+      height='112px' // Adjusted height to maintain 16:9 aspect ratio
+      style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }} // Maintain aspect ratio
     />
   );
 });
@@ -52,7 +91,7 @@ ResponsiveImage.propTypes = {
     title: PropTypes.string,
   }).isRequired,
   howManyColumns: PropTypes.number,
-  fetchPriority: PropTypes.string, // New prop type
+  fetchPriority: PropTypes.string,
 };
 
 export default ResponsiveImage;
