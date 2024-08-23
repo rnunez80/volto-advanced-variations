@@ -1,36 +1,27 @@
-import React, { Suspense } from 'react';
+import loadable from '@loadable/component';
 import { advancedListingSchema } from './AdvancedListingSchema';
 import { advancedCarouselSchema } from './AdvancedCarouselSchema';
 
-const LazyAdvancedListingBlockTemplate = React.lazy(() =>
+// Dynamically import components using loadable
+const LazyAdvancedListingBlockTemplate = loadable(() =>
   import('./AdvancedListingBlockTemplate'),
 );
-const LazyAdvancedCarouselBlockTemplate = React.lazy(() =>
+const LazyAdvancedCarouselBlockTemplate = loadable(() =>
   import('./AdvancedCarouselBlockTemplate'),
 );
-
-const LoadingFallback = () => <div>Loading...</div>;
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.listing.variations = [
     {
       id: 'advanced',
       title: 'Advanced Listing',
-      template: (props) => (
-        <Suspense fallback={<LoadingFallback />}>
-          <LazyAdvancedListingBlockTemplate {...props} />
-        </Suspense>
-      ),
+      template: LazyAdvancedListingBlockTemplate,
       schemaEnhancer: advancedListingSchema,
     },
     {
       id: 'advancedCarousel',
       title: 'Advanced Carousel',
-      template: (props) => (
-        <Suspense fallback={<LoadingFallback />}>
-          <LazyAdvancedCarouselBlockTemplate {...props} />
-        </Suspense>
-      ),
+      template: LazyAdvancedCarouselBlockTemplate,
       schemaEnhancer: advancedCarouselSchema,
     },
     ...config.blocks.blocksConfig.listing.variations,
