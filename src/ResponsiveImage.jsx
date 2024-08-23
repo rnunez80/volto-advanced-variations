@@ -77,8 +77,8 @@ const ResponsiveImage = React.memo(({ item, howManyColumns, fetchPriority }) => 
       src={imageUrl + '/preview'}
       loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
       fetchpriority={fetchPriority}
-      width='200px'  // Adjusted width to 400px
-      height='112px' // Adjusted height to maintain 16:9 aspect ratio
+      width='100%'
+      height='auto'
       style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }} // Maintain aspect ratio
     />
   );
