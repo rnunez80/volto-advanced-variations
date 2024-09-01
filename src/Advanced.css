@@ -332,7 +332,7 @@
 }
 
 .slick-dots {
-  bottom: 0em !important;
+  bottom: 30px !important;
 }
 
 .advancedView.advancedList {
@@ -417,7 +417,7 @@
 .playpause {
   position: absolute;
   background: transparent !important;
-  transform: translate(10px, -24px);
+  transform: translate(10px, -61px);
   opacity: .25;
 }
 
