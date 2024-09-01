@@ -83,6 +83,7 @@ const CommonItemRenderer = ({
       )}
 
       {eventCard && getEventCard(item)}
+      {(eventDate || eventTime) && <div>{renderMetadata(item)}</div>}
       {showTitle && (
         <TitleTag className='threelines'>
           {imageSide === 'background' ? (
@@ -98,7 +99,7 @@ const CommonItemRenderer = ({
           )}
         </TitleTag>
       )}
-      {(eventDate || eventTime) && <p>{renderMetadata(item)}</p>}
+
       {eventLocation && <p>{item.location}</p>}
       {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
