@@ -83,7 +83,7 @@ const CommonItemRenderer = ({
       )}
 
       {eventCard && getEventCard(item)}
-      {(eventDate || eventTime) && <div>{renderMetadata(item)}</div>}
+      {(eventDate || eventTime) && <div className='advancedDatetime'>{renderMetadata(item)}</div>}
       {showTitle && (
         <TitleTag className='threelines'>
           {imageSide === 'background' ? (
