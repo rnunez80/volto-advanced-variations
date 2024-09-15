@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes
-import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
@@ -50,12 +49,21 @@ const AdvancedListingBlockTemplate = ({
   const imageGridWidth = oneColumnElement ? 12 : imageWidth || 2;
   const contentGridWidth = oneColumnElement ? 12 : hasImage ? 12 - imageWidth : 12;
 
+  const columnClassMap = {
+    1: 'twelve',
+    2: 'six',
+    3: 'four',
+    4: 'three',
+  };
+
   return (
-    <div className='advancedView advancedList'>
+    <div className='ui twelve column grid column-grid'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
-      <Grid columns={howManyColumns || 1} stackable className={`column${howManyColumns}`}>
         {items.map((item) => (
-          <div className='ui one column grid advanced-item' key={item['@id']}>
+          <div
+            className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${columnClassMap[howManyColumns] || 'four'} wide tablet column column-blocks-wrapper`}
+            key={item['@id']}
+          >
             <CommonItemRenderer
               items={[item]}
               showRecurrence={showRecurrence}
@@ -77,7 +85,6 @@ const AdvancedListingBlockTemplate = ({
             />
           </div>
         ))}
-      </Grid>
       {moreLink && <div className='more-link'>{moreLink}</div>}
     </div>
   );
