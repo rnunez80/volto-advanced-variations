@@ -22,7 +22,7 @@ const getSizes = (howManyColumns) => {
         (min-width: 768px) and (max-width: 991px) 600px,
         (min-width: 992px) and (max-width: 1199px) 800px,
         (min-width: 1200px) and (max-width: 1919px) 1000px,
-        (min-width: 1920px) 1200px
+        (min-width: 1650px) 1200px
       `;
     case 2:
       // Two-column layout: Half-width images for larger breakpoints
@@ -31,7 +31,7 @@ const getSizes = (howManyColumns) => {
         (min-width: 768px) and (max-width: 991px) 300px,
         (min-width: 992px) and (max-width: 1199px) 400px,
         (min-width: 1200px) and (max-width: 1919px) 500px,
-        (min-width: 1920px) 600px
+        (min-width: 1650px) 600px
       `;
     case 3:
       // Three-column layout: One-third width images for larger breakpoints
@@ -40,7 +40,7 @@ const getSizes = (howManyColumns) => {
         (min-width: 768px) and (max-width: 991px) 200px,
         (min-width: 992px) and (max-width: 1199px) 300px,
         (min-width: 1200px) and (max-width: 1919px) 400px,
-        (min-width: 1920px) 500px
+        (min-width: 1650px) 500px
       `;
     case 4:
       // Four-column layout: Quarter-width images for larger breakpoints
@@ -49,7 +49,7 @@ const getSizes = (howManyColumns) => {
         (min-width: 768px) and (max-width: 991px) 150px,
         (min-width: 992px) and (max-width: 1199px) 200px,
         (min-width: 1200px) and (max-width: 1919px) 300px,
-        (min-width: 1920px) 400px
+        (min-width: 1650px) 400px
       `;
     default:
       // Default case: Use a conservative width for default handling
@@ -58,7 +58,7 @@ const getSizes = (howManyColumns) => {
         (min-width: 768px) and (max-width: 991px) 600px,
         (min-width: 992px) and (max-width: 1199px) 800px,
         (min-width: 1200px) and (max-width: 1919px) 1000px,
-        (min-width: 1920px) 1200px
+        (min-width: 1650px) 1600px
       `;
   }
 };
