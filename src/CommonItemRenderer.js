@@ -40,13 +40,14 @@ const CommonItemRenderer = ({
                               imageSide,
                               imageWidth = 4,
                               howManyColumns,
-                              fetchPriority, // New prop added here
+                              fetchPriority,
                             }) => {
   const intl = useIntl();
 
+  // Process items based on recurrence setting
   const processedItems = useMemo(() => {
     if (showRecurrence) {
-      return processItemsForRecurrence(items);
+      return processItemsForRecurrence(items); // Sort by next recurrence date
     }
     return items.map(item => ({
       ...item,
@@ -214,7 +215,7 @@ CommonItemRenderer.propTypes = {
   imageSide: PropTypes.string,
   imageWidth: PropTypes.number,
   howManyColumns: PropTypes.number,
-  fetchPriority: PropTypes.string,  // New prop type
+  fetchPriority: PropTypes.string,
 };
 
 export default CommonItemRenderer;

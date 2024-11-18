@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Image } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import CommonItemRenderer from './CommonItemRenderer';
+import processItemsForRecurrence from './processItemsForRecurrence';
 import PropTypes from 'prop-types'; // Import PropTypes
 import './Advanced.css'; // Import the CSS file
 
@@ -30,7 +31,7 @@ const AdvancedCarouselBlockTemplate = ({
                                          moreLinkUrl,
                                          header,
                                          headerUrl,
-                                         headerTag,
+                                         headerTag: HeaderTag = 'h2', // Default header tag
                                          isEditMode,
                                          imageSide,
                                          imageWidth,
@@ -53,12 +54,24 @@ const AdvancedCarouselBlockTemplate = ({
                                        }) => {
   const { sliderRef, isPlaying, togglePlay } = useSliderControls();
 
+  // Preprocess items for recurrence
+  const processedItems = useMemo(() => {
+    return showRecurrence
+      ? processItemsForRecurrence(items)
+      : items.map(item => ({
+        ...item,
+        url: flattenToAppURL(item['@id']),
+      }));
+  }, [items, showRecurrence]);
+
   const getLink = (url, text) => {
     if (!url) return null;
     return isInternalURL(url) ? (
       <Link to={flattenToAppURL(url)}>{text || url}</Link>
     ) : (
-      <a href={url} target='_blank'>{text || url}</a>
+      <a href={url} target='_blank' rel='noopener noreferrer'>
+        {text || url}
+      </a>
     );
   };
 
@@ -92,7 +105,7 @@ const AdvancedCarouselBlockTemplate = ({
             : [{ breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } }]
         }
       >
-        {items.map(item => (
+        {processedItems.map(item => (
           <div key={item['@id']}>
             <CommonItemRenderer
               items={[item]}
@@ -108,10 +121,10 @@ const AdvancedCarouselBlockTemplate = ({
               effectiveDate={effectiveDate}
               expirationDate={expirationDate}
               isEditMode={isEditMode}
-              imageSide={imageSide} // Pass the image side information
-              imageWidth={imageWidth} // Pass the image width information
-              howManyColumns={howManyColumns} // Pass the column configuration
-              fetchPriority={fetchPriority} // Pass the fetch priority information
+              imageSide={imageSide}
+              imageWidth={imageWidth}
+              howManyColumns={howManyColumns}
+              fetchPriority={fetchPriority}
             />
           </div>
         ))}
