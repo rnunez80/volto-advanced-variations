@@ -109,7 +109,7 @@ const CommonItemRenderer = ({
   );
 
   return (
-    <>
+    <div className='fade-in loaded'>
       {processedItems.map(item => (
         <div key={item['@id']} className='ui one column grid advanced-item'>
           <div className={`column ${imageSide}`}>
@@ -194,7 +194,7 @@ const CommonItemRenderer = ({
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
