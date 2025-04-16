@@ -31,7 +31,7 @@ const AdvancedCarouselBlockTemplate = ({
                                          moreLinkUrl,
                                          header,
                                          headerUrl,
-                                         headerTag: HeaderTag = 'h2', // Default header tag
+                                         headerTag: HeaderTag = 'p', // Default header tag
                                          isEditMode,
                                          imageSide,
                                          imageWidth,
@@ -44,9 +44,9 @@ const AdvancedCarouselBlockTemplate = ({
                                          eventDate,
                                          eventLocation,
                                          eventTime,
-                                         slidesToScroll,
-                                         autoPlay,
-                                         autoplaySpeed,
+                                         slidesToScroll: slidesToScroll = 1,
+                                         autoPlay: autoPlay = true,
+                                         autoplaySpeed: autoplaySpeed = 5,
                                          eventCard,
                                          quote,
                                          showRecurrence,

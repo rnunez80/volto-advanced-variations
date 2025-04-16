@@ -27,9 +27,9 @@ const CommonItemRenderer = ({
                               items,
                               showRecurrence,
                               quote,
-                              showTitle,
+                              showTitle: showTitle = true,
                               eventCard,
-                              titleTag: TitleTag = 'h3',
+                              titleTag: TitleTag = 'p',
                               eventDate,
                               eventTime,
                               eventLocation,
@@ -38,9 +38,12 @@ const CommonItemRenderer = ({
                               expirationDate,
                               isEditMode,
                               imageSide,
-                              imageWidth = 4,
+                              imageWidth: imageWidth = 4,
                               howManyColumns,
                               fetchPriority,
+                              slidesToScroll: slidesToScroll = 1,
+                              autoPlay: autoPlay = true,
+                              autoplaySpeed: autoplaySpeed = 5,
                             }) => {
   const intl = useIntl();
 
@@ -216,6 +219,9 @@ CommonItemRenderer.propTypes = {
   imageWidth: PropTypes.number,
   howManyColumns: PropTypes.number,
   fetchPriority: PropTypes.string,
+  slidesToScroll: PropTypes.number,
+  autoPlay: PropTypes.bool,
+  autoplaySpeed: PropTypes.number,
 };
 
 export default CommonItemRenderer;
