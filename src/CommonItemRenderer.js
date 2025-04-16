@@ -53,7 +53,7 @@ const CommonItemRenderer = ({
       ...item,
       url: flattenToAppURL(item['@id']),
       imageSrc: item.image_field
-        ? `${flattenToAppURL(item['@id'])}/@@images/preview_image`
+        ? `${flattenToAppURL(item['@id'])}/@@images/image`
         : null,
     }));
   }, [items, showRecurrence]);
@@ -122,15 +122,15 @@ const CommonItemRenderer = ({
                         <img
                           sizes='(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px'
                           srcSet={`
-                            ${item.imageSrc}/mini 200w,
-                            ${item.imageSrc}/preview 400w,
-                            ${item.imageSrc}/teaser 600w,
-                            ${item.imageSrc}/large 800w,
-                            ${item.imageSrc}/larger 1000w,
-                            ${item.imageSrc}/great 1200w,
-                            ${item.imageSrc}/huge 1600w
+                            ${item.url}/@@images/${item.image_field}/mini 200w,
+                            ${item.url}/@@images/${item.image_field}/preview 400w,
+                            ${item.url}/@@images/${item.image_field}/teaser 600w,
+                            ${item.url}/@@images/${item.image_field}/large 800w,
+                            ${item.url}/@@images/${item.image_field}/larger 1000w,
+                            ${item.url}/@@images/${item.image_field}/great 1200w,
+                            ${item.url}/@@images/${item.image_field}/huge 1600w
                           `}
-                          src={`${item.imageSrc}/preview`}
+                          src={`${item.url}/@@images/${item.image_field}/preview`}
                           alt={item.title || ''}
                           className='ui image listImage'
                           loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
