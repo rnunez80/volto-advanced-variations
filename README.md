@@ -7,6 +7,8 @@ A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.or
 
 Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider or image gallery.
 
+0.5.1 move events options to fieldset
+
 0.5.0 Volto-light-theme support and Background image URL correction
 
 0.4.0: Added show Creator/Author support and option.
