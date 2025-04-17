@@ -40,14 +40,21 @@ export const advancedCarouselSchema = (props) => {
           'fetchPriority',  // Added fetch priority field
           'showTitle',
           'showDescription',
+          'effectiveDate',
+          'expirationDate',
+          'creatorauthor',
+          'quote',
+        ],
+      },
+      {
+        id: 'itemEventOptions',
+        title: intl.formatMessage(messages.itemEventOptions),
+        fields: [
           'eventCard',
           'eventDate',
           'eventTime',
           'eventLocation',
           'showRecurrence',
-          'effectiveDate',
-          'expirationDate',
-          'quote',
         ],
       },
     ],
@@ -174,6 +181,10 @@ export const advancedCarouselSchema = (props) => {
         title: intl.formatMessage(messages.fetchPriority),
         choices: fetchPriorityChoices,
         default: 'auto',
+      },
+      creatorauthor: {
+        title: intl.formatMessage(messages.showcreatorauthor),
+        type: 'boolean',
       },
     },
   };

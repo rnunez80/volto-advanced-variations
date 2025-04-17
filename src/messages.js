@@ -145,6 +145,10 @@ const messages = defineMessages({
     id: 'itemDisplayOptions',
     defaultMessage: 'Item Display Options',
   },
+  itemEventOptions: {
+    id: 'itemEventOptions',
+    defaultMessage: 'Item Event Options',
+  },
   eventDate: {
     id: 'eventDate',
     defaultMessage: 'Show Event Date',
@@ -196,6 +200,10 @@ const messages = defineMessages({
   fetchPriority: {
     id: 'fetchPriority',
     defaultMessage: 'Fetch Priority',
+  },
+  showcreatorauthor: {
+    id: 'creatorauthor',
+    defaultMessage: 'Show Creator/Author',
   },
 });
 

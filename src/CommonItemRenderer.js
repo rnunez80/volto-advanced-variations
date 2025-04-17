@@ -44,6 +44,7 @@ const CommonItemRenderer = ({
                               slidesToScroll: slidesToScroll = 1,
                               autoPlay: autoPlay = true,
                               autoplaySpeed: autoplaySpeed = 5,
+                              creatorauthor,
                             }) => {
   const intl = useIntl();
 
@@ -104,7 +105,8 @@ const CommonItemRenderer = ({
         </TitleTag>
       )}
 
-      {eventLocation && <p>{item.location}</p>}
+      {creatorauthor && <p className='author'>{item.Creator}</p>}
+      {eventLocation && <p className='location'>{item.location}</p>}
       {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
       {showDescription && item.description && <p>{item.description}</p>}
@@ -222,6 +224,7 @@ CommonItemRenderer.propTypes = {
   slidesToScroll: PropTypes.number,
   autoPlay: PropTypes.bool,
   autoplaySpeed: PropTypes.number,
+  creatorauthor: PropTypes.bool,
 };
 
 export default CommonItemRenderer;

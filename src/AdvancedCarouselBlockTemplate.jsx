@@ -51,6 +51,7 @@ const AdvancedCarouselBlockTemplate = ({
                                          quote,
                                          showRecurrence,
                                          fetchPriority,
+                                         creatorauthor,
                                        }) => {
   const { sliderRef, isPlaying, togglePlay } = useSliderControls();
 
@@ -125,6 +126,7 @@ const AdvancedCarouselBlockTemplate = ({
               imageWidth={imageWidth}
               howManyColumns={howManyColumns}
               fetchPriority={fetchPriority}
+              creatorauthor={creatorauthor}
             />
           </div>
         ))}
@@ -173,6 +175,7 @@ AdvancedCarouselBlockTemplate.propTypes = {
   quote: PropTypes.bool,
   showRecurrence: PropTypes.bool,
   fetchPriority: PropTypes.string,
+  creatorauthor: PropTypes.bool,
 };
 
 export default React.memo(AdvancedCarouselBlockTemplate);

@@ -30,6 +30,7 @@ const AdvancedListingBlockTemplate = ({
                                         quote,
                                         showRecurrence,
                                         fetchPriority,
+                                        creatorauthor,
                                       }) => {
   // Preprocess items for recurrence
   const processedItems = useMemo(() => {
@@ -90,6 +91,7 @@ const AdvancedListingBlockTemplate = ({
             imageWidth={imageWidth}
             howManyColumns={howManyColumns}
             fetchPriority={fetchPriority}
+            creatorauthor={creatorauthor}
           />
         </div>
       ))}
@@ -121,6 +123,7 @@ AdvancedListingBlockTemplate.propTypes = {
   quote: PropTypes.bool,
   showRecurrence: PropTypes.bool,
   fetchPriority: PropTypes.string,
+  creatorauthor: PropTypes.bool,
 };
 
 export default React.memo(AdvancedListingBlockTemplate);

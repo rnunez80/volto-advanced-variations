@@ -31,14 +31,21 @@ export const advancedListingSchema = (props) => {
           'fetchPriority',  // New field added here
           'showTitle',
           'showDescription',
+          'effectiveDate',
+          'expirationDate',
+          'creatorauthor',
+          'quote',
+        ],
+      },
+      {
+        id: 'itemEventOptions',
+        title: intl.formatMessage(messages.itemEventOptions),
+        fields: [
           'eventCard',
           'eventDate',
           'eventTime',
           'eventLocation',
           'showRecurrence',
-          'effectiveDate',
-          'expirationDate',
-          'quote',
         ],
       },
     ],
@@ -129,6 +136,10 @@ export const advancedListingSchema = (props) => {
       showRecurrence: {
         title: intl.formatMessage(messages.showRecurrence),
         description: intl.formatMessage(messages.showRecurrenceDescription),
+        type: 'boolean',
+      },
+      creatorauthor: {
+        title: intl.formatMessage(messages.showcreatorauthor),
         type: 'boolean',
       },
     },
