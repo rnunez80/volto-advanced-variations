@@ -1,6 +1,6 @@
 {
   "name": "volto-advanced-variations",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Advanced variations: Volto add-on",
   "main": "src/index.js",
   "author": "Rafael Nunez",
