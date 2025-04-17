@@ -39,7 +39,7 @@ const CommonItemRenderer = ({
                               isEditMode,
                               imageSide: imageSide = 'up',
                               imageWidth: imageWidth = 4,
-                              howManyColumns,
+                              howManyColumns: howManyColumns = 1,
                               fetchPriority,
                               slidesToScroll: slidesToScroll = 1,
                               autoPlay: autoPlay = true,
