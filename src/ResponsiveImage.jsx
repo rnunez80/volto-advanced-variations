@@ -18,47 +18,48 @@ const getSizes = (howManyColumns) => {
     case 1:
       // One-column layout: Image is full width at all breakpoints
       return `
-        (max-width: 767px) 400px,
-        (min-width: 768px) and (max-width: 991px) 600px,
-        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 1650px) 1200px,
         (min-width: 1200px) and (max-width: 1919px) 1000px,
-        (min-width: 1650px) 1200px
+        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 768px) and (max-width: 991px) 600px,
+        (max-width: 767px) 400px
       `;
     case 2:
       // Two-column layout: Half-width images for larger breakpoints
       return `
-        (max-width: 767px) 400px,
-        (min-width: 768px) and (max-width: 991px) 300px,
-        (min-width: 992px) and (max-width: 1199px) 400px,
-        (min-width: 1200px) and (max-width: 1919px) 500px,
-        (min-width: 1650px) 600px
+        (min-width: 1650px) 800px,
+        (min-width: 1200px) and (max-width: 1919px) 600px,
+        (min-width: 992px) and (max-width: 1199px) 500px,
+        (min-width: 768px) and (max-width: 991px) 400px,
+        (max-width: 767px) 400px
       `;
     case 3:
       // Three-column layout: One-third width images for larger breakpoints
       return `
-        (max-width: 767px) 400px,
-        (min-width: 768px) and (max-width: 991px) 200px,
-        (min-width: 992px) and (max-width: 1199px) 300px,
+
+        (min-width: 1650px) 500px,
         (min-width: 1200px) and (max-width: 1919px) 400px,
-        (min-width: 1650px) 500px
+        (min-width: 992px) and (max-width: 1199px) 300px,
+        (min-width: 768px) and (max-width: 991px) 200px,
+        (max-width: 767px) 400px
       `;
     case 4:
       // Four-column layout: Quarter-width images for larger breakpoints
       return `
-        (max-width: 767px) 400px,
-        (min-width: 768px) and (max-width: 991px) 150px,
-        (min-width: 992px) and (max-width: 1199px) 200px,
+        (min-width: 1650px) 400px,
         (min-width: 1200px) and (max-width: 1919px) 300px,
-        (min-width: 1650px) 400px
+        (min-width: 992px) and (max-width: 1199px) 200px,
+        (min-width: 768px) and (max-width: 991px) 150px,
+        (max-width: 767px) 400px
       `;
     default:
       // Default case: Use a conservative width for default handling
       return `
-        (max-width: 767px) 400px,
-        (min-width: 768px) and (max-width: 991px) 600px,
-        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 1650px) 1600px,
         (min-width: 1200px) and (max-width: 1919px) 1000px,
-        (min-width: 1650px) 1600px
+        (min-width: 992px) and (max-width: 1199px) 800px,
+        (min-width: 768px) and (max-width: 991px) 600px,
+        (max-width: 767px) 400px
       `;
   }
 };

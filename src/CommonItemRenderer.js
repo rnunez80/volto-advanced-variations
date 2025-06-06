@@ -125,7 +125,10 @@ const CommonItemRenderer = ({
                     {item.imageSrc ? (
                       <Link to={item.url}>
                         <img
-                          sizes='(min-width: 768px) and (max-width: 991px) 171px, (min-width: 992px) and (max-width: 1199px) 223px, (min-width: 1200px) 272px'
+                          src={`${item.url}/@@images/${item.image_field}/preview`}
+                          // sizes='(min-width: 768px) and (max-width: 991px) 171px,
+                          // (min-width: 992px) and (max-width: 1199px) 223px,
+                          // (min-width: 1200px) 272px'
                           srcSet={`
                             ${item.url}/@@images/${item.image_field}/mini 200w,
                             ${item.url}/@@images/${item.image_field}/preview 400w,
@@ -135,7 +138,7 @@ const CommonItemRenderer = ({
                             ${item.url}/@@images/${item.image_field}/great 1200w,
                             ${item.url}/@@images/${item.image_field}/huge 1600w
                           `}
-                          src={`${item.url}/@@images/${item.image_field}/preview`}
+
                           alt={item.title || ''}
                           className='ui image listImage'
                           loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
