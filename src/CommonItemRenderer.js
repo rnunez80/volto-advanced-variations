@@ -132,8 +132,8 @@ const CommonItemRenderer = ({
                           srcSet={`
                             ${item.url}/@@images/${item.image_field}/mini 200w,
                             ${item.url}/@@images/${item.image_field}/preview 400w,
-                            ${item.url}/@@images/${item.image_field}/teaser 600w,
-                            ${item.url}/@@images/${item.image_field}/large 800w,
+                            ${item.url}/@@images/${item.image_field}/teaser 500w,
+                            ${item.url}/@@images/${item.image_field}/large 700w,
                             ${item.url}/@@images/${item.image_field}/larger 1000w,
                             ${item.url}/@@images/${item.image_field}/great 1200w,
                             ${item.url}/@@images/${item.image_field}/huge 1600w
