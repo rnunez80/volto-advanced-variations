@@ -89,6 +89,7 @@ const CommonItemRenderer = ({
 
       {eventCard && getEventCard(item)}
       {(eventDate || eventTime) && <div className='advancedDatetime'>{renderMetadata(item)}</div>}
+      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {showTitle && (
         <TitleTag className='threelines'>
           {imageSide === 'background' ? (
@@ -107,7 +108,7 @@ const CommonItemRenderer = ({
 
       {creatorauthor && <p className='author'>{item.Creator}</p>}
       {eventLocation && <p className='location'>{item.location}</p>}
-      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
+
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
       {showDescription && item.description && <p>{item.description}</p>}
     </>
