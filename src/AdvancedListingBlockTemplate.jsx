@@ -67,7 +67,7 @@ const AdvancedListingBlockTemplate = ({
   return (
     <div className='ui twelve column grid column-grid'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
-      {processedItems.map(item => (
+      {processedItems.map((item, index) => (
         <div
           className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${columnClassMap[howManyColumns] || 'four'
             } wide tablet column column-blocks-wrapper`}
@@ -75,6 +75,7 @@ const AdvancedListingBlockTemplate = ({
         >
           <CommonItemRenderer
             items={[item]}
+            index={index}
             showRecurrence={showRecurrence}
             quote={quote}
             showTitle={showTitle}
