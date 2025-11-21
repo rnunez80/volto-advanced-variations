@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useIntl } from 'react-intl';
 import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import RenderImage from './renderImage';
+import messages from './messages';
 
 const columnClassMap = {
   1: 'one',
@@ -24,28 +26,29 @@ const columnClassMap = {
 };
 
 const CommonItemRenderer = ({
-                              items,
-                              showRecurrence,
-                              quote,
-                              showTitle: showTitle = true,
-                              eventCard,
-                              titleTag: TitleTag = 'h2',
-                              eventDate,
-                              eventTime,
-                              eventLocation,
-                              showDescription: showDescription = true,
-                              effectiveDate,
-                              expirationDate,
-                              isEditMode,
-                              imageSide: imageSide = 'up',
-                              imageWidth: imageWidth = 4,
-                              howManyColumns: howManyColumns = 1,
-                              fetchPriority,
-                              slidesToScroll: slidesToScroll = 1,
-                              autoPlay: autoPlay = true,
-                              autoplaySpeed: autoplaySpeed = 5,
-                              creatorauthor,
-                            }) => {
+  items,
+  showRecurrence,
+  quote,
+  showTitle: showTitle = true,
+  eventCard,
+  titleTag: TitleTag = 'h2',
+  eventDate,
+  eventTime,
+  eventLocation,
+  showDescription: showDescription = true,
+  effectiveDate,
+  expirationDate,
+  isEditMode,
+  imageSide: imageSide = 'up',
+  imageWidth: imageWidth = 4,
+  howManyColumns: howManyColumns = 1,
+  fetchPriority,
+  slidesToScroll: slidesToScroll = 1,
+  autoPlay: autoPlay = true,
+  autoplaySpeed: autoplaySpeed = 5,
+  creatorauthor,
+  readMore,
+}) => {
   const intl = useIntl();
 
   // Process items based on recurrence setting
@@ -111,6 +114,31 @@ const CommonItemRenderer = ({
 
       {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
       {showDescription && item.description && <p>{item.description}</p>}
+      {readMore && (
+        <div className='read-more'>
+          {isInternalURL(item.url) ? (
+            <Link
+              to={item.url}
+              className='ui button secondary right floated'
+              aria-label={intl.formatMessage(messages.readMoreLabel, {
+                title: item.title,
+              })}
+            >
+              {intl.formatMessage(messages.readMoreButton)}
+            </Link>
+          ) : (
+            <a
+              href={item.url}
+              className='ui button secondary right floated'
+              aria-label={intl.formatMessage(messages.readMoreLabel, {
+                title: item.title,
+              })}
+            >
+              {intl.formatMessage(messages.readMoreButton)}
+            </a>
+          )}
+        </div>
+      )}
     </>
   );
 
@@ -164,9 +192,8 @@ const CommonItemRenderer = ({
             ) : (
               <div className='ui grid'>
                 {['up', 'left'].includes(imageSide) && (
-                  <div className={`${
-                    ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                  } wide column advancedImage`}>
+                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
+                    } wide column advancedImage`}>
                     <Link to={item.url}>
                       <RenderImage
                         item={item}
@@ -177,17 +204,15 @@ const CommonItemRenderer = ({
                     </Link>
                   </div>
                 )}
-                <div className={`${
-                  ['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
-                    ? 'twelve'
-                    : columnClassMap[12 - imageWidth]
-                } wide column`}>
+                <div className={`${['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
+                  ? 'twelve'
+                  : columnClassMap[12 - imageWidth]
+                  } wide column`}>
                   {renderContent(item)}
                 </div>
                 {['right', 'down'].includes(imageSide) && (
-                  <div className={`${
-                    ['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                  } wide column advancedImage`}>
+                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
+                    } wide column advancedImage`}>
                     <Link to={item.url}>
                       <RenderImage
                         item={item}
@@ -229,6 +254,7 @@ CommonItemRenderer.propTypes = {
   autoPlay: PropTypes.bool,
   autoplaySpeed: PropTypes.number,
   creatorauthor: PropTypes.bool,
+  readMore: PropTypes.bool,
 };
 
 export default CommonItemRenderer;

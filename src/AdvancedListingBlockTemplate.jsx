@@ -8,30 +8,31 @@ import processItemsForRecurrence from './processItemsForRecurrence';
 import './Advanced.css'; // Import the CSS file
 
 const AdvancedListingBlockTemplate = ({
-                                        items,
-                                        moreLinkText,
-                                        moreLinkUrl,
-                                        header,
-                                        headerUrl,
-                                        headerTag: HeaderTag = 'h2', // Default to <h2> if headerTag is not provided
-                                        isEditMode,
-                                        imageSide,
-                                        imageWidth,
-                                        howManyColumns,
-                                        effectiveDate,
-                                        expirationDate,
-                                        titleTag,
-                                        showDescription,
-                                        eventDate,
-                                        eventLocation,
-                                        eventTime,
-                                        showTitle,
-                                        eventCard,
-                                        quote,
-                                        showRecurrence,
-                                        fetchPriority,
-                                        creatorauthor,
-                                      }) => {
+  items,
+  moreLinkText,
+  moreLinkUrl,
+  header,
+  headerUrl,
+  headerTag: HeaderTag = 'h2', // Default to <h2> if headerTag is not provided
+  isEditMode,
+  imageSide,
+  imageWidth,
+  howManyColumns,
+  effectiveDate,
+  expirationDate,
+  titleTag,
+  showDescription,
+  eventDate,
+  eventLocation,
+  eventTime,
+  showTitle,
+  eventCard,
+  quote,
+  showRecurrence,
+  fetchPriority,
+  creatorauthor,
+  readMore,
+}) => {
   // Preprocess items for recurrence
   const processedItems = useMemo(() => {
     return showRecurrence
@@ -68,9 +69,8 @@ const AdvancedListingBlockTemplate = ({
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
       {processedItems.map(item => (
         <div
-          className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${
-            columnClassMap[howManyColumns] || 'four'
-          } wide tablet column column-blocks-wrapper`}
+          className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${columnClassMap[howManyColumns] || 'four'
+            } wide tablet column column-blocks-wrapper`}
           key={item['@id']}
         >
           <CommonItemRenderer
@@ -92,6 +92,7 @@ const AdvancedListingBlockTemplate = ({
             howManyColumns={howManyColumns}
             fetchPriority={fetchPriority}
             creatorauthor={creatorauthor}
+            readMore={readMore}
           />
         </div>
       ))}
@@ -124,6 +125,7 @@ AdvancedListingBlockTemplate.propTypes = {
   showRecurrence: PropTypes.bool,
   fetchPriority: PropTypes.string,
   creatorauthor: PropTypes.bool,
+  readMore: PropTypes.bool,
 };
 
 export default React.memo(AdvancedListingBlockTemplate);

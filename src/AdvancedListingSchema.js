@@ -35,6 +35,7 @@ export const advancedListingSchema = (props) => {
           'expirationDate',
           'creatorauthor',
           'quote',
+          'readMore',
         ],
       },
       {
@@ -140,6 +141,10 @@ export const advancedListingSchema = (props) => {
       },
       creatorauthor: {
         title: intl.formatMessage(messages.showcreatorauthor),
+        type: 'boolean',
+      },
+      readMore: {
+        title: intl.formatMessage(messages.readMore),
         type: 'boolean',
       },
     },

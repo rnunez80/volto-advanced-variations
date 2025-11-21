@@ -205,6 +205,18 @@ const messages = defineMessages({
     id: 'creatorauthor',
     defaultMessage: 'Show Creator/Author',
   },
+  readMore: {
+    id: 'readMore',
+    defaultMessage: 'Read More',
+  },
+  readMoreLabel: {
+    id: 'readMoreLabel',
+    defaultMessage: 'Read more about {title}',
+  },
+  readMoreButton: {
+    id: 'readMoreButton',
+    defaultMessage: 'Read More',
+  },
 });
 
 export default messages;
