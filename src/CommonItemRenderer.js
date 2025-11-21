@@ -92,7 +92,6 @@ const CommonItemRenderer = ({
 
       {eventCard && getEventCard(item)}
       {(eventDate || eventTime) && <div className='advancedDatetime'>{renderMetadata(item)}</div>}
-      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
       {showTitle && (
         <TitleTag className='threelines'>
           {imageSide === 'background' ? (
@@ -108,6 +107,7 @@ const CommonItemRenderer = ({
           )}
         </TitleTag>
       )}
+      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
 
       {creatorauthor && <p className='author'>{item.Creator}</p>}
       {eventLocation && <p className='location'>{item.location}</p>}
@@ -119,7 +119,7 @@ const CommonItemRenderer = ({
           {isInternalURL(item.url) ? (
             <Link
               to={item.url}
-              className='ui button secondary right floated'
+              className='ui button basic'
               aria-label={intl.formatMessage(messages.readMoreLabel, {
                 title: item.title,
               })}
@@ -129,7 +129,7 @@ const CommonItemRenderer = ({
           ) : (
             <a
               href={item.url}
-              className='ui button secondary right floated'
+              className='ui button basic'
               aria-label={intl.formatMessage(messages.readMoreLabel, {
                 title: item.title,
               })}
