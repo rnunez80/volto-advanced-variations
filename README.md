@@ -7,6 +7,8 @@ A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.or
 
 Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider or image gallery.
 
+0.6.0: Added 'read more' and animation option.
+
 0.5.1 move events options to fieldset
 
 0.5.0 Volto-light-theme support and Background image URL correction
@@ -71,7 +73,8 @@ A example of Carousel options Sidebar, it look like the following capture:
 1. `expirationDate` (_boolean_): Show expiration date.
 1. `show as quote` (_boolean_): Show as quote.
 1. `eventRecurrence` (_boolean_): Show event recurrence date and change order.
-
+1. `enableAnimation` (_boolean_): Enable animation.
+1. 'readMore' (_boolean_): Show read more.
 ## Screen recording
 
 [![Screen recording](https://img.youtube.com/vi/KhnCCyNOu28/0.jpg)](https://youtu.be/KhnCCyNOu28)

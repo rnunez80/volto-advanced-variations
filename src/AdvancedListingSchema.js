@@ -36,6 +36,7 @@ export const advancedListingSchema = (props) => {
           'creatorauthor',
           'quote',
           'readMore',
+          'enableAnimation',
         ],
       },
       {
@@ -145,6 +146,10 @@ export const advancedListingSchema = (props) => {
       },
       readMore: {
         title: intl.formatMessage(messages.readMore),
+        type: 'boolean',
+      },
+      enableAnimation: {
+        title: intl.formatMessage(messages.enableAnimation),
         type: 'boolean',
       },
     },

@@ -215,7 +215,11 @@ const messages = defineMessages({
   },
   readMoreButton: {
     id: 'readMoreButton',
-    defaultMessage: 'Read More',
+    defaultMessage: 'Show Read More',
+  },
+  enableAnimation: {
+    id: 'enableAnimation',
+    defaultMessage: 'Enable Animation',
   },
 });
 

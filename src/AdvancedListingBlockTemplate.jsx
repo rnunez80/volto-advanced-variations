@@ -6,6 +6,7 @@ import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import CommonItemRenderer from './CommonItemRenderer';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import './Advanced.css'; // Import the CSS file
+import { FadeInSection } from './sharedUtils';
 
 const AdvancedListingBlockTemplate = ({
   items,
@@ -32,6 +33,7 @@ const AdvancedListingBlockTemplate = ({
   fetchPriority,
   creatorauthor,
   readMore,
+  enableAnimation,
 }) => {
   // Preprocess items for recurrence
   const processedItems = useMemo(() => {
@@ -64,36 +66,64 @@ const AdvancedListingBlockTemplate = ({
     4: 'three',
   };
 
+  const columns = howManyColumns || 3;
+
   return (
     <div className='ui twelve column grid column-grid'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
-      {processedItems.map(item => (
+      {processedItems.map((item, index) => (
         <div
           className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${columnClassMap[howManyColumns] || 'four'
             } wide tablet column column-blocks-wrapper`}
           key={item['@id']}
         >
-          <CommonItemRenderer
-            items={[item]}
-            showRecurrence={showRecurrence}
-            quote={quote}
-            showTitle={showTitle}
-            eventCard={eventCard}
-            titleTag={titleTag}
-            eventDate={eventDate}
-            eventTime={eventTime}
-            eventLocation={eventLocation}
-            showDescription={showDescription}
-            effectiveDate={effectiveDate}
-            expirationDate={expirationDate}
-            isEditMode={isEditMode}
-            imageSide={imageSide}
-            imageWidth={imageWidth}
-            howManyColumns={howManyColumns}
-            fetchPriority={fetchPriority}
-            creatorauthor={creatorauthor}
-            readMore={readMore}
-          />
+          {enableAnimation ? (
+            <FadeInSection delay={(index % columns) * 100}>
+              <CommonItemRenderer
+                items={[item]}
+                showRecurrence={showRecurrence}
+                quote={quote}
+                showTitle={showTitle}
+                eventCard={eventCard}
+                titleTag={titleTag}
+                eventDate={eventDate}
+                eventTime={eventTime}
+                eventLocation={eventLocation}
+                showDescription={showDescription}
+                effectiveDate={effectiveDate}
+                expirationDate={expirationDate}
+                isEditMode={isEditMode}
+                imageSide={imageSide}
+                imageWidth={imageWidth}
+                howManyColumns={howManyColumns}
+                fetchPriority={fetchPriority}
+                creatorauthor={creatorauthor}
+                readMore={readMore}
+              />
+            </FadeInSection>
+          ) : (
+            <CommonItemRenderer
+              items={[item]}
+              showRecurrence={showRecurrence}
+              quote={quote}
+              showTitle={showTitle}
+              eventCard={eventCard}
+              titleTag={titleTag}
+              eventDate={eventDate}
+              eventTime={eventTime}
+              eventLocation={eventLocation}
+              showDescription={showDescription}
+              effectiveDate={effectiveDate}
+              expirationDate={expirationDate}
+              isEditMode={isEditMode}
+              imageSide={imageSide}
+              imageWidth={imageWidth}
+              howManyColumns={howManyColumns}
+              fetchPriority={fetchPriority}
+              creatorauthor={creatorauthor}
+              readMore={readMore}
+            />
+          )}
         </div>
       ))}
       {moreLink && <div className='more-link'>{moreLink}</div>}
@@ -126,6 +156,7 @@ AdvancedListingBlockTemplate.propTypes = {
   fetchPriority: PropTypes.string,
   creatorauthor: PropTypes.bool,
   readMore: PropTypes.bool,
+  enableAnimation: PropTypes.bool,
 };
 
 export default React.memo(AdvancedListingBlockTemplate);
