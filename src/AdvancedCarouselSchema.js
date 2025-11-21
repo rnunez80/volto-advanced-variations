@@ -44,6 +44,8 @@ export const advancedCarouselSchema = (props) => {
           'expirationDate',
           'creatorauthor',
           'quote',
+          'readMore',
+          'enableAnimation',
         ],
       },
       {
@@ -184,6 +186,14 @@ export const advancedCarouselSchema = (props) => {
       },
       creatorauthor: {
         title: intl.formatMessage(messages.showcreatorauthor),
+        type: 'boolean',
+      },
+      readMore: {
+        title: intl.formatMessage(messages.readMore),
+        type: 'boolean',
+      },
+      enableAnimation: {
+        title: intl.formatMessage(messages.enableAnimation),
         type: 'boolean',
       },
     },

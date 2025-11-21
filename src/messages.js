@@ -217,6 +217,10 @@ const messages = defineMessages({
     id: 'readMoreButton',
     defaultMessage: 'Read More',
   },
+  enableAnimation: {
+    id: 'enableAnimation',
+    defaultMessage: 'Enable Animation',
+  },
 });
 
 export default messages;

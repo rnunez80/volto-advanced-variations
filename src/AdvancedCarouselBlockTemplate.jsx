@@ -8,6 +8,7 @@ import CommonItemRenderer from './CommonItemRenderer';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import PropTypes from 'prop-types'; // Import PropTypes
 import './Advanced.css'; // Import the CSS file
+import { FadeInSection } from './sharedUtils';
 
 const useSliderControls = () => {
   const sliderRef = useRef(null);
@@ -26,33 +27,35 @@ const useSliderControls = () => {
 };
 
 const AdvancedCarouselBlockTemplate = ({
-                                         items,
-                                         moreLinkText,
-                                         moreLinkUrl,
-                                         header,
-                                         headerUrl,
-                                         headerTag: HeaderTag = 'p', // Default header tag
-                                         isEditMode,
-                                         imageSide,
-                                         imageWidth,
-                                         howManyColumns,
-                                         effectiveDate,
-                                         expirationDate,
-                                         titleTag,
-                                         showTitle,
-                                         showDescription,
-                                         eventDate,
-                                         eventLocation,
-                                         eventTime,
-                                         slidesToScroll: slidesToScroll = 1,
-                                         autoPlay: autoPlay = true,
-                                         autoplaySpeed: autoplaySpeed = 5,
-                                         eventCard,
-                                         quote,
-                                         showRecurrence,
-                                         fetchPriority,
-                                         creatorauthor,
-                                       }) => {
+  items,
+  moreLinkText,
+  moreLinkUrl,
+  header,
+  headerUrl,
+  headerTag: HeaderTag = 'p', // Default header tag
+  isEditMode,
+  imageSide,
+  imageWidth,
+  howManyColumns,
+  effectiveDate,
+  expirationDate,
+  titleTag,
+  showTitle,
+  showDescription,
+  eventDate,
+  eventLocation,
+  eventTime,
+  slidesToScroll: slidesToScroll = 1,
+  autoPlay: autoPlay = true,
+  autoplaySpeed: autoplaySpeed = 5,
+  eventCard,
+  quote,
+  showRecurrence,
+  fetchPriority,
+  creatorauthor,
+  readMore,
+  enableAnimation,
+}) => {
   const { sliderRef, isPlaying, togglePlay } = useSliderControls();
 
   // Preprocess items for recurrence
@@ -106,28 +109,55 @@ const AdvancedCarouselBlockTemplate = ({
             : [{ breakpoint: 767, settings: { slidesToShow: 1, slidesToScroll: 1 } }]
         }
       >
-        {processedItems.map(item => (
+        {processedItems.map((item, index) => (
           <div key={item['@id']}>
-            <CommonItemRenderer
-              items={[item]}
-              showRecurrence={showRecurrence}
-              quote={quote}
-              showTitle={showTitle}
-              eventCard={eventCard}
-              titleTag={titleTag}
-              eventDate={eventDate}
-              eventTime={eventTime}
-              eventLocation={eventLocation}
-              showDescription={showDescription}
-              effectiveDate={effectiveDate}
-              expirationDate={expirationDate}
-              isEditMode={isEditMode}
-              imageSide={imageSide}
-              imageWidth={imageWidth}
-              howManyColumns={howManyColumns}
-              fetchPriority={fetchPriority}
-              creatorauthor={creatorauthor}
-            />
+            {enableAnimation ? (
+              <FadeInSection delay={(index % (howManyColumns || 1)) * 100}>
+                <CommonItemRenderer
+                  items={[item]}
+                  showRecurrence={showRecurrence}
+                  quote={quote}
+                  showTitle={showTitle}
+                  eventCard={eventCard}
+                  titleTag={titleTag}
+                  eventDate={eventDate}
+                  eventTime={eventTime}
+                  eventLocation={eventLocation}
+                  showDescription={showDescription}
+                  effectiveDate={effectiveDate}
+                  expirationDate={expirationDate}
+                  isEditMode={isEditMode}
+                  imageSide={imageSide}
+                  imageWidth={imageWidth}
+                  howManyColumns={howManyColumns}
+                  fetchPriority={fetchPriority}
+                  creatorauthor={creatorauthor}
+                  readMore={readMore}
+                />
+              </FadeInSection>
+            ) : (
+              <CommonItemRenderer
+                items={[item]}
+                showRecurrence={showRecurrence}
+                quote={quote}
+                showTitle={showTitle}
+                eventCard={eventCard}
+                titleTag={titleTag}
+                eventDate={eventDate}
+                eventTime={eventTime}
+                eventLocation={eventLocation}
+                showDescription={showDescription}
+                effectiveDate={effectiveDate}
+                expirationDate={expirationDate}
+                isEditMode={isEditMode}
+                imageSide={imageSide}
+                imageWidth={imageWidth}
+                howManyColumns={howManyColumns}
+                fetchPriority={fetchPriority}
+                creatorauthor={creatorauthor}
+                readMore={readMore}
+              />
+            )}
           </div>
         ))}
       </Slider>
@@ -176,6 +206,8 @@ AdvancedCarouselBlockTemplate.propTypes = {
   showRecurrence: PropTypes.bool,
   fetchPriority: PropTypes.string,
   creatorauthor: PropTypes.bool,
+  readMore: PropTypes.bool,
+  enableAnimation: PropTypes.bool,
 };
 
 export default React.memo(AdvancedCarouselBlockTemplate);

@@ -61,3 +61,34 @@ export const getEventTime = (item) => {
   }
   return end ? `${start} - ${end}` : start;
 };
+
+import React from 'react';
+
+export const FadeInSection = ({ children, delay = 0 }) => {
+  const [isVisible, setVisible] = React.useState(false);
+  const domRef = React.useRef();
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(domRef.current);
+        }
+      });
+    }, { rootMargin: '0px 0px 0px 0px' });
+    observer.observe(domRef.current);
+    return () => observer.unobserve(domRef.current);
+  }, []);
+
+  return (
+    <div ref={domRef}>
+      <div
+        className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
