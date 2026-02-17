@@ -74,7 +74,7 @@ const ResponsiveImage = React.memo(({ item, howManyColumns, fetchPriority }) => 
       className='listImage'
       srcSet={srcset}
       sizes={sizes}
-      alt={item.title || 'Image'}
+      alt={'Learn More about ' + item.title || 'Image'}
       src={imageUrl + '/preview'}
       loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
       fetchpriority={fetchPriority}
