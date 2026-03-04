@@ -104,9 +104,12 @@
   display: flex;
   width: 100%;
   height: 100%;
-  overflow: hidden;}
+  overflow: hidden;
+}
 
-.mosaic-bento__large,.mosaic-bento__small-item {
+.mosaic-bento__large,
+.mosaic-bento__small-item {
+  border-radius: 14px;
   box-shadow: 0 10px 14px rgba(0, 0, 0, .4);
 }
 
@@ -182,12 +185,12 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 1.25rem 1.375rem;
+  padding: 1.5rem 3rem 3rem 3em;
   /* background-color via inline style */
 }
 
 .mosaic-card__panel--side {
-  padding: 0.875rem 1rem 1rem;
+  padding: 0.875rem 2rem 2rem 2rem;
 }
 
 /* ── Title ──────────────────────────────────────────────── */
@@ -200,8 +203,9 @@
   letter-spacing: 0.02em;
 }
 
-div#page-document p a, div#page-document li .mosaic-card a {
-      border-bottom: none
+div#page-document p a,
+div#page-document li .mosaic-card a {
+  border-bottom: none
 }
 
 /* ── Date metadata ──────────────────────────────────────── */
@@ -222,7 +226,7 @@ div#page-document p a, div#page-document li .mosaic-card a {
 /* ── Description — always white ─────────────────────────── */
 .mosaic-card__description {
   color: #ffffff !important;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   margin: 0 0 0.75rem;
   flex: 1;
@@ -235,7 +239,7 @@ div#page-document p a, div#page-document li .mosaic-card a {
 }
 
 .mosaic-card__description--small {
-  font-size: 0.8125rem;
+  font-size: 1.1rem;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   margin-bottom: 0.5rem;

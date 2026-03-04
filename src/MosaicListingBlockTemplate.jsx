@@ -9,6 +9,7 @@ import { getEventDate } from './sharedUtils';
 import './MosaicListing.css';
 
 const COLOR_COMBOS = [
+
     { bg: '#B11116', text: '#FFE293' },
     { bg: '#1D3A83', text: '#59CBE8' },
     { bg: '#8363AA', text: '#ffffff' },
@@ -301,7 +302,7 @@ const MosaicListingBlockTemplate = ({
                     {readMore && (
                         <div className="mosaic-card__cta">
                             {isEditMode ? (
-                              <span className="ui white button" aria-hidden="true">
+                                <span className="ui white button" aria-hidden="true">
                                     Read More
                                 </span>
                             ) : isInternalURL(item.url) ? (
