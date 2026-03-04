@@ -1,6 +1,7 @@
 import loadable from '@loadable/component';
 import { advancedListingSchema } from './AdvancedListingSchema';
 import { advancedCarouselSchema } from './AdvancedCarouselSchema';
+import { mosaicListingSchema } from './MosaicListingSchema';
 
 // Dynamically import components using loadable
 const LazyAdvancedListingBlockTemplate = loadable(() =>
@@ -8,6 +9,9 @@ const LazyAdvancedListingBlockTemplate = loadable(() =>
 );
 const LazyAdvancedCarouselBlockTemplate = loadable(() =>
   import('./AdvancedCarouselBlockTemplate'),
+);
+const LazyMosaicListingBlockTemplate = loadable(() =>
+  import('./MosaicListingBlockTemplate'),
 );
 
 const applyConfig = (config) => {
@@ -23,6 +27,12 @@ const applyConfig = (config) => {
       title: 'Advanced Carousel',
       template: LazyAdvancedCarouselBlockTemplate,
       schemaEnhancer: advancedCarouselSchema,
+    },
+    {
+      id: 'mosaicListing',
+      title: 'Mosaic Listing',
+      template: LazyMosaicListingBlockTemplate,
+      schemaEnhancer: mosaicListingSchema,
     },
     ...config.blocks.blocksConfig.listing.variations,
   ];

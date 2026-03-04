@@ -221,6 +221,14 @@ const messages = defineMessages({
     id: 'enableAnimation',
     defaultMessage: 'Enable Animation',
   },
+  mosaicDisplayOptions: {
+    id: 'mosaicDisplayOptions',
+    defaultMessage: 'Mosaic Display Options',
+  },
+  showStartDate: {
+    id: 'showStartDate',
+    defaultMessage: 'Show Start Date',
+  },
 });
 
 export default messages;
