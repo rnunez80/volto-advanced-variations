@@ -111,7 +111,7 @@
 .mosaic-bento__large,
 .mosaic-bento__small-item {
   border-radius: 14px;
-  box-shadow: 2px 2px 14px rgba(0, 0, 0, .4);
+  /*box-shadow: 2px 2px 14px rgba(0, 0, 0, .4);*/
 }
 
 /* ── LARGE card: image top (~55%), panel bottom ─────────── */
