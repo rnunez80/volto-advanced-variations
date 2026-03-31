@@ -33,7 +33,6 @@
     "@plone/scripts": "*",
     "babel": "^6.23.0",
     "glob": "^10.3.3",
-    "lodash": "^4.17.21",
     "prettier": "^3.0.2",
     "react-slick": "^0.29.0"
   },

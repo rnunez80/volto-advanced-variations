@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import moment from 'moment';
-import { FadeInSection } from './sharedUtils';
-import { getEventDate } from './sharedUtils';
+import { FadeInSection, getEventDate } from './sharedUtils';
 import './MosaicListing.css';
 
 const COLOR_COMBOS = [
