@@ -90,8 +90,13 @@ const MosaicListingBlockTemplate = ({
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
   const TitleTag = titleTag || 'h3';
 
-  const getImageSrc = (item, size) =>
-    item[imageField] ? `${item.url}/@@images/${imageField}/${size}` : null;
+  const getImageSrc = (item, size) => {
+    const fieldToUse = item.image_field || imageField;
+    if (item.preview_image_url) {
+      return item.preview_image_url;
+    }
+    return `${item.url}/@@images/${fieldToUse}/${size}`;
+  };
 
   // Color rotation: pick next combo that is NOT the same bg as the previous one.
   // Returns a combo object for a sequential item index.
@@ -113,6 +118,7 @@ const MosaicListingBlockTemplate = ({
     const imageSrc = getImageSrc(item, 'large');
     const readMoreLabel = `Read more about ${item.title || item.id}`;
     const ariaId = `mosaic-title-${globalItemIdx}`;
+    const fieldToUse = item.image_field || imageField;
 
     const card = (
       <article
@@ -126,10 +132,10 @@ const MosaicListingBlockTemplate = ({
             <img
               src={imageSrc}
               srcSet={[
-                `${item.url}/@@images/${imageField}/preview 400w`,
-                `${item.url}/@@images/${imageField}/teaser 600w`,
-                `${item.url}/@@images/${imageField}/large 900w`,
-                `${item.url}/@@images/${imageField}/larger 1200w`,
+                `${item.url}/@@images/${fieldToUse}/preview 400w`,
+                `${item.url}/@@images/${fieldToUse}/teaser 600w`,
+                `${item.url}/@@images/${fieldToUse}/large 900w`,
+                `${item.url}/@@images/${fieldToUse}/larger 1200w`,
               ].join(',')}
               sizes="(max-width: 767px) 100vw, 50vw"
               alt={item.title || ''}
@@ -245,6 +251,7 @@ const MosaicListingBlockTemplate = ({
     const imageSrc = getImageSrc(item, 'preview');
     const readMoreLabel = `Read more about ${item.title || item.id}`;
     const ariaId = `mosaic-title-${globalItemIdx}`;
+    const fieldToUse = item.image_field || imageField;
 
     const card = (
       <article
@@ -261,9 +268,9 @@ const MosaicListingBlockTemplate = ({
             <img
               src={imageSrc}
               srcSet={[
-                `${item.url}/@@images/${imageField}/mini 200w`,
-                `${item.url}/@@images/${imageField}/preview 400w`,
-                `${item.url}/@@images/${imageField}/teaser 600w`,
+                `${item.url}/@@images/${fieldToUse}/mini 200w`,
+                `${item.url}/@@images/${fieldToUse}/preview 400w`,
+                `${item.url}/@@images/${fieldToUse}/teaser 600w`,
               ].join(',')}
               sizes="(max-width: 767px) 100vw, 25vw"
               alt={item.title || ''}
