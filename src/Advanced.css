@@ -55,29 +55,29 @@
 }
 
 .backgroundimage a:hover .focuspoint {
-  filter: drop-shadow(2px 4px 6px black);
-  transition: 0.5s;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+  transition: filter 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backgroundimage .info-text p {
   height: 0.2em;
   overflow: hidden;
-  transition: 0.5s;
+  transition: height 260ms cubic-bezier(0.4, 0, 0.2, 1), padding 260ms cubic-bezier(0.4, 0, 0.2, 1);
   padding-top: 4px;
 }
 
 .backgroundimage:hover .info-text p.date {
   height: 1.5em;
-  transition: 0.5s;
+  transition: height 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backgroundimage:hover {
-  box-shadow: 1px 6px 8px;
-  transition: 0.5s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backgroundimage .event-when {
-  background: #b11116;
+  background: #c8201a;
   padding: 0 0.5em;
 }
 
@@ -179,8 +179,8 @@
 /*}*/
 
 .backgroundimage a:hover img {
-  filter: blur(3px);
-  transition: 1s;
+  filter: blur(2px);
+  transition: filter 420ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media only screen and (max-width: 991px) {
@@ -263,7 +263,7 @@
   .advancedView:hover .slick-prev {
     transform: translateX(42px);
     opacity: 1;
-    transition: 1s;
+    transition: opacity 260ms ease-out, transform 260ms ease-out;
   }
 
   .advancedView .slick-next {
@@ -275,7 +275,7 @@
   .advancedView:hover .slick-next {
     transform: translateX(-42px);
     opacity: 1;
-    transition: 1s;
+    transition: opacity 260ms ease-out, transform 260ms ease-out;
   }
 }
 
@@ -288,7 +288,7 @@
 .advancedView:hover .column1 .slick-prev {
   transform: translateX(42px);
   opacity: 1;
-  transition: 1s;
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
 }
 
 .advancedView .column1 .slick-next {
@@ -300,7 +300,7 @@
 .advancedView:hover .column1 .slick-next {
   transform: translateX(-42px);
   opacity: 1;
-  transition: 1s;
+  transition: opacity 260ms ease-out, transform 260ms ease-out;
 }
 
 .advancedView .column1 .backgroundimage:hover {
@@ -377,7 +377,7 @@
 }
 
 .cal_month {
-  background: #b11116;
+  background: #c8201a;
   padding: 0 0.5em;
   color: #fff;
   font-size: 1.1em;
@@ -494,10 +494,10 @@ p.effectiveDate {
 
 .fade-in-section {
   opacity: 0;
-  transform: translateY(20vh);
+  transform: translateY(24px);
   visibility: hidden;
-  transition: opacity 0.6s ease-out, transform 1.2s ease-out;
-  will-change: opacity, visibility;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform, visibility;
 }
 
 .fade-in-section.is-visible {
