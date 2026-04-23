@@ -217,8 +217,7 @@
   letter-spacing: 0.02em;
 }
 
-div#page-document p a,
-div#page-document li .mosaic-card a {
+li .mosaic-card a {
   border-bottom: none;
 }
 
