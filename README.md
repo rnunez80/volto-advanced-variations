@@ -1,12 +1,19 @@
 # volto-advanced-variations
 
-A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.org/volto/blocks/index.html) [add-on](https://6.dev-docs.plone.org/volto/addons/index.html) that add two new variations to the listing and search blocks.
-
+A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.org/volto/blocks/index.html) [add-on](https://6.dev-docs.plone.org/volto/addons/index.html) that add new variations to the listing and search blocks.
 
 ## Features
 
-Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider or image gallery.
+Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider, image gallery, styled list, or table layout.
 
+### New in 0.8.0:
+- Added 'Advanced Table' variation - displays items in a table with columns determined by selected options
+- Added 'Advanced List Marker' variation - allows custom list marker styles (none, disc, circle, square, decimal, roman, alpha)
+
+### New in 0.7.0:
+- Added 'Advanced List' variation - displays items as a list with OL, UL, or no bullets styling
+
+### Previous versions:
 0.6.0: Added 'read more' and animation option.
 
 0.5.1 move events options to fieldset
@@ -30,6 +37,59 @@ A example of Listing options Sidebar, it look like the following capture:
 A example of Carousel options Sidebar, it look like the following capture:
 
 ![Carousel options](https://raw.githubusercontent.com/rnunez80/volto-advanced-variations/main/carousel-options.png "Carousel options")
+
+---
+
+### Advanced List Marker options
+
+A example of Advanced List Marker options Sidebar, it look like the following capture:
+
+![Advanced List Marker options](https://raw.githubusercontent.com/rnunez80/volto-advanced-variations/main/ul.png "Advanced List Marker options")
+
+---
+
+### Advanced Table options
+
+A example of Advanced Table options Sidebar, it look like the following capture:
+
+![Advanced Table options](https://raw.githubusercontent.com/rnunez80/volto-advanced-variations/main/table.png "Advanced Table options")
+
+---
+
+## Advanced List Marker properties
+
+### List Display Options
+
+1. `titleTag` (_choice_): items heading level.
+1. `listMarker` (_choice_): select the list marker style (None, Disc, Circle, Square, Decimal, Decimal Leading Zero, Lower Roman, Upper Roman, Lower Alpha, Upper Alpha).
+1. `showTitle` (_boolean_): Show Title.
+1. `showDescription` (_boolean_): Show Description.
+
+### Item Event Options
+
+1. `eventDate` (_boolean_): Show event date.
+1. `eventTime` (_boolean_): Show event time.
+1. `eventLocation` (_boolean_): Show event location.
+1. `showRecurrence` (_boolean_): Show event recurrence date and change order.
+1. `effectiveDate` (_boolean_): Show effective date.
+1. `expirationDate` (_boolean_): Show expiration date.
+1. `creatorauthor` (_boolean_): Show Creator/Author.
+1. `readMore` (_boolean_): Show read more.
+
+---
+
+## Advanced Table properties
+
+### Table Display Options
+
+1. `showTitle` (_boolean_): Show Title.
+1. `showDescription` (_boolean_): Show Description.
+1. `effectiveDate` (_boolean_): Show effective date.
+1. `expirationDate` (_boolean_): Show expiration date.
+1. `eventDate` (_boolean_): Show event date.
+1. `eventTime` (_boolean_): Show event time.
+1. `eventLocation` (_boolean_): Show event location.
+1. `creatorauthor` (_boolean_): Show Creator/Author.
 
 ---
 

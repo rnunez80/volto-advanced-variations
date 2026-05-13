@@ -229,6 +229,30 @@ const messages = defineMessages({
     id: 'showStartDate',
     defaultMessage: 'Show Start Date',
   },
+  listDisplayOptions: {
+    id: 'listDisplayOptions',
+    defaultMessage: 'List Display Options',
+  },
+  listStyle: {
+    id: 'listStyle',
+    defaultMessage: 'List Style',
+  },
+  orderedList: {
+    id: 'orderedList',
+    defaultMessage: 'Ordered List (OL)',
+  },
+  unorderedList: {
+    id: 'unorderedList',
+    defaultMessage: 'Unordered List (UL)',
+  },
+  noBullets: {
+    id: 'noBullets',
+    defaultMessage: 'No Bullets',
+  },
+  listMarker: {
+    id: 'listMarker',
+    defaultMessage: 'List Marker',
+  },
 });
 
 export default messages;

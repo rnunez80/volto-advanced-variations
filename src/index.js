@@ -1,9 +1,10 @@
 import loadable from '@loadable/component';
-import { advancedListingSchema } from './AdvancedListingSchema';
-import { advancedCarouselSchema } from './AdvancedCarouselSchema';
-import { mosaicListingSchema } from './MosaicListingSchema';
+import {advancedListingSchema} from './AdvancedListingSchema';
+import {advancedCarouselSchema} from './AdvancedCarouselSchema';
+import {mosaicListingSchema} from './MosaicListingSchema';
+import {advancedTableSchema} from './AdvancedTableSchema';
+import {advancedListMarkerSchema} from './AdvancedListMarkerSchema';
 
-// Dynamically import components using loadable
 const LazyAdvancedListingBlockTemplate = loadable(() =>
   import('./AdvancedListingBlockTemplate'),
 );
@@ -13,9 +14,21 @@ const LazyAdvancedCarouselBlockTemplate = loadable(() =>
 const LazyMosaicListingBlockTemplate = loadable(() =>
   import('./MosaicListingBlockTemplate'),
 );
+const LazyAdvancedTableBlockTemplate = loadable(() =>
+  import('./AdvancedTableBlockTemplate'),
+);
+const LazyAdvancedListMarkerBlockTemplate = loadable(() =>
+  import('./AdvancedListMarkerBlockTemplate'),
+);
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.listing.variations = [
+    {
+      id: 'advancedCarousel',
+      title: 'Advanced Carousel',
+      template: LazyAdvancedCarouselBlockTemplate,
+      schemaEnhancer: advancedCarouselSchema,
+    },
     {
       id: 'advanced',
       title: 'Advanced Listing',
@@ -23,10 +36,16 @@ const applyConfig = (config) => {
       schemaEnhancer: advancedListingSchema,
     },
     {
-      id: 'advancedCarousel',
-      title: 'Advanced Carousel',
-      template: LazyAdvancedCarouselBlockTemplate,
-      schemaEnhancer: advancedCarouselSchema,
+      id: 'advancedTable',
+      title: 'Advanced Table',
+      template: LazyAdvancedTableBlockTemplate,
+      schemaEnhancer: advancedTableSchema,
+    },
+    {
+      id: 'advancedListMarker',
+      title: 'Advanced List Marker',
+      template: LazyAdvancedListMarkerBlockTemplate,
+      schemaEnhancer: advancedListMarkerSchema,
     },
     {
       id: 'mosaicListing',

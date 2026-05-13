@@ -137,14 +137,6 @@
   margin-left: 0;
 }
 
-.advancedView.has--stretch--stretch {
-  margin-left: 0;
-}
-
-.advancedView.has--stretch--stretch .slick-slide {
-  padding: 0;
-}
-
 .advancedView.has--stretch--stretch .slick-slide {
   padding: 0;
 }
@@ -230,16 +222,6 @@
     width: calc(100vw - 20px) !important;
     margin: 0 0 0 10px !important;
     left: calc(50% - 50vw);
-  }
-}
-
-@media screen and (min-width: 1791px) {
-  body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar-collapsed) .stretch {
-    left: calc(50% - 80px);
-  }
-
-  body:not(.view-editview):not(.view-addview):not(.document_wide_view):not(.is-anonymous):not(.has-toolbar) .stretch {
-    left: calc(50% - 20px);
   }
 }
 
@@ -473,6 +455,137 @@ p.effectiveDate {
 }
 
 /* withQuerystringResults.css */
+
+/* Advanced List Styles */
+.advanced-list-ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+}
+
+.advanced-list-ul {
+  list-style-type: disc;
+  padding-left: 2em;
+}
+
+.advanced-list-none {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.advanced-list-item {
+  margin-bottom: 1em;
+}
+
+/* ADA compliant: ensure focus indicators are visible */
+.advanced-list-item a:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Animation styles */
+.fade-in-enabled {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in-enabled .advanced-list-item {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive list styles */
+@media only screen and (max-width: 767px) {
+  .advanced-list-ol,
+  .advanced-list-ul,
+  .advanced-list-none {
+    padding-left: 1em;
+  }
+}
+
+/* Advanced List Marker Styles */
+.advanced-list-none {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.advanced-list-disc {
+  list-style-type: disc;
+  padding-left: 2em;
+}
+
+.advanced-list-circle {
+  list-style-type: circle;
+  padding-left: 2em;
+}
+
+.advanced-list-square {
+  list-style-type: square;
+  padding-left: 2em;
+}
+
+.advanced-list-decimal {
+  list-style-type: decimal;
+  padding-left: 2em;
+}
+
+.advanced-list-decimal-leading-zero {
+  list-style-type: decimal-leading-zero;
+  padding-left: 2em;
+}
+
+.advanced-list-lower-roman {
+  list-style-type: lower-roman;
+  padding-left: 2em;
+}
+
+.advanced-list-upper-roman {
+  list-style-type: upper-roman;
+  padding-left: 2em;
+}
+
+.advanced-list-lower-alpha {
+  list-style-type: lower-alpha;
+  padding-left: 2em;
+}
+
+.advanced-list-upper-alpha {
+  list-style-type: upper-alpha;
+  padding-left: 2em;
+}
+
+/* Advanced Table Styles */
+.advanced-table td {
+  vertical-align: top;
+  padding: 1em;
+}
+
+.advanced-table-cell {
+  padding: 1em;
+  border: 1px solid #d4d4d5;
+}
+
+.advanced-table-cell .ui.card {
+  margin: 0;
+}
+
+/* Responsive table styles */
+@media only screen and (max-width: 767px) {
+  .advanced-table td,
+  .advanced-table-cell {
+    display: block;
+    width: 100%;
+  }
+}
 
 .fade-enter {
   opacity: 0;
