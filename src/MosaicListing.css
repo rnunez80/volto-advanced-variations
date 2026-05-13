@@ -1,0 +1,392 @@
+/* ============================================================
+   Mosaic / Bento Listing Variation  v4
+   Flat grid per group — no nested height-propagation issues.
+   All gaps: 4px. Dark backgrounds only. Border-radius: 0.
+   ============================================================ */
+
+/* ── Outer section ──────────────────────────────────────── */
+.mosaic-listing {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.mosaic-listing__header {
+  margin: 0 0 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1d3a83;
+}
+.mosaic-listing__header a {
+  color: inherit;
+  text-decoration: none;
+}
+.mosaic-listing__header a:hover {
+  text-decoration: underline;
+}
+
+.mosaic-listing__more-link {
+  margin-top: 0.75rem;
+  text-align: right;
+}
+
+.mosaic-listing__more-link a {
+  color: #1d3a83;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ── Outer bento flex wrapper ───────────────────────────── */
+.mosaic-bento,
+.mosaic-bento__group,
+.mosaic-bento__group-inner,
+.mosaic-bento__large,
+.mosaic-bento__small-stack,
+.mosaic-bento__smalls,
+.mosaic-bento__small-item {
+  /* Reset all browser list/margin defaults */
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mosaic-bento {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Each bento row is a 2-column, 2-row sub-grid ──────── */
+/*
+   Layout per group:
+   Col 1            Col 2
+   [  large   ]   [ small-1 ]
+   [  large   ]   [ small-2 ]
+
+   (reversed groups swap columns)
+*/
+.mosaic-bento__group-inner {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  /*height: 460px;*/
+  gap: 14px !important;
+}
+
+/* Large card spans BOTH rows of column 1 (or col 2 when reversed) */
+.mosaic-bento__large {
+  display: flex !important;
+  grid-row: 1 / 3;
+  grid-column: 1;
+  overflow: hidden;
+}
+
+.mosaic-bento__group--reversed .mosaic-bento__large {
+  grid-column: 2;
+}
+
+/* Small-card stack lives in column 2 — but we render TWO separate
+   grid cells instead of a nested stack, so we use display:contents
+   on the stack wrapper and let each small-item sit in its own grid cell */
+.mosaic-bento__small-stack {
+  display: contents !important;
+}
+
+/* .mosaic-bento__smalls is inside display:contents, so skip it */
+.mosaic-bento__smalls {
+  display: contents !important;
+}
+
+/* Each small item is a real grid cell */
+.mosaic-bento__small-item {
+  display: flex !important;
+  grid-column: 2;
+  overflow: hidden;
+}
+
+.mosaic-bento__group--reversed .mosaic-bento__small-item {
+  grid-column: 1;
+}
+
+/* ── Card base ──────────────────────────────────────────── */
+.mosaic-card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mosaic-bento__large,
+.mosaic-bento__small-item {
+  border-radius: 14px;
+  /*box-shadow: 2px 2px 14px rgba(0, 0, 0, .4);*/
+}
+
+/* ── LARGE card: image top (~55%), panel bottom ─────────── */
+.mosaic-card--large {
+  flex-direction: column;
+}
+
+.mosaic-card--large .mosaic-card__image-wrap {
+  flex: 0 0 58%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.mosaic-card--large .mosaic-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  transition: transform 0.4s ease;
+}
+
+.mosaic-card--large:hover .mosaic-card__image-wrap img {
+  transform: scale(1.04);
+}
+
+.mosaic-card--large .mosaic-card__image--placeholder {
+  width: 100%;
+  height: 100%;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SMALL card: image left (~42%), panel right ─────────── */
+.mosaic-card--small {
+  flex-direction: row;
+}
+
+.mosaic-card__image-wrap--side {
+  flex: 0 0 42%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.mosaic-card__image-wrap--side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  transition: transform 0.4s ease;
+}
+
+.mosaic-card--small:hover .mosaic-card__image-wrap--side img {
+  transform: scale(1.04);
+}
+
+.mosaic-card__image--placeholder {
+  background: #2a2a2a;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Force border-radius: 0 on every image in the listing */
+.mosaic-listing img {
+  border-radius: 0 !important;
+}
+
+/* ── Text panel ─────────────────────────────────────────── */
+.mosaic-card__panel {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 3rem 3rem 3em;
+  /* background-color via inline style */
+}
+
+.mosaic-card__panel--side {
+  padding: 0.875rem 2rem 2rem 2rem;
+}
+
+/* ── Title ──────────────────────────────────────────────── */
+.mosaic-card__title--small,
+.mosaic-card__title {
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+li .mosaic-card a {
+  border-bottom: none;
+}
+
+/* ── Date metadata ──────────────────────────────────────── */
+.mosaic-card__dates {
+  font-size: 0.6875rem;
+  color: #fff;
+  margin: 0 0 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  opacity: 0.85;
+}
+
+.mosaic-card__date-label {
+  font-weight: 700;
+}
+
+/* ── Description — always white ─────────────────────────── */
+.mosaic-card__description {
+  color: #ffffff !important;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0 0 0.75rem;
+  flex: 1;
+  min-height: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mosaic-card__description--small {
+  font-size: 1.1rem;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Read More button ───────────────────────────────────── */
+.mosaic-card__cta {
+  margin-top: auto;
+  padding-top: 0.625rem;
+  flex-shrink: 0;
+}
+
+.mosaic-card__btn {
+  display: inline-block;
+  padding: 0.45rem 1.125rem;
+  border: 2px solid var(--btn-border-color, #fff);
+  border-radius: 0;
+  background: transparent;
+  color: var(--btn-color, #fff) !important;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.mosaic-card__btn:hover {
+  background-color: var(--btn-color, #fff);
+  color: var(--card-bg, #1d3a83) !important;
+}
+
+.mosaic-card__btn--small {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.625rem;
+}
+
+/* ── Focus indicators (WCAG 2.1 AA) ─────────────────────── */
+.mosaic-card__title-link:focus-visible,
+.mosaic-card__btn:focus-visible {
+  outline: 3px solid #ffb81c;
+  outline-offset: 3px;
+}
+
+/* ── Responsive: tablet ≤1024px ─────────────────────────── */
+@media only screen and (max-width: 1024px) {
+  .mosaic-bento__group-inner {
+    height: 360px;
+  }
+}
+
+/* ── Responsive: mobile ≤767px ──────────────────────────── */
+@media only screen and (max-width: 767px) {
+  /* Switch to single column, auto height */
+  .mosaic-bento__group-inner {
+    display: flex !important;
+    flex-direction: column;
+    height: auto;
+    gap: 4px !important;
+  }
+
+  /* Undo grid placement on mobile */
+  .mosaic-bento__large,
+  .mosaic-bento__small-stack,
+  .mosaic-bento__small-item {
+    grid-column: unset !important;
+    grid-row: unset !important;
+  }
+
+  .mosaic-bento__small-stack {
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mosaic-bento__smalls {
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mosaic-bento__small-item {
+    display: flex !important;
+  }
+
+  /* Large card: image fixed height on mobile */
+  .mosaic-card--large {
+    min-height: 380px;
+  }
+
+  .mosaic-card--large .mosaic-card__image-wrap {
+    flex: none;
+    height: 200px;
+  }
+
+  /* Small card: top-image layout on mobile */
+  .mosaic-card--small {
+    flex-direction: column;
+    min-height: 220px;
+  }
+
+  .mosaic-card__image-wrap--side {
+    flex: none;
+    height: 140px;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mosaic-card--large .mosaic-card__image-wrap img,
+  .mosaic-card__image-wrap--side img {
+    transition: none;
+  }
+}
+
+/* ── Windows High Contrast ──────────────────────────────── */
+@media (forced-colors: active) {
+  .mosaic-card__panel {
+    border: 1px solid ButtonText;
+  }
+
+  .mosaic-card__btn {
+    border: 2px solid ButtonText;
+    color: ButtonText !important;
+    background: ButtonFace !important;
+  }
+
+  .mosaic-card__title-link:focus-visible,
+  .mosaic-card__btn:focus-visible {
+    outline: 3px solid Highlight;
+  }
+}

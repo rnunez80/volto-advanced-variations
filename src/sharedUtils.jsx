@@ -31,11 +31,11 @@ export const getEventDate = (item) => {
   let start = '', end = '';
   if (item.start) {
     const parsedDate = new Date(Date.parse(item.start));
-    start = `${parsedDate.toLocaleString('default', { month: 'short' })} ${parsedDate.getDate()}`;
+    start = `${parsedDate.toLocaleString('default', { month: 'short' })} ${parsedDate.getDate()}, ${parsedDate.getFullYear()}`;
   }
   if (item.end) {
     const parsedEndDate = new Date(Date.parse(item.end));
-    end = `${parsedEndDate.toLocaleString('default', { month: 'short' })} ${parsedEndDate.getDate()}`;
+    end = `${parsedEndDate.toLocaleString('default', { month: 'short' })} ${parsedEndDate.getDate()}, ${parsedEndDate.getFullYear()}`;
   }
   //if start and end are the same day, only show the start date
   if (start === end) {
