@@ -1,7 +1,6 @@
 import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
-import {flattenToAppURL} from '@plone/volto/helpers';
-import {isInternalURL} from '@plone/volto/helpers/Url/Url';
+import {flattenToAppURL, isInternalURL} from '@plone/volto/helpers';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import {useIntl} from 'react-intl';

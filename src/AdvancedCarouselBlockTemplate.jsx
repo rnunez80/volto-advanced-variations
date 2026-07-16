@@ -2,8 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { Image } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { isInternalURL } from '@plone/volto/helpers/Url/Url';
+import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers';
 import CommonItemRenderer from './CommonItemRenderer';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import PropTypes from 'prop-types'; // Import PropTypes
