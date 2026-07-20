@@ -19,22 +19,20 @@
     "url": "git@github.com:rnunez80/volto-advanced-variations.git"
   },
   "addons": [
-    "@eeacms/volto-listing-block"
   ],
   "dependencies": {
-    "@eeacms/volto-listing-block": "*"
+    "react-slick": "^0.29.0"
+  },
+  "peerDependencies": {
+    "@plone/volto": ">=18.0.0"
+  },
+  "engines": {
+    "node": "^18 || ^20 || ^22"
   },
   "bugs": {
     "url": "https://github.com/rnunez80/volto-advanced-variations/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.10",
-    "@babel/core": "^7.22.10",
-    "@plone/scripts": "*",
-    "babel": "^6.23.0",
-    "glob": "^10.3.3",
-    "prettier": "^3.0.2",
-    "react-slick": "^0.29.0"
   },
   "scripts": {
     "prettier": "make prettier",
