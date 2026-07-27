@@ -221,7 +221,7 @@ const MosaicListingBlockTemplate = ({
                   aria-label={readMoreLabel}
                 >
                   Read More
-                  <span className="hide"> about {item.title || item.id}</span>
+                  <span className="visually-hidden"> about {item.title || item.id}</span>
                 </Link>
               ) : (
                 <a
@@ -232,7 +232,7 @@ const MosaicListingBlockTemplate = ({
                   rel="noopener noreferrer"
                 >
                   Read More{' '}
-                  <span className="hide"> about {item.title || item.id}</span>
+                  <span className="visually-hidden"> about {item.title || item.id}</span>
                 </a>
               )}
             </div>
@@ -353,7 +353,8 @@ const MosaicListingBlockTemplate = ({
                   className="ui white button"
                   aria-label={readMoreLabel}
                 >
-                  Read More
+                  Read More{' '}
+                  <span className="visually-hidden"> about {item.title || item.id}</span>
                 </Link>
               ) : (
                 <a
@@ -363,7 +364,8 @@ const MosaicListingBlockTemplate = ({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Read More
+                  Read More{' '}
+                  <span className="visually-hidden"> about {item.title || item.id}</span>
                 </a>
               )}
             </div>
