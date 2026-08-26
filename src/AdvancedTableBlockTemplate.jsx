@@ -7,6 +7,24 @@ import { getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import './Advanced.css';
 
+const createVttDataUri = (transcript) => {
+  let text = '';
+  if (transcript) {
+    text = typeof transcript === 'string' ? transcript : (transcript.data || '');
+  }
+  let vtt = text;
+  if (typeof window !== 'undefined' && text) {
+    const tmp = document.createElement("DIV");
+    tmp.innerHTML = text;
+    text = (tmp.textContent || tmp.innerText || "").trim();
+    vtt = text;
+  }
+  if (!vtt.startsWith('WEBVTT')) {
+     vtt = `WEBVTT\n\n00:00:00.000 --> 99:59:59.999\n${vtt}`;
+  }
+  return `data:text/vtt;charset=utf-8,${encodeURIComponent(vtt)}`;
+};
+
 const AdvancedTableBlockTemplate = ({
   items,
   moreLinkText,
@@ -25,6 +43,7 @@ const AdvancedTableBlockTemplate = ({
   showTitle,
   showRecurrence,
   creatorauthor,
+  showAudio,
 }) => {
   const processedItems = useMemo(() => {
     return showRecurrence
@@ -58,6 +77,7 @@ const AdvancedTableBlockTemplate = ({
     { key: 'eventTime', label: 'Time', visible: eventTime },
     { key: 'eventLocation', label: 'Location', visible: eventLocation },
     { key: 'creatorauthor', label: 'Author', visible: creatorauthor },
+    { key: 'audio', label: 'Audio', visible: showAudio },
   ];
 
   const visibleColumns = columnHeaders.filter(col => col.visible);
@@ -97,6 +117,17 @@ const AdvancedTableBlockTemplate = ({
       case 'creatorauthor':
         content = creatorauthor && <p className='author'>{item.Creator}</p>;
         break;
+      case 'audio':
+        content = showAudio && (
+          <div className='audio-player-block'>
+            <audio controls style={{ width: '100%' }} aria-label={item.title || 'Audio player'}>
+              <source src={`${flattenToAppURL(item['@id'])}/@@download/file`} />
+              <track kind="captions" src={createVttDataUri(item.audio_transcript)} srcLang="en" label="English" default />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        );
+        break;
       default:
         content = null;
     }
@@ -104,7 +135,7 @@ const AdvancedTableBlockTemplate = ({
   };
 
   const renderHeaderCell = (col, index) => (
-    <th key={index} className='advanced-table-header'>
+    <th key={index} className='advanced-table-header' scope='col'>
       {col.label}
     </th>
   );
@@ -160,6 +191,7 @@ AdvancedTableBlockTemplate.propTypes = {
   showTitle: PropTypes.bool,
   showRecurrence: PropTypes.bool,
   creatorauthor: PropTypes.bool,
+  showAudio: PropTypes.bool,
 };
 
 export default React.memo(AdvancedTableBlockTemplate);

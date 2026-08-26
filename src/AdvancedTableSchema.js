@@ -27,6 +27,7 @@ export const advancedTableSchema = (props) => {
           'eventTime',
           'eventLocation',
           'creatorauthor',
+          'showAudio',
         ],
       },
     ],
@@ -78,6 +79,10 @@ export const advancedTableSchema = (props) => {
       },
       creatorauthor: {
         title: intl.formatMessage(messages.showcreatorauthor),
+        type: 'boolean',
+      },
+      showAudio: {
+        title: intl.formatMessage(messages.showAudio),
         type: 'boolean',
       },
       readMore: {

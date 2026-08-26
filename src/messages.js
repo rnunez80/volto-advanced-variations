@@ -205,6 +205,10 @@ const messages = defineMessages({
     id: 'creatorauthor',
     defaultMessage: 'Show Creator/Author',
   },
+  showAudio: {
+    id: 'showAudio',
+    defaultMessage: 'Show Audio Player',
+  },
   readMore: {
     id: 'readMore',
     defaultMessage: 'Read More',
