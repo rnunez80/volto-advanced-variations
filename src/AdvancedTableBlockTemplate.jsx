@@ -31,11 +31,11 @@ const AdvancedTableBlockTemplate = ({
   moreLinkUrl,
   header,
   headerUrl,
-  headerTag: HeaderTag = 'h2',
+  headerTag: HeaderTag = 'p',
   isEditMode,
   effectiveDate,
   expirationDate,
-  titleTag = 'h3',
+  titleTag = 'p',
   showDescription,
   eventDate,
   eventLocation,
@@ -317,7 +317,7 @@ const AdvancedTableBlockTemplate = ({
     switch (key) {
       case 'title':
         content = (
-          <TitleTag className='threelines'>
+          <strong className='threelines'>
             {!isEditMode ? (
               <Link to={item.url} tabIndex={isDuplicate ? -1 : undefined}>
                 {item.title ? item.title : item.id}
@@ -325,7 +325,7 @@ const AdvancedTableBlockTemplate = ({
             ) : (
               item.title || item.id
             )}
-          </TitleTag>
+          </strong>
         );
         break;
       case 'description':
