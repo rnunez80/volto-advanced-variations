@@ -578,6 +578,56 @@ p.effectiveDate {
   margin: 0;
 }
 
+/* Infinite Scroll Table Styles */
+.advanced-table-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.advanced-table-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.advanced-table-scrolling {
+  margin: 0 !important;
+}
+
+.advanced-table-scrolling thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-shadow: 0 1px 0 #d4d4d5;
+}
+
+.advanced-table .table-controls {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem 0;
+}
+
+.advanced-table .table-playpause {
+  background: transparent !important;
+  opacity: 0.6;
+  padding: 0.4em 0.6em !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.advanced-table .table-playpause:hover {
+  opacity: 1;
+}
+
+.advanced-table .table-playpause svg {
+  display: block;
+}
+
 /* Responsive table styles */
 @media only screen and (max-width: 767px) {
   .advanced-table td,

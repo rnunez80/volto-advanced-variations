@@ -257,6 +257,38 @@ const messages = defineMessages({
     id: 'listMarker',
     defaultMessage: 'List Marker',
   },
+  infiniteScroll: {
+    id: 'infiniteScroll',
+    defaultMessage: 'Infinite Scroll Rows',
+  },
+  infiniteScrollDescription: {
+    id: 'infiniteScrollDescription',
+    defaultMessage: 'Enable continuous vertical scrolling for table rows',
+  },
+  rowsToShow: {
+    id: 'rowsToShow',
+    defaultMessage: 'Rows to Show',
+  },
+  rowsToShowDescription: {
+    id: 'rowsToShowDescription',
+    defaultMessage: 'Number of rows visible at a time while scrolling',
+  },
+  pauseDuration: {
+    id: 'pauseDuration',
+    defaultMessage: 'Pause per row (seconds)',
+  },
+  pauseDurationDescription: {
+    id: 'pauseDurationDescription',
+    defaultMessage: 'Number of seconds to pause on each row before scrolling',
+  },
+  pauseLength: {
+    id: 'pauseLength',
+    defaultMessage: 'Pause Length in Seconds',
+  },
+  pauseLengthDescription: {
+    id: 'pauseLengthDescription',
+    defaultMessage: 'Enter the pause length in seconds for each row before scrolling',
+  },
 });
 
 export default messages;
