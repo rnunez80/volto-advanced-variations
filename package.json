@@ -40,5 +40,8 @@
     "prettier": "make prettier",
     "prettier:fix": "make prettier-fix",
     "i18n": "make i18n"
+  },
+  "peerDependencies": {
+    "@plone/volto": ">=17.0.0 || >=18.0.0-alpha.0 || >=19.0.0-alpha.0"
   }
 }
