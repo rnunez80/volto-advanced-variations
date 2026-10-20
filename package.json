@@ -22,7 +22,9 @@
     "@eeacms/volto-listing-block"
   ],
   "dependencies": {
-    "@eeacms/volto-listing-block": "*"
+    "@eeacms/volto-listing-block": "*",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   },
   "bugs": {
     "url": "https://github.com/rnunez80/volto-advanced-variations/issues"
