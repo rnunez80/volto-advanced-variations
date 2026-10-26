@@ -6,6 +6,15 @@ A [Plone/volto](https://plone.org/why-plone) [block](https://6.dev-docs.plone.or
 
 Based on [codesyntax/volto-listingadvanced-variation](https://github.com/codesyntax/volto-listingadvanced-variation) this addon add events options including dates times and location, displaying this listing or search as a carousel/slider, image gallery, styled list, or table layout.
 
+### New in 0.10.0:
+- Volto 19 compatibility and peer dependencies update (`@plone/volto` 17, 18, and 19).
+- SSR resilience and cleanup in `FadeInSection` intersection observers.
+- Bundled `react-slick` and `slick-carousel` directly in dependencies for pnpm workspace compatibility.
+
+### New in 0.9.0:
+- Added auto-scrolling infinite list and table mode for digital signage in `AdvancedTable`.
+- Title header sizing enhancements.
+
 ### New in 0.8.0:
 - Added 'Advanced Table' variation - displays items in a table with columns determined by selected options
 - Added 'Advanced List Marker' variation - allows custom list marker styles (none, disc, circle, square, decimal, roman, alpha)
