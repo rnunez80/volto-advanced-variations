@@ -116,12 +116,43 @@
 }
 
 .advancedView {
-  max-width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .advancedView {
   width: calc(100% + 1em);
   margin-left: -0.5em;
+}
+
+.advancedView .slick-slider,
+.advancedView .slick-list {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.row-column .advancedView,
+.column .advancedView,
+.columns-view .advancedView {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.row-column .advancedView .slick-slider,
+.row-column .advancedView .slick-list,
+.column .advancedView .slick-slider,
+.column .advancedView .slick-list,
+.columns-view .advancedView .slick-slider,
+.columns-view .advancedView .slick-list {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .slick-prev:before,
@@ -185,28 +216,43 @@
   }
 }
 
-@media only screen and (max-width: 1222px) {
-  .view-editview .advancedView {
-    max-width: calc(100vw - 475px) !important;
-  }
+/* In edit mode, ensure advancedView and its slick components stay strictly within container/column */
+.view-editview .advancedView,
+.view-editview .advancedSlider,
+body.view-editview .advancedView,
+body.view-editview .advancedSlider,
+body.content-view-edit .advancedView,
+body.content-view-edit .advancedSlider,
+.view-editview .block.listing.advancedCarousel,
+body.view-editview .block.listing.advancedCarousel,
+body.content-view-edit .block.listing.advancedCarousel,
+.view-editview .block-editor-listing,
+body.view-editview .block-editor-listing,
+body.content-view-edit .block-editor-listing {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
 }
 
-@media only screen and (min-width: 1223px) and (max-width: 1446px) {
-  .view-editview .advancedView {
-    max-width: 730px !important;
-  }
-}
-
-@media only screen and (min-width: 1447px) and (max-width: 1654px) {
-  .view-editview .advancedView {
-    max-width: 940px !important;
-  }
-}
-
-@media only screen and (min-width: 1655px) {
-  .view-editview .advancedView {
-    max-width: 1134px !important;
-  }
+.view-editview .advancedView .slick-slider,
+.view-editview .advancedView .slick-list,
+.view-editview .advancedSlider .slick-slider,
+.view-editview .advancedSlider .slick-list,
+body.view-editview .advancedView .slick-slider,
+body.view-editview .advancedView .slick-list,
+body.view-editview .advancedSlider .slick-slider,
+body.view-editview .advancedSlider .slick-list,
+body.content-view-edit .advancedView .slick-slider,
+body.content-view-edit .advancedView .slick-list,
+body.content-view-edit .advancedSlider .slick-slider,
+body.content-view-edit .advancedSlider .slick-list {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
 }
 
 @media screen and (min-width: 767px) {
@@ -226,9 +272,6 @@
 }
 
 @media screen and (max-width: 766px) {
-  .view-editview .advancedView {
-    max-width: calc(100vw - 28px) !important;
-  }
 
   .styled-listing.has--stretch--stretch.styled.stretch {
     /*left: calc(50% - 50vw) !important;*/

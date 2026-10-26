@@ -27,7 +27,7 @@ const useSliderControls = () => {
 };
 
 const AdvancedCarouselBlockTemplate = ({
-  items,
+  items = [],
   moreLinkText,
   moreLinkUrl,
   header,
@@ -60,9 +60,10 @@ const AdvancedCarouselBlockTemplate = ({
 
   // Preprocess items for recurrence
   const processedItems = useMemo(() => {
+    const safeItems = Array.isArray(items) ? items : [];
     return showRecurrence
-      ? processItemsForRecurrence(items)
-      : items.map(item => ({
+      ? processItemsForRecurrence(safeItems)
+      : safeItems.map(item => ({
         ...item,
         url: flattenToAppURL(item['@id']),
       }));
@@ -81,6 +82,17 @@ const AdvancedCarouselBlockTemplate = ({
 
   const moreLink = getLink(moreLinkUrl?.[0]?.['@id'], moreLinkText);
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
+
+  if (!processedItems || processedItems.length === 0) {
+    return isEditMode ? (
+      <div className='advancedView advancedSlider'>
+        {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
+        <div className='ui message info'>
+          <p>No items found for this listing.</p>
+        </div>
+      </div>
+    ) : null;
+  }
 
   return (
     <div className='advancedView advancedSlider'>
