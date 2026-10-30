@@ -278,54 +278,113 @@ body.content-view-edit .advancedSlider .slick-list {
     width: 100vw !important;
     margin: 0 !important;
   }
+}
 
+/* Slick Arrow Controls */
+.advancedView .slick-prev,
+.advancedView .slick-next {
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.advancedView .slick-prev:hover,
+.advancedView .slick-next:hover {
+  opacity: 1;
+}
+
+.advancedView .slick-prev {
+  left: -20px;
+  transform: translateY(-50%);
+}
+
+.advancedView .slick-next {
+  right: -20px;
+  transform: translateY(-50%);
+}
+
+/* On mobile / tablet, pull arrows inside visible boundary */
+@media screen and (max-width: 991px) {
   .advancedView .slick-prev {
-    z-index: 2;
-    transform: translateX(0);
-    opacity: 0;
+    left: 8px !important;
   }
-
-  .advancedView:hover .slick-prev {
-    transform: translateX(42px);
-    opacity: 1;
-    transition: opacity 260ms ease-out, transform 260ms ease-out;
-  }
-
   .advancedView .slick-next {
-    z-index: 2;
-    transform: translateX(0);
-    opacity: 0;
-  }
-
-  .advancedView:hover .slick-next {
-    transform: translateX(-42px);
-    opacity: 1;
-    transition: opacity 260ms ease-out, transform 260ms ease-out;
+    right: 8px !important;
   }
 }
 
-.advancedView .column1 .slick-prev {
-  z-index: 2;
-  transform: translateX(0);
-  opacity: 0;
+/* Full width carousels outside rows: keep arrows aligned with layout bounds instead of hugging viewport edge */
+.has--block-width--full .advancedView .slick-prev,
+.has--stretch--stretch .advancedView .slick-prev,
+.stretch .advancedView .slick-prev {
+  left: max(20px, calc((100% - var(--layout-container-width, 1440px)) / 2 + 20px)) !important;
 }
 
-.advancedView:hover .column1 .slick-prev {
-  transform: translateX(42px);
-  opacity: 1;
-  transition: opacity 260ms ease-out, transform 260ms ease-out;
+.has--block-width--full .advancedView .slick-next,
+.has--stretch--stretch .advancedView .slick-next,
+.stretch .advancedView .slick-next {
+  right: max(20px, calc((100% - var(--layout-container-width, 1440px)) / 2 + 20px)) !important;
 }
 
-.advancedView .column1 .slick-next {
-  z-index: 2;
-  transform: translateX(0);
-  opacity: 0;
+/* When carousel is ON A ROW: contain arrows strictly within column boundary */
+.row-column .advancedView .slick-prev,
+.block.row .advancedView .slick-prev,
+.columns-view .advancedView .slick-prev {
+  left: 10px !important;
+  right: auto !important;
+  z-index: 10 !important;
+  transform: translateY(-50%) !important;
+  opacity: 0.9 !important;
 }
 
-.advancedView:hover .column1 .slick-next {
-  transform: translateX(-42px);
-  opacity: 1;
-  transition: opacity 260ms ease-out, transform 260ms ease-out;
+.row-column .advancedView .slick-next,
+.block.row .advancedView .slick-next,
+.columns-view .advancedView .slick-next {
+  right: 10px !important;
+  left: auto !important;
+  z-index: 10 !important;
+  transform: translateY(-50%) !important;
+  opacity: 0.9 !important;
+}
+
+.row-column .advancedView .slick-prev:hover,
+.block.row .advancedView .slick-prev:hover,
+.columns-view .advancedView .slick-prev:hover {
+  opacity: 1 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.row-column .advancedView .slick-next:hover,
+.block.row .advancedView .slick-next:hover,
+.columns-view .advancedView .slick-next:hover {
+  opacity: 1 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* Ensure row column containment and positioning context */
+.row-column .advancedView,
+.row-column .advancedSlider,
+.row-column .slick-slider,
+.block.row .advancedView,
+.block.row .advancedSlider,
+.block.row .slick-slider,
+.columns-view .advancedView,
+.columns-view .advancedSlider,
+.columns-view .slick-slider {
+  position: relative !important;
+}
+
+/* Inside row columns: contain dots to column width */
+.row-column .advancedView .slick-dots,
+.block.row .advancedView .slick-dots,
+.columns-view .advancedView .slick-dots {
+  width: 100% !important;
+  max-width: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
 }
 
 .advancedView .column1 .backgroundimage:hover {
@@ -370,6 +429,49 @@ body.content-view-edit .advancedSlider .slick-list {
 .ui.one.column.grid.advanced-item .column.background {
   padding: 0 0 0 0 !important;
   margin: 0;
+}
+
+.advanced-item .advanced-item-inner {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .advanced-item .column.left .ui.grid,
+  .advanced-item .column.right .ui.grid,
+  .advanced-item .advanced-item-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+
+  .advanced-item .column.left .ui.grid > .column,
+  .advanced-item .column.right .ui.grid > .column,
+  .advanced-item .advanced-item-inner > .column {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .advanced-item .column.left .ui.grid > .advancedImage,
+  .advanced-item .column.right .ui.grid > .advancedImage,
+  .advanced-item .advanced-item-inner > .advancedImage {
+    order: -1 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .advanced-item .column.left .ui.grid > .advancedContent,
+  .advanced-item .column.right .ui.grid > .advancedContent,
+  .advanced-item .column.left .ui.grid > .column:not(.advancedImage),
+  .advanced-item .column.right .ui.grid > .column:not(.advancedImage),
+  .advanced-item .advanced-item-inner > .advancedContent,
+  .advanced-item .advanced-item-inner > .column:not(.advancedImage) {
+    order: 1 !important;
+  }
 }
 
 .block.listing.advanced .ui.stackable.one.column.grid,
@@ -430,14 +532,94 @@ body.content-view-edit .advancedSlider .slick-list {
 }
 
 /* end eventCard */
-.playpause {
-  position: absolute;
-  background: transparent !important;
-  transform: translate(10px, -61px);
-  opacity: .25;
+/* Unified Dots & Play/Pause Container */
+.advancedView .slick-dots-container {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  position: absolute !important;
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+  max-width: 90% !important;
+  margin: 0 !important;
+  padding: 2px 8px !important;
+  z-index: 5 !important;
 }
 
-.playpause:hover {
+.advancedView .slick-dots-container .slick-dots {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  list-style: none !important;
+}
+
+.advancedView .slick-dots-container .playpause {
+  position: static !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 2px !important;
+  min-height: 0 !important;
+  height: 24px !important;
+  width: 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  opacity: 0.5;
+  cursor: pointer;
+  order: -1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.advancedView .slick-dots-container .playpause:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.advancedView .slick-dots-container .playpause .image,
+.advancedView .slick-dots-container .playpause img {
+  height: 14px !important;
+  width: 14px !important;
+  display: block;
+}
+
+/* Fallback standalone dots (when not using slick-dots-container) */
+.advancedView > .slick-slider > .slick-dots,
+.advancedView .slick-dots:not(.slick-dots-container *) {
+  bottom: 16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Fallback standalone playpause */
+.advancedView > .playpause {
+  position: absolute;
+  bottom: 14px;
+  left: calc(50% - 60px);
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  opacity: 0.5;
+}
+
+.advancedView > .playpause:hover {
   opacity: 1;
 }
 

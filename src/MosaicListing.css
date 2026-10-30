@@ -1,20 +1,22 @@
 /* ============================================================
-   Mosaic / Bento Listing Variation  v4
-   Flat grid per group — no nested height-propagation issues.
-   All gaps: 4px. Dark backgrounds only. Border-radius: 0.
+   Mosaic / Bento Listing Variation
+   Campaign Style: York College "Your Village Awaits"
    ============================================================ */
 
 /* ── Outer section ──────────────────────────────────────── */
 .mosaic-listing {
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 2rem;
 }
 
 .mosaic-listing__header {
   margin: 0 0 1.25rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
   color: #1d3a83;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
 }
 .mosaic-listing__header a {
   color: inherit;
@@ -25,17 +27,18 @@
 }
 
 .mosaic-listing__more-link {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   text-align: right;
 }
 
 .mosaic-listing__more-link a {
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
   color: #1d3a83;
   font-weight: 700;
   text-decoration: underline;
 }
 
-/* ── Outer bento flex wrapper ───────────────────────────── */
+/* ── Bento Grid Structure ───────────────────────────────── */
 .mosaic-bento,
 .mosaic-bento__group,
 .mosaic-bento__group-inner,
@@ -43,7 +46,6 @@
 .mosaic-bento__small-stack,
 .mosaic-bento__smalls,
 .mosaic-bento__small-item {
-  /* Reset all browser list/margin defaults */
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -52,82 +54,85 @@
 .mosaic-bento {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 1.25rem;
 }
 
-/* ── Each bento row is a 2-column, 2-row sub-grid ──────── */
-/*
-   Layout per group:
-   Col 1            Col 2
-   [  large   ]   [ small-1 ]
-   [  large   ]   [ small-2 ]
-
-   (reversed groups swap columns)
-*/
+/* Layout per group: 2 columns, 2 rows */
 .mosaic-bento__group-inner {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  /*height: 460px;*/
-  gap: 14px !important;
+  gap: 1.25rem !important;
 }
 
-/* Large card spans BOTH rows of column 1 (or col 2 when reversed) */
+/* Large card spans both rows */
 .mosaic-bento__large {
   display: flex !important;
   grid-row: 1 / 3;
   grid-column: 1;
   overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mosaic-bento__large:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 .mosaic-bento__group--reversed .mosaic-bento__large {
   grid-column: 2;
 }
 
-/* Small-card stack lives in column 2 — but we render TWO separate
-   grid cells instead of a nested stack, so we use display:contents
-   on the stack wrapper and let each small-item sit in its own grid cell */
 .mosaic-bento__small-stack {
   display: contents !important;
 }
 
-/* .mosaic-bento__smalls is inside display:contents, so skip it */
 .mosaic-bento__smalls {
   display: contents !important;
 }
 
-/* Each small item is a real grid cell */
 .mosaic-bento__small-item {
   display: flex !important;
   grid-column: 2;
   overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mosaic-bento__small-item:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
 }
 
 .mosaic-bento__group--reversed .mosaic-bento__small-item {
   grid-column: 1;
 }
 
-/* ── Card base ──────────────────────────────────────────── */
+/* ── Card Base ──────────────────────────────────────────── */
 .mosaic-card {
   display: flex;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+  background-color: var(--card-bg, #1d3a83);
 }
 
-.mosaic-bento__large,
-.mosaic-bento__small-item {
-  border-radius: 14px;
-  /*box-shadow: 2px 2px 14px rgba(0, 0, 0, .4);*/
+/* Force border-radius on images inside cards */
+.mosaic-listing img {
+  border-radius: 0 !important;
 }
 
-/* ── LARGE card: image top (~55%), panel bottom ─────────── */
+/* ── LARGE card: Image top, panel bottom ────────────────── */
 .mosaic-card--large {
   flex-direction: column;
 }
 
 .mosaic-card--large .mosaic-card__image-wrap {
-  flex: 0 0 58%;
+  flex: 0 0 54%;
+  position: relative;
   overflow: hidden;
   line-height: 0;
 }
@@ -137,8 +142,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .mosaic-card--large:hover .mosaic-card__image-wrap img {
@@ -148,19 +152,20 @@
 .mosaic-card--large .mosaic-card__image--placeholder {
   width: 100%;
   height: 100%;
-  background: #2a2a2a;
+  background: #1c2331;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ── SMALL card: image left (~42%), panel right ─────────── */
+/* ── SMALL card: Image left, panel right ────────────────── */
 .mosaic-card--small {
   flex-direction: row;
 }
 
 .mosaic-card__image-wrap--side {
   flex: 0 0 42%;
+  position: relative;
   overflow: hidden;
   line-height: 0;
 }
@@ -170,8 +175,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .mosaic-card--small:hover .mosaic-card__image-wrap--side img {
@@ -179,7 +183,7 @@
 }
 
 .mosaic-card__image--placeholder {
-  background: #2a2a2a;
+  background: #1c2331;
   width: 100%;
   height: 100%;
   display: flex;
@@ -187,139 +191,243 @@
   justify-content: center;
 }
 
-/* Force border-radius: 0 on every image in the listing */
-.mosaic-listing img {
-  border-radius: 0 !important;
-}
-
-/* ── Text panel ─────────────────────────────────────────── */
+/* ── Text Panel with Dynamic Geometric Facets ───────────── */
 .mosaic-card__panel {
   flex: 1;
   min-width: 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 3rem 3rem 3em;
-  /* background-color via inline style */
+  padding: 1.75rem 2rem 1.75rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--card-bg, #1d3a83);
+}
+
+/* Diagonal shard dynamic facet effect as seen in campaign ads */
+.mosaic-card__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 42%, transparent 42%),
+    linear-gradient(298deg, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 50%),
+    linear-gradient(185deg, rgba(255, 255, 255, 0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mosaic-card__panel::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 60%;
+  height: 160%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, transparent 65%);
+  transform: skewX(-22deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure panel content sits above facets */
+.mosaic-card__panel > * {
+  position: relative;
+  z-index: 2;
 }
 
 .mosaic-card__panel--side {
-  padding: 0.875rem 2rem 2rem 2rem;
+  padding: 1.25rem 1.5rem 1.25rem 1.5rem;
 }
 
-/* ── Title ──────────────────────────────────────────────── */
-.mosaic-card__title--small,
+/* ── Title: Bold, Uppercase, Campaign Impact ────────────── */
 .mosaic-card__title {
-  margin: 0 0 0.5rem;
-  font-weight: 800;
-  line-height: 1.15;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  margin: 0 0 0.65rem;
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif) !important;
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
+  font-weight: 800 !important;
+  line-height: 1.08;
+  text-transform: uppercase !important;
+  letter-spacing: -0.015em;
+  color: #ffffff !important;
+}
+
+.mosaic-card__title--small {
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  line-height: 1.12;
+  margin-bottom: 0.5rem;
+}
+
+.mosaic-card__title-link {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  display: block;
+}
+
+.mosaic-card__title-link:hover {
+  text-decoration: none !important;
+  opacity: 0.92;
 }
 
 li .mosaic-card a {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
-/* ── Date metadata ──────────────────────────────────────── */
+/* ── Dates ──────────────────────────────────────────────── */
 .mosaic-card__dates {
-  font-size: 0.6875rem;
-  color: #fff;
-  margin: 0 0 0.4rem;
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 0.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  opacity: 0.85;
+  gap: 0.5rem;
 }
 
 .mosaic-card__date-label {
   font-weight: 700;
+  color: #ffffff;
 }
 
-/* ── Description — always white ─────────────────────────── */
+/* ── Description ────────────────────────────────────────── */
 .mosaic-card__description {
-  color: #ffffff !important;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  margin: 0 0 0.75rem;
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 1.02rem;
+  line-height: 1.42;
+  margin: 0 0 1rem;
   flex: 1;
   min-height: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .mosaic-card__description--small {
-  font-size: 1.1rem;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  font-size: 0.92rem;
+  line-height: 1.38;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   margin-bottom: 0.5rem;
 }
 
-/* ── Read More button ───────────────────────────────────── */
-.mosaic-card__cta {
+/* ── Card Footer: Pill button ───────────────────────────── */
+.mosaic-card__footer {
   margin-top: auto;
-  padding-top: 0.625rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+
+.mosaic-card__footer--small {
+  padding-top: 0.5rem;
+}
+
+/* ── Pill Button (Campaign Style) ───────────────────────── */
+.mosaic-card__cta {
   flex-shrink: 0;
 }
 
-.mosaic-card__btn {
-  display: inline-block;
-  padding: 0.45rem 1.125rem;
-  border: 2px solid var(--btn-border-color, #fff);
-  border-radius: 0;
-  background: transparent;
-  color: var(--btn-color, #fff) !important;
-  font-size: 0.6875rem;
+.mosaic-card__pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.58rem 1.4rem;
+  border-radius: 9999px;
+  font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  text-decoration: none !important;
   cursor: pointer;
-  line-height: 1.4;
+  line-height: 1.2;
   white-space: nowrap;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.mosaic-card__btn:hover {
-  background-color: var(--btn-color, #fff);
-  color: var(--card-bg, #1d3a83) !important;
+.mosaic-card__pill-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38);
+  filter: brightness(1.12);
+  color: #ffffff !important;
+  text-decoration: none !important;
 }
 
-.mosaic-card__btn--small {
-  padding: 0.35rem 0.75rem;
-  font-size: 0.625rem;
+.mosaic-card__pill-btn--small {
+  padding: 0.42rem 1.1rem;
+  font-size: 0.78rem;
+}
+
+.mosaic-card__pill-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mosaic-card__pill-btn:hover .mosaic-card__pill-arrow {
+  transform: translateX(3px);
 }
 
 /* ── Focus indicators (WCAG 2.1 AA) ─────────────────────── */
 .mosaic-card__title-link:focus-visible,
-.mosaic-card__btn:focus-visible {
-  outline: 3px solid #ffb81c;
-  outline-offset: 3px;
+.mosaic-card__pill-btn:focus-visible {
+  outline: 3px solid #ffb81c !important;
+  outline-offset: 3px !important;
 }
 
 /* ── Responsive: tablet ≤1024px ─────────────────────────── */
 @media only screen and (max-width: 1024px) {
   .mosaic-bento__group-inner {
-    height: 360px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem !important;
+  }
+
+  .mosaic-bento__large,
+  .mosaic-bento__group--reversed .mosaic-bento__large {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .mosaic-bento__small-item,
+  .mosaic-bento__group--reversed .mosaic-bento__small-item {
+    grid-column: 1;
+  }
+
+  .mosaic-card--large {
+    min-height: 480px;
+  }
+
+  .mosaic-card--large .mosaic-card__image-wrap {
+    height: 260px;
+    flex: none;
+  }
+
+  .mosaic-card--small {
+    min-height: 240px;
   }
 }
 
 /* ── Responsive: mobile ≤767px ──────────────────────────── */
 @media only screen and (max-width: 767px) {
-  /* Switch to single column, auto height */
+  .mosaic-bento {
+    gap: 1rem;
+  }
+
   .mosaic-bento__group-inner {
     display: flex !important;
     flex-direction: column;
-    height: auto;
-    gap: 4px !important;
+    gap: 1rem !important;
   }
 
-  /* Undo grid placement on mobile */
   .mosaic-bento__large,
   .mosaic-bento__small-stack,
   .mosaic-bento__small-item {
@@ -330,46 +438,67 @@ li .mosaic-card a {
   .mosaic-bento__small-stack {
     display: flex !important;
     flex-direction: column;
-    gap: 4px;
+    gap: 1rem;
   }
 
   .mosaic-bento__smalls {
     display: flex !important;
     flex-direction: column;
-    gap: 4px;
+    gap: 1rem;
   }
 
   .mosaic-bento__small-item {
     display: flex !important;
   }
 
-  /* Large card: image fixed height on mobile */
+  /* Large card mobile */
   .mosaic-card--large {
-    min-height: 380px;
+    min-height: auto;
   }
 
   .mosaic-card--large .mosaic-card__image-wrap {
+    height: 210px;
     flex: none;
-    height: 200px;
   }
 
-  /* Small card: top-image layout on mobile */
+  /* Small card stacked vertically on mobile */
   .mosaic-card--small {
     flex-direction: column;
-    min-height: 220px;
+    min-height: auto;
   }
 
   .mosaic-card__image-wrap--side {
+    height: 180px;
     flex: none;
-    height: 140px;
+  }
+
+  .mosaic-card__panel,
+  .mosaic-card__panel--side {
+    padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+  }
+
+  .mosaic-card__title {
+    font-size: 1.35rem;
+  }
+
+  .mosaic-card__title--small {
+    font-size: 1.2rem;
+  }
+
+  .mosaic-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
 
 /* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .mosaic-card--large .mosaic-card__image-wrap img,
-  .mosaic-card__image-wrap--side img {
-    transition: none;
+  .mosaic-card__image-wrap--side img,
+  .mosaic-card__pill-btn,
+  .mosaic-card__pill-arrow {
+    transition: none !important;
   }
 }
 
@@ -379,14 +508,14 @@ li .mosaic-card a {
     border: 1px solid ButtonText;
   }
 
-  .mosaic-card__btn {
+  .mosaic-card__pill-btn {
     border: 2px solid ButtonText;
     color: ButtonText !important;
     background: ButtonFace !important;
   }
 
   .mosaic-card__title-link:focus-visible,
-  .mosaic-card__btn:focus-visible {
+  .mosaic-card__pill-btn:focus-visible {
     outline: 3px solid Highlight;
   }
 }

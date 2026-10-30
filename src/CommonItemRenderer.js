@@ -193,10 +193,15 @@ const CommonItemRenderer = ({
                 </Link>
               </div>
             ) : (
-              <div className='ui grid'>
+              <div className='ui grid advanced-item-inner'>
                 {['up', 'left'].includes(imageSide) && (
-                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                  } wide column advancedImage`}>
+                  <div
+                    className={`${
+                      ['up', 'down'].includes(imageSide)
+                        ? 'twelve wide'
+                        : `${columnClassMap[imageWidth] || 'four'} wide computer ${columnClassMap[imageWidth] || 'four'} wide tablet twelve wide mobile`
+                    } column advancedImage`}
+                  >
                     <Link to={item.url}>
                       <RenderImage
                         item={item}
@@ -207,15 +212,23 @@ const CommonItemRenderer = ({
                     </Link>
                   </div>
                 )}
-                <div className={`${['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
-                  ? 'twelve'
-                  : columnClassMap[12 - imageWidth]
-                } wide column`}>
+                <div
+                  className={`${
+                    ['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
+                      ? 'twelve wide'
+                      : `${columnClassMap[12 - imageWidth] || 'eight'} wide computer ${columnClassMap[12 - imageWidth] || 'eight'} wide tablet twelve wide mobile`
+                  } column advancedContent`}
+                >
                   {renderContent(item)}
                 </div>
                 {['right', 'down'].includes(imageSide) && (
-                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                  } wide column advancedImage`}>
+                  <div
+                    className={`${
+                      ['up', 'down'].includes(imageSide)
+                        ? 'twelve wide'
+                        : `${columnClassMap[imageWidth] || 'four'} wide computer ${columnClassMap[imageWidth] || 'four'} wide tablet twelve wide mobile`
+                    } column advancedImage`}
+                  >
                     <Link to={item.url}>
                       <RenderImage
                         item={item}

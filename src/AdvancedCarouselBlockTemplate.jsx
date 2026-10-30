@@ -102,6 +102,7 @@ const AdvancedCarouselBlockTemplate = ({
         ref={sliderRef}
         className={`column${howManyColumns}`}
         dots
+        dotsClass="slick-dots-container"
         infinite
         lazyLoad
         speed={500}
@@ -111,6 +112,30 @@ const AdvancedCarouselBlockTemplate = ({
         autoplaySpeed={autoplaySpeed * 1000}
         pauseOnHover={false}
         arrows
+        appendDots={dots => (
+          <div className='slick-dots-container'>
+            <button
+              type='button'
+              className='ui circular button playpause'
+              onClick={togglePlay}
+              aria-label={isPlaying ? 'Pause Slideshow' : 'Play Slideshow'}
+              title={isPlaying ? 'Pause Slideshow' : 'Play Slideshow'}
+            >
+              {isPlaying ? (
+                <Image
+                  src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
+                  alt='Pause Slideshow'
+                />
+              ) : (
+                <Image
+                  src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
+                  alt='Play Slideshow'
+                />
+              )}
+            </button>
+            <ul className='slick-dots'>{dots}</ul>
+          </div>
+        )}
         responsive={
           howManyColumns >= 3
             ? [
@@ -173,20 +198,6 @@ const AdvancedCarouselBlockTemplate = ({
           </div>
         ))}
       </Slider>
-
-      <button className='ui circular button playpause' onClick={togglePlay}>
-        {isPlaying ? (
-          <Image
-            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
-            alt='Pause Slideshow'
-          />
-        ) : (
-          <Image
-            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
-            alt='Play Slideshow'
-          />
-        )}
-      </button>
     </div>
   );
 };
