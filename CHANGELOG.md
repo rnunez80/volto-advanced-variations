@@ -2,6 +2,15 @@
 
 All notable changes to `volto-advanced-variations` will be documented in this file.
 
+## [0.10.5] - 2026-10-29
+
+### ADA Contrast & Dark Mode Accessibility
+- **Mosaic Listing ADA Contrast & Accessibility (`MosaicListingBlockTemplate.jsx`, `MosaicListing.css`):**
+  - Updated amber background combo from low-contrast `#C47600` (which yielded 3.5:1, failing WCAG AA) to rich bronze amber `#854400`, ensuring white text achieves 7.5:1 contrast (WCAG AAA >= 7.0:1).
+  - Enforced pure white text (`#ffffff !important;`) and subtle text-shadows on card titles, descriptions, and dates in both light and dark modes, preventing dark mode global paragraph styles (`#cbd5e1`) from degrading contrast on card panels.
+  - Added dark mode high-contrast styles for section headers (`.mosaic-listing__header`: `#f1f5f9 !important;`, 14.8:1 contrast) and more links (`.mosaic-listing__more-link a`: `#60a5fa !important;`, 7.2:1 contrast).
+  - Reinforced pill button definition with `border: 2px solid rgba(255, 255, 255, 0.75) !important;` for crisp delineation across all card panel color variants.
+
 ## [0.10.4] - 2026-10-29
 
 ### Campaign Redesign for Mosaic Listing

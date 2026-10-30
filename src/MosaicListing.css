@@ -26,6 +26,11 @@
   text-decoration: underline;
 }
 
+html.dark .mosaic-listing__header,
+html.dark .mosaic-listing__header a {
+  color: #f1f5f9 !important;
+}
+
 .mosaic-listing__more-link {
   margin-top: 1rem;
   text-align: right;
@@ -36,6 +41,14 @@
   color: #1d3a83;
   font-weight: 700;
   text-decoration: underline;
+}
+
+html.dark .mosaic-listing__more-link a {
+  color: #60a5fa !important;
+}
+
+html.dark .mosaic-listing__more-link a:hover {
+  color: #93c5fd !important;
 }
 
 /* ── Bento Grid Structure ───────────────────────────────── */
@@ -241,7 +254,8 @@
 }
 
 /* ── Title: Bold, Uppercase, Campaign Impact ────────────── */
-.mosaic-card__title {
+.mosaic-card__title,
+html.dark .mosaic-card__title {
   margin: 0 0 0.65rem;
   font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif) !important;
   font-size: clamp(1.45rem, 2.2vw, 2.1rem);
@@ -250,23 +264,32 @@
   text-transform: uppercase !important;
   letter-spacing: -0.015em;
   color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
-.mosaic-card__title--small {
+.mosaic-card__title--small,
+html.dark .mosaic-card__title--small {
   font-size: clamp(1.1rem, 1.4vw, 1.35rem);
   line-height: 1.12;
   margin-bottom: 0.5rem;
 }
 
-.mosaic-card__title-link {
+.mosaic-card__title-link,
+html.dark .mosaic-card__title-link,
+.mosaic-card__title a,
+html.dark .mosaic-card__title a {
   color: #ffffff !important;
   text-decoration: none !important;
   display: block;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
-.mosaic-card__title-link:hover {
+.mosaic-card__title-link:hover,
+html.dark .mosaic-card__title-link:hover,
+.mosaic-card__title a:hover,
+html.dark .mosaic-card__title a:hover {
   text-decoration: none !important;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 li .mosaic-card a {
@@ -274,25 +297,33 @@ li .mosaic-card a {
 }
 
 /* ── Dates ──────────────────────────────────────────────── */
-.mosaic-card__dates {
+.mosaic-card__dates,
+html.dark .mosaic-card__dates {
   font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   margin: 0 0 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.mosaic-card__date-label {
+.mosaic-card__date-label,
+html.dark .mosaic-card__date-label {
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 /* ── Description ────────────────────────────────────────── */
-.mosaic-card__description {
+.mosaic-card__description,
+html.dark .mosaic-card__description,
+.mosaic-card p,
+html.dark .mosaic-card p {
   font-family: var(--yc-font-primary, 'Poppins', 'DM Sans', sans-serif);
-  color: rgba(255, 255, 255, 0.95) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   font-size: 1.02rem;
   line-height: 1.42;
   margin: 0 0 1rem;
@@ -305,7 +336,8 @@ li .mosaic-card a {
   overflow: hidden;
 }
 
-.mosaic-card__description--small {
+.mosaic-card__description--small,
+html.dark .mosaic-card__description--small {
   font-size: 0.92rem;
   line-height: 1.38;
   -webkit-line-clamp: 2;
@@ -331,7 +363,8 @@ li .mosaic-card a {
   flex-shrink: 0;
 }
 
-.mosaic-card__pill-btn {
+.mosaic-card__pill-btn,
+html.dark .mosaic-card__pill-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -349,10 +382,12 @@ li .mosaic-card a {
   white-space: nowrap;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.75) !important;
+  color: #ffffff !important;
 }
 
-.mosaic-card__pill-btn:hover {
+.mosaic-card__pill-btn:hover,
+html.dark .mosaic-card__pill-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.38);
   filter: brightness(1.12);

@@ -10,7 +10,7 @@ import './MosaicListing.css';
 const COLOR_COMBOS = [
   { bg: '#B11116', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
   { bg: '#1D3A83', btnBg: '#B11116', btnColor: '#ffffff', text: '#ffffff' },
-  { bg: '#C47600', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#854400', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
   { bg: '#582C6D', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
   { bg: '#8B0B0F', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
   { bg: '#122557', btnBg: '#B11116', btnColor: '#ffffff', text: '#ffffff' },
