@@ -1,6 +1,6 @@
 {
   "name": "volto-advanced-variations",
-  "version": "0.8.0",
+  "version": "0.10.5",
   "description": "Advanced variations: Volto add-on",
   "main": "src/index.js",
   "author": "Rafael Nunez",
@@ -22,7 +22,9 @@
     "@eeacms/volto-listing-block"
   ],
   "dependencies": {
-    "@eeacms/volto-listing-block": "*"
+    "@eeacms/volto-listing-block": "*",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   },
   "bugs": {
     "url": "https://github.com/rnunez80/volto-advanced-variations/issues"
@@ -40,5 +42,8 @@
     "prettier": "make prettier",
     "prettier:fix": "make prettier-fix",
     "i18n": "make i18n"
+  },
+  "peerDependencies": {
+    "@plone/volto": ">=17.0.0 || >=18.0.0-alpha.0 || >=19.0.0-alpha.0"
   }
 }

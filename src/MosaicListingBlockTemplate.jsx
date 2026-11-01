@@ -8,17 +8,21 @@ import { FadeInSection, getEventDate } from './sharedUtils';
 import './MosaicListing.css';
 
 const COLOR_COMBOS = [
-  { bg: '#B11116', text: '#FFE293' },
-  { bg: '#1D3A83', text: '#59CBE8' },
-  { bg: '#8363AA', text: '#ffffff' },
-  { bg: '#C4D600', text: '#1D3A83' },
-  { bg: '#FFB81C', text: '#1D3A83' },
-  { bg: '#59CBE8', text: '#1D3A83' },
-  { bg: '#1D3A83', text: '#C4D600' },
+  { bg: '#B11116', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#1D3A83', btnBg: '#B11116', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#854400', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#582C6D', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#8B0B0F', btnBg: '#1D3A83', btnColor: '#ffffff', text: '#ffffff' },
+  { bg: '#122557', btnBg: '#B11116', btnColor: '#ffffff', text: '#ffffff' },
 ];
 
-// All backgrounds are dark — buttons are always white border + white text.
-// On hover, CSS fills button with white and sets text to the card bg.
+const isValidDate = (d) => {
+  if (!d) return false;
+  const m = moment(d);
+  return m.isValid() && m.year() > 1980;
+};
+
+// All backgrounds are dark — buttons are styled via custom pill styles.
 const BTN_VARS = { '--btn-color': '#ffffff', '--btn-border-color': '#ffffff' };
 
 // Split flat items array into bento groups of 3 [large, small, small]
@@ -183,19 +187,19 @@ const MosaicListingBlockTemplate = ({
           {/* Date metadata */}
           {(effectiveDate || expirationDate || showStartDate) && (
             <p className="mosaic-card__dates" style={{ color: combo.text }}>
-              {showStartDate && item.start && (
+              {showStartDate && isValidDate(item.start) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Start: </span>
                   {getEventDate(item)}
                 </span>
               )}
-              {effectiveDate && item.effective && (
+              {effectiveDate && isValidDate(item.effective) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Published: </span>
                   {moment(item.effective).format('MMM D, YYYY')}
                 </span>
               )}
-              {expirationDate && item.expires && (
+              {expirationDate && isValidDate(item.expires) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Expires: </span>
                   {moment(item.expires).format('MMM D, YYYY')}
@@ -209,30 +213,55 @@ const MosaicListingBlockTemplate = ({
           )}
 
           {readMore && (
-            <div className="">
-              {isEditMode ? (
-                <span className="ui white button" aria-hidden="true">
-                  Read More
-                </span>
-              ) : isInternalURL(item.url) ? (
-                <Link
-                  to={item.url}
-                  className="ui white button"
-                  aria-label={readMoreLabel}
-                >
-                  Read More
-                </Link>
-              ) : (
-                <a
-                  href={item.url}
-                  className="ui white button"
-                  aria-label={readMoreLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read More
-                </a>
-              )}
+            <div className="mosaic-card__footer">
+              <div className="mosaic-card__cta">
+                {isEditMode ? (
+                  <span
+                    className="mosaic-card__pill-btn"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-hidden="true"
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                  </span>
+                ) : isInternalURL(item.url) ? (
+                  <Link
+                    to={item.url}
+                    className="mosaic-card__pill-btn"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-label={readMoreLabel}
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    <span className="visually-hidden">
+                      {' '}
+                      about {item.title || item.id}
+                    </span>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.url}
+                    className="mosaic-card__pill-btn"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-label={readMoreLabel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    <span className="visually-hidden">
+                      {' '}
+                      about {item.title || item.id}
+                    </span>
+                  </a>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -259,11 +288,13 @@ const MosaicListingBlockTemplate = ({
         aria-labelledby={ariaId}
       >
         {/* Image — left side */}
-        {imageSrc ? (
-          <div
-            className="mosaic-card__image-wrap mosaic-card__image-wrap--side"
-            aria-hidden="true"
-          >
+        <div
+          className={`mosaic-card__image-wrap mosaic-card__image-wrap--side ${
+            !imageSrc ? 'mosaic-card__image--placeholder' : ''
+          }`}
+          aria-hidden="true"
+        >
+          {imageSrc && (
             <img
               src={imageSrc}
               srcSet={[
@@ -277,13 +308,8 @@ const MosaicListingBlockTemplate = ({
               loading="lazy"
               fetchpriority="auto"
             />
-          </div>
-        ) : (
-          <div
-            className="mosaic-card__image-wrap mosaic-card__image-wrap--side mosaic-card__image--placeholder"
-            aria-hidden="true"
-          />
-        )}
+          )}
+        </div>
 
         {/* Panel — right side */}
         <div
@@ -312,19 +338,19 @@ const MosaicListingBlockTemplate = ({
           {/* Date metadata */}
           {(effectiveDate || expirationDate || showStartDate) && (
             <p className="mosaic-card__dates" style={{ color: combo.text }}>
-              {showStartDate && item.start && (
+              {showStartDate && isValidDate(item.start) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Start: </span>
                   {getEventDate(item)}
                 </span>
               )}
-              {effectiveDate && item.effective && (
+              {effectiveDate && isValidDate(item.effective) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Published: </span>
                   {moment(item.effective).format('MMM D, YYYY')}
                 </span>
               )}
-              {expirationDate && item.expires && (
+              {expirationDate && isValidDate(item.expires) && (
                 <span className="mosaic-card__date">
                   <span className="mosaic-card__date-label">Expires: </span>
                   {moment(item.expires).format('MMM D, YYYY')}
@@ -340,30 +366,55 @@ const MosaicListingBlockTemplate = ({
           )}
 
           {readMore && (
-            <div className="mosaic-card__cta">
-              {isEditMode ? (
-                <span className="ui white button" aria-hidden="true">
-                  Read More
-                </span>
-              ) : isInternalURL(item.url) ? (
-                <Link
-                  to={item.url}
-                  className="ui white button"
-                  aria-label={readMoreLabel}
-                >
-                  Read More
-                </Link>
-              ) : (
-                <a
-                  href={item.url}
-                  className="ui white button"
-                  aria-label={readMoreLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Read More
-                </a>
-              )}
+            <div className="mosaic-card__footer mosaic-card__footer--small">
+              <div className="mosaic-card__cta">
+                {isEditMode ? (
+                  <span
+                    className="mosaic-card__pill-btn mosaic-card__pill-btn--small"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-hidden="true"
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                  </span>
+                ) : isInternalURL(item.url) ? (
+                  <Link
+                    to={item.url}
+                    className="mosaic-card__pill-btn mosaic-card__pill-btn--small"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-label={readMoreLabel}
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    <span className="visually-hidden">
+                      {' '}
+                      about {item.title || item.id}
+                    </span>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.url}
+                    className="mosaic-card__pill-btn mosaic-card__pill-btn--small"
+                    style={{
+                      backgroundColor: combo.btnBg,
+                      color: combo.btnColor,
+                    }}
+                    aria-label={readMoreLabel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    <span className="visually-hidden">
+                      {' '}
+                      about {item.title || item.id}
+                    </span>
+                  </a>
+                )}
+              </div>
             </div>
           )}
         </div>

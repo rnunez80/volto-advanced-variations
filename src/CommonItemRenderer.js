@@ -1,14 +1,15 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { isInternalURL } from '@plone/volto/helpers/Url/Url';
-import { Link } from 'react-router-dom';
+import {flattenToAppURL} from '@plone/volto/helpers';
+import {isInternalURL} from '@plone/volto/helpers/Url/Url';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
-import { useIntl } from 'react-intl';
-import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
+import {useIntl} from 'react-intl';
+import {getEventCard, getEventDate, getEventTime} from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import RenderImage from './renderImage';
 import messages from './messages';
+import display from "volto-facultycv/src/customizations/components/manage/Display/Display";
 
 const columnClassMap = {
   1: 'one',
@@ -26,29 +27,29 @@ const columnClassMap = {
 };
 
 const CommonItemRenderer = ({
-  items,
-  showRecurrence,
-  quote,
-  showTitle: showTitle = true,
-  eventCard,
-  titleTag: TitleTag = 'h2',
-  eventDate,
-  eventTime,
-  eventLocation,
-  showDescription: showDescription = true,
-  effectiveDate,
-  expirationDate,
-  isEditMode,
-  imageSide: imageSide = 'up',
-  imageWidth: imageWidth = 4,
-  howManyColumns: howManyColumns = 1,
-  fetchPriority,
-  slidesToScroll: slidesToScroll = 1,
-  autoPlay: autoPlay = true,
-  autoplaySpeed: autoplaySpeed = 5,
-  creatorauthor,
-  readMore,
-}) => {
+                              items,
+                              showRecurrence,
+                              quote,
+                              showTitle: showTitle = true,
+                              eventCard,
+                              titleTag: TitleTag = 'h2',
+                              eventDate,
+                              eventTime,
+                              eventLocation,
+                              showDescription: showDescription = true,
+                              effectiveDate,
+                              expirationDate,
+                              isEditMode,
+                              imageSide: imageSide = 'up',
+                              imageWidth: imageWidth = 4,
+                              howManyColumns: howManyColumns = 1,
+                              fetchPriority,
+                              slidesToScroll: slidesToScroll = 1,
+                              autoPlay: autoPlay = true,
+                              autoplaySpeed: autoplaySpeed = 5,
+                              creatorauthor,
+                              readMore,
+                            }) => {
   const intl = useIntl();
 
   // Process items based on recurrence setting
@@ -91,7 +92,7 @@ const CommonItemRenderer = ({
       )}
 
       {eventCard && getEventCard(item)}
-      {(eventDate || eventTime || eventLocation) && <div className='advancedDatetime'>{renderMetadata(item)}{eventLocation && <span className='location'> | {item.location}</span>}</div>}
+      <div style={{display: 'grid'}}>
       {showTitle && (
         <TitleTag className='threelines'>
           {imageSide === 'background' ? (
@@ -107,6 +108,9 @@ const CommonItemRenderer = ({
           )}
         </TitleTag>
       )}
+      {(eventDate || eventTime || eventLocation) &&
+        <div className='advancedDatetime'>{renderMetadata(item)}{eventLocation &&
+          <span className='location'> | {item.location}</span>}</div>}
       {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
 
       {creatorauthor && <p className='author'>{item.Creator}</p>}
@@ -137,7 +141,7 @@ const CommonItemRenderer = ({
             </a>
           )}
         </div>
-      )}
+      )}</div>
     </>
   );
 
@@ -173,7 +177,7 @@ const CommonItemRenderer = ({
                           fetchpriority={fetchPriority}
                           width='100%'
                           height='auto'
-                          style={{ aspectRatio: '16/9' }}
+                          style={{aspectRatio: '16/9'}}
                         />
                       </Link>
                     ) : (
@@ -189,10 +193,15 @@ const CommonItemRenderer = ({
                 </Link>
               </div>
             ) : (
-              <div className='ui grid'>
+              <div className='ui grid advanced-item-inner'>
                 {['up', 'left'].includes(imageSide) && (
-                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                    } wide column advancedImage`}>
+                  <div
+                    className={`${
+                      ['up', 'down'].includes(imageSide)
+                        ? 'twelve wide'
+                        : `${columnClassMap[imageWidth] || 'four'} wide computer ${columnClassMap[imageWidth] || 'four'} wide tablet twelve wide mobile`
+                    } column advancedImage`}
+                  >
                     <Link to={item.url}>
                       <RenderImage
                         item={item}
@@ -203,15 +212,23 @@ const CommonItemRenderer = ({
                     </Link>
                   </div>
                 )}
-                <div className={`${['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
-                  ? 'twelve'
-                  : columnClassMap[12 - imageWidth]
-                  } wide column`}>
+                <div
+                  className={`${
+                    ['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
+                      ? 'twelve wide'
+                      : `${columnClassMap[12 - imageWidth] || 'eight'} wide computer ${columnClassMap[12 - imageWidth] || 'eight'} wide tablet twelve wide mobile`
+                  } column advancedContent`}
+                >
                   {renderContent(item)}
                 </div>
                 {['right', 'down'].includes(imageSide) && (
-                  <div className={`${['up', 'down'].includes(imageSide) ? 'twelve' : columnClassMap[imageWidth]
-                    } wide column advancedImage`}>
+                  <div
+                    className={`${
+                      ['up', 'down'].includes(imageSide)
+                        ? 'twelve wide'
+                        : `${columnClassMap[imageWidth] || 'four'} wide computer ${columnClassMap[imageWidth] || 'four'} wide tablet twelve wide mobile`
+                    } column advancedImage`}
+                  >
                     <Link to={item.url}>
                       <RenderImage
                         item={item}

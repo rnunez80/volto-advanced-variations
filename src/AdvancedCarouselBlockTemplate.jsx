@@ -27,7 +27,7 @@ const useSliderControls = () => {
 };
 
 const AdvancedCarouselBlockTemplate = ({
-  items,
+  items = [],
   moreLinkText,
   moreLinkUrl,
   header,
@@ -60,9 +60,10 @@ const AdvancedCarouselBlockTemplate = ({
 
   // Preprocess items for recurrence
   const processedItems = useMemo(() => {
+    const safeItems = Array.isArray(items) ? items : [];
     return showRecurrence
-      ? processItemsForRecurrence(items)
-      : items.map(item => ({
+      ? processItemsForRecurrence(safeItems)
+      : safeItems.map(item => ({
         ...item,
         url: flattenToAppURL(item['@id']),
       }));
@@ -82,6 +83,17 @@ const AdvancedCarouselBlockTemplate = ({
   const moreLink = getLink(moreLinkUrl?.[0]?.['@id'], moreLinkText);
   const headerLink = getLink(headerUrl?.[0]?.['@id'], header);
 
+  if (!processedItems || processedItems.length === 0) {
+    return isEditMode ? (
+      <div className='advancedView advancedSlider'>
+        {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
+        <div className='ui message info'>
+          <p>No items found for this listing.</p>
+        </div>
+      </div>
+    ) : null;
+  }
+
   return (
     <div className='advancedView advancedSlider'>
       {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
@@ -90,6 +102,7 @@ const AdvancedCarouselBlockTemplate = ({
         ref={sliderRef}
         className={`column${howManyColumns}`}
         dots
+        dotsClass="slick-dots-container"
         infinite
         lazyLoad
         speed={500}
@@ -99,6 +112,30 @@ const AdvancedCarouselBlockTemplate = ({
         autoplaySpeed={autoplaySpeed * 1000}
         pauseOnHover={false}
         arrows
+        appendDots={dots => (
+          <div className='slick-dots-container'>
+            <button
+              type='button'
+              className='ui circular button playpause'
+              onClick={togglePlay}
+              aria-label={isPlaying ? 'Pause Slideshow' : 'Play Slideshow'}
+              title={isPlaying ? 'Pause Slideshow' : 'Play Slideshow'}
+            >
+              {isPlaying ? (
+                <Image
+                  src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
+                  alt='Pause Slideshow'
+                />
+              ) : (
+                <Image
+                  src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
+                  alt='Play Slideshow'
+                />
+              )}
+            </button>
+            <ul className='slick-dots'>{dots}</ul>
+          </div>
+        )}
         responsive={
           howManyColumns >= 3
             ? [
@@ -161,20 +198,6 @@ const AdvancedCarouselBlockTemplate = ({
           </div>
         ))}
       </Slider>
-
-      <button className='ui circular button playpause' onClick={togglePlay}>
-        {isPlaying ? (
-          <Image
-            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTEgMjJoLTR2LTIwaDR2MjB6bTYtMjBoLTR2MjBoNHYtMjB6Ii8+PC9zdmc+'
-            alt='Pause Slideshow'
-          />
-        ) : (
-          <Image
-            src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMyAyMnYtMjBsMTggMTAtMTggMTB6Ii8+PC9zdmc+'
-            alt='Play Slideshow'
-          />
-        )}
-      </button>
     </div>
   );
 };

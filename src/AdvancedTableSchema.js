@@ -27,6 +27,9 @@ export const advancedTableSchema = (props) => {
           'eventTime',
           'eventLocation',
           'creatorauthor',
+          'showAudio',
+          'infiniteScroll',
+          ...(formData?.infiniteScroll ? ['rowsToShow', 'pauseLength'] : []),
         ],
       },
     ],
@@ -79,6 +82,37 @@ export const advancedTableSchema = (props) => {
       creatorauthor: {
         title: intl.formatMessage(messages.showcreatorauthor),
         type: 'boolean',
+      },
+      showAudio: {
+        title: intl.formatMessage(messages.showAudio),
+        type: 'boolean',
+      },
+      infiniteScroll: {
+        title: intl.formatMessage(messages.infiniteScroll),
+        description: intl.formatMessage(messages.infiniteScrollDescription),
+        type: 'boolean',
+        default: false,
+      },
+      rowsToShow: {
+        title: intl.formatMessage(messages.rowsToShow),
+        description: intl.formatMessage(messages.rowsToShowDescription),
+        type: 'number',
+        minimum: 1,
+        default: 5,
+      },
+      pauseLength: {
+        title: intl.formatMessage(messages.pauseLength),
+        description: intl.formatMessage(messages.pauseLengthDescription),
+        type: 'number',
+        minimum: 1,
+        default: 5,
+      },
+      pauseDuration: {
+        title: intl.formatMessage(messages.pauseLength),
+        description: intl.formatMessage(messages.pauseLengthDescription),
+        type: 'number',
+        minimum: 1,
+        default: 5,
       },
       readMore: {
         title: intl.formatMessage(messages.readMore),

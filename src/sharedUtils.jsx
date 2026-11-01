@@ -69,16 +69,29 @@ export const FadeInSection = ({ children, delay = 0 }) => {
   const domRef = React.useRef();
 
   React.useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(domRef.current);
-        }
-      });
-    }, { rootMargin: '0px 0px 0px 0px' });
-    observer.observe(domRef.current);
-    return () => observer.unobserve(domRef.current);
+    const node = domRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '0px 0px 0px 0px' },
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
