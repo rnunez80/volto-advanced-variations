@@ -9,13 +9,17 @@ const RenderImage = ({ item, isEditMode, howManyColumns, fetchPriority }) => {
   const intl = useIntl();
 
   const imageContent = item.image_field ? (
-    <ResponsiveImage item={item} howManyColumns={howManyColumns} fetchPriority={fetchPriority} />
+    <ResponsiveImage
+      item={item}
+      howManyColumns={howManyColumns}
+      fetchPriority={fetchPriority}
+    />
   ) : (
     <Image
-      className='listImage'
+      className="listImage"
       src={DefaultImageSVG}
       alt={intl.formatMessage(messages.thisContentHasNoImage)}
-      width='100%'
+      width="100%"
     />
   );
 

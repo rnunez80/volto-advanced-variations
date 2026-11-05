@@ -1,24 +1,24 @@
 import loadable from '@loadable/component';
-import {advancedListingSchema} from './AdvancedListingSchema';
-import {advancedCarouselSchema} from './AdvancedCarouselSchema';
-import {mosaicListingSchema} from './MosaicListingSchema';
-import {advancedTableSchema} from './AdvancedTableSchema';
-import {advancedListMarkerSchema} from './AdvancedListMarkerSchema';
+import { advancedListingSchema } from './AdvancedListingSchema';
+import { advancedCarouselSchema } from './AdvancedCarouselSchema';
+import { mosaicListingSchema } from './MosaicListingSchema';
+import { advancedTableSchema } from './AdvancedTableSchema';
+import { advancedListMarkerSchema } from './AdvancedListMarkerSchema';
 
-const LazyAdvancedListingBlockTemplate = loadable(() =>
-  import('./AdvancedListingBlockTemplate'),
+const LazyAdvancedListingBlockTemplate = loadable(
+  () => import('./AdvancedListingBlockTemplate'),
 );
-const LazyAdvancedCarouselBlockTemplate = loadable(() =>
-  import('./AdvancedCarouselBlockTemplate'),
+const LazyAdvancedCarouselBlockTemplate = loadable(
+  () => import('./AdvancedCarouselBlockTemplate'),
 );
-const LazyMosaicListingBlockTemplate = loadable(() =>
-  import('./MosaicListingBlockTemplate'),
+const LazyMosaicListingBlockTemplate = loadable(
+  () => import('./MosaicListingBlockTemplate'),
 );
-const LazyAdvancedTableBlockTemplate = loadable(() =>
-  import('./AdvancedTableBlockTemplate'),
+const LazyAdvancedTableBlockTemplate = loadable(
+  () => import('./AdvancedTableBlockTemplate'),
 );
-const LazyAdvancedListMarkerBlockTemplate = loadable(() =>
-  import('./AdvancedListMarkerBlockTemplate'),
+const LazyAdvancedListMarkerBlockTemplate = loadable(
+  () => import('./AdvancedListMarkerBlockTemplate'),
 );
 
 const applyConfig = (config) => {

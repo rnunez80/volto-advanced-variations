@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
-const getSrcSet = (imageUrl) => `${imageUrl}/teaser 600w, ${imageUrl}/large 800w, ${imageUrl}/larger 1000w`;
+const getSrcSet = (imageUrl) =>
+  `${imageUrl}/teaser 600w, ${imageUrl}/large 800w, ${imageUrl}/larger 1000w`;
 
 const getSizes = (howManyColumns) => {
   switch (howManyColumns) {
@@ -19,25 +20,29 @@ const getSizes = (howManyColumns) => {
   }
 };
 
-const ResponsiveImage = React.memo(({ item, howManyColumns, fetchPriority }) => {
-  const imageUrl = flattenToAppURL(`${item.url}/@@images/${item.image_field}`);
-  const srcset = getSrcSet(imageUrl);
-  const sizes = getSizes(howManyColumns);
+const ResponsiveImage = React.memo(
+  ({ item, howManyColumns, fetchPriority }) => {
+    const imageUrl = flattenToAppURL(
+      `${item.url}/@@images/${item.image_field}`,
+    );
+    const srcset = getSrcSet(imageUrl);
+    const sizes = getSizes(howManyColumns);
 
-  return (
-    <img
-      className='listImage'
-      srcSet={srcset}
-      sizes={sizes}
-      alt={'Learn More about ' + item.title || 'Image'}
-      src={imageUrl + '/teaser'}
-      loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
-      fetchpriority={fetchPriority}
-      decoding="async"
-      style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }}
-    />
-  );
-});
+    return (
+      <img
+        className="listImage"
+        srcSet={srcset}
+        sizes={sizes}
+        alt={'Learn More about ' + item.title || 'Image'}
+        src={imageUrl + '/teaser'}
+        loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
+        fetchpriority={fetchPriority}
+        decoding="async"
+        style={{ width: '100%', height: 'auto', aspectRatio: '16/9' }}
+      />
+    );
+  },
+);
 
 ResponsiveImage.propTypes = {
   item: PropTypes.shape({

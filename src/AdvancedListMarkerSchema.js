@@ -45,12 +45,7 @@ export const advancedListMarkerSchema = (props) => {
       {
         id: 'itemEventOptions',
         title: intl.formatMessage(messages.itemEventOptions),
-        fields: [
-          'eventDate',
-          'eventTime',
-          'eventLocation',
-          'showRecurrence',
-        ],
+        fields: ['eventDate', 'eventTime', 'eventLocation', 'showRecurrence'],
       },
     ],
     properties: {

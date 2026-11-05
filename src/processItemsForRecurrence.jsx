@@ -27,9 +27,14 @@ const processItemsForRecurrence = (originalItems) => {
         if (futureDate > today) {
           if (!firstFutureRecurrenceAdded || rrule.all().indexOf(date) === 1) {
             // Add the item if it's the first future recurrence or the second occurrence
-            const dateStr = `${futureDate.getFullYear()}-${(futureDate.getMonth() + 1)
+            const dateStr = `${futureDate.getFullYear()}-${(
+              futureDate.getMonth() + 1
+            )
               .toString()
-              .padStart(2, '0')}-${futureDate.getDate().toString().padStart(2, '0')}`;
+              .padStart(
+                2,
+                '0',
+              )}-${futureDate.getDate().toString().padStart(2, '0')}`;
             const startTime = new Date(item.start).toTimeString().split(' ')[0];
             const endTime = new Date(item.end).toTimeString().split(' ')[0];
             const startStr = `${dateStr}T${startTime}`;

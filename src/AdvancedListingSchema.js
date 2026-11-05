@@ -28,7 +28,7 @@ export const advancedListingSchema = (props) => {
           'howManyColumns',
           'imageSide',
           'imageWidth',
-          'fetchPriority',  // New field added here
+          'fetchPriority', // New field added here
           'showTitle',
           'showDescription',
           'effectiveDate',
@@ -93,9 +93,9 @@ export const advancedListingSchema = (props) => {
         default: 'up',
       },
       fetchPriority: {
-        title: intl.formatMessage(messages.fetchPriority),  // New property title
-        choices: fetchPriorityChoices,                      // New property choices
-        default: 'auto',                                    // Default value
+        title: intl.formatMessage(messages.fetchPriority), // New property title
+        choices: fetchPriorityChoices, // New property choices
+        default: 'auto', // Default value
       },
       showTitle: {
         title: intl.formatMessage(messages.showTitle),

@@ -39,10 +39,10 @@ const AdvancedListingBlockTemplate = ({
   const processedItems = useMemo(() => {
     return showRecurrence
       ? processItemsForRecurrence(items)
-      : items.map(item => ({
-        ...item,
-        url: flattenToAppURL(item['@id']),
-      }));
+      : items.map((item) => ({
+          ...item,
+          url: flattenToAppURL(item['@id']),
+        }));
   }, [items, showRecurrence]);
 
   const getLink = (url, text) => {
@@ -50,7 +50,7 @@ const AdvancedListingBlockTemplate = ({
     return isInternalURL(url) ? (
       <Link to={flattenToAppURL(url)}>{text || url}</Link>
     ) : (
-      <a href={url} target='_blank' rel='noopener noreferrer'>
+      <a href={url} target="_blank" rel="noopener noreferrer">
         {text || url}
       </a>
     );
@@ -69,12 +69,15 @@ const AdvancedListingBlockTemplate = ({
   const columns = howManyColumns || 3;
 
   return (
-    <div className='ui twelve column grid column-grid'>
-      {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
+    <div className="ui twelve column grid column-grid">
+      {headerLink && (
+        <HeaderTag className="listing-header">{headerLink}</HeaderTag>
+      )}
       {processedItems.map((item, index) => (
         <div
-          className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${columnClassMap[howManyColumns] || 'four'
-            } wide tablet column column-blocks-wrapper`}
+          className={`${columnClassMap[howManyColumns] || 'four'} wide computer twelve wide mobile ${
+            columnClassMap[howManyColumns] || 'four'
+          } wide tablet column column-blocks-wrapper`}
           key={item['@id']}
         >
           {enableAnimation ? (
@@ -126,7 +129,7 @@ const AdvancedListingBlockTemplate = ({
           )}
         </div>
       ))}
-      {moreLink && <div className='more-link'>{moreLink}</div>}
+      {moreLink && <div className="more-link">{moreLink}</div>}
     </div>
   );
 };

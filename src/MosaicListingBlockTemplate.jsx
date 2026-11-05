@@ -224,7 +224,8 @@ const MosaicListingBlockTemplate = ({
                     }}
                     aria-hidden="true"
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                   </span>
                 ) : isInternalURL(item.url) ? (
                   <Link
@@ -236,7 +237,8 @@ const MosaicListingBlockTemplate = ({
                     }}
                     aria-label={readMoreLabel}
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                     <span className="visually-hidden">
                       {' '}
                       about {item.title || item.id}
@@ -254,7 +256,8 @@ const MosaicListingBlockTemplate = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                     <span className="visually-hidden">
                       {' '}
                       about {item.title || item.id}
@@ -377,7 +380,8 @@ const MosaicListingBlockTemplate = ({
                     }}
                     aria-hidden="true"
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                   </span>
                 ) : isInternalURL(item.url) ? (
                   <Link
@@ -389,7 +393,8 @@ const MosaicListingBlockTemplate = ({
                     }}
                     aria-label={readMoreLabel}
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                     <span className="visually-hidden">
                       {' '}
                       about {item.title || item.id}
@@ -407,7 +412,8 @@ const MosaicListingBlockTemplate = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Read More <span className="mosaic-card__pill-arrow">&rarr;</span>
+                    Read More{' '}
+                    <span className="mosaic-card__pill-arrow">&rarr;</span>
                     <span className="visually-hidden">
                       {' '}
                       about {item.title || item.id}

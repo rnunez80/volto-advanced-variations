@@ -37,7 +37,7 @@ export const advancedCarouselSchema = (props) => {
           'titleTag',
           'imageSide',
           'imageWidth',
-          'fetchPriority',  // Added fetch priority field
+          'fetchPriority', // Added fetch priority field
           'showTitle',
           'showDescription',
           'effectiveDate',
@@ -179,7 +179,8 @@ export const advancedCarouselSchema = (props) => {
         description: intl.formatMessage(messages.showRecurrenceDescription),
         type: 'boolean',
       },
-      fetchPriority: {  // Added fetch priority property
+      fetchPriority: {
+        // Added fetch priority property
         title: intl.formatMessage(messages.fetchPriority),
         choices: fetchPriorityChoices,
         default: 'auto',

@@ -1,4 +1,10 @@
-import React, { useMemo, useRef, useState, useEffect, useCallback } from 'react';
+import React, {
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -10,17 +16,17 @@ import './Advanced.css';
 const createVttDataUri = (transcript) => {
   let text = '';
   if (transcript) {
-    text = typeof transcript === 'string' ? transcript : (transcript.data || '');
+    text = typeof transcript === 'string' ? transcript : transcript.data || '';
   }
   let vtt = text;
   if (typeof window !== 'undefined' && text) {
-    const tmp = document.createElement("DIV");
+    const tmp = document.createElement('DIV');
     tmp.innerHTML = text;
-    text = (tmp.textContent || tmp.innerText || "").trim();
+    text = (tmp.textContent || tmp.innerText || '').trim();
     vtt = text;
   }
   if (!vtt.startsWith('WEBVTT')) {
-     vtt = `WEBVTT\n\n00:00:00.000 --> 99:59:59.999\n${vtt}`;
+    vtt = `WEBVTT\n\n00:00:00.000 --> 99:59:59.999\n${vtt}`;
   }
   return `data:text/vtt;charset=utf-8,${encodeURIComponent(vtt)}`;
 };
@@ -54,16 +60,18 @@ const AdvancedTableBlockTemplate = ({
   const processedItems = useMemo(() => {
     return showRecurrence
       ? processItemsForRecurrence(items)
-      : items.map(item => ({
-        ...item,
-        url: flattenToAppURL(item['@id']),
-      }));
+      : items.map((item) => ({
+          ...item,
+          url: flattenToAppURL(item['@id']),
+        }));
   }, [items, showRecurrence]);
 
   const parsedRowsToShow = Math.max(1, parseInt(rowsToShow, 10) || 5);
-  const shouldScroll = Boolean(infiniteScroll) && processedItems.length > parsedRowsToShow;
+  const shouldScroll =
+    Boolean(infiniteScroll) && processedItems.length > parsedRowsToShow;
   const effectivePauseLength = pauseLength ?? pauseDuration ?? 5;
-  const pauseDurationMs = (Math.max(1, parseInt(effectivePauseLength, 10)) || 5) * 1000;
+  const pauseDurationMs =
+    (Math.max(1, parseInt(effectivePauseLength, 10)) || 5) * 1000;
 
   const containerRef = useRef(null);
   const tbodyRef = useRef(null);
@@ -93,7 +101,7 @@ const AdvancedTableBlockTemplate = ({
     let totalFirstSet = 0;
     let maxWindowHeight = 0;
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       const rect = row.getBoundingClientRect();
       offsets.push(rect.top - tbodyTop);
       totalFirstSet += rect.height;
@@ -115,7 +123,7 @@ const AdvancedTableBlockTemplate = ({
     setContainerHeight(Math.ceil(theadHeight + maxWindowHeight));
   }, [parsedRowsToShow]);
 
-  const scrollToRow = useCallback(targetIndex => {
+  const scrollToRow = useCallback((targetIndex) => {
     if (!containerRef.current || !tbodyRef.current) return;
     const offsets = rowOffsetsRef.current;
     if (!offsets || offsets.length === 0) return;
@@ -135,7 +143,7 @@ const AdvancedTableBlockTemplate = ({
     let startTime = null;
     isAnimatingRef.current = true;
 
-    const animateScroll = currentTime => {
+    const animateScroll = (currentTime) => {
       if (!startTime) startTime = currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
@@ -233,7 +241,7 @@ const AdvancedTableBlockTemplate = ({
     };
   }, [shouldScroll, isPaused, pauseDurationMs, scrollToRow]);
 
-  const handleWheel = e => {
+  const handleWheel = (e) => {
     if (!containerRef.current || !firstSetHeightRef.current || !shouldScroll)
       return;
     if (animationFrameRef.current) {
@@ -249,7 +257,7 @@ const AdvancedTableBlockTemplate = ({
     updateCurrentIndexFromScroll();
   };
 
-  const handleTouchStart = e => {
+  const handleTouchStart = (e) => {
     if (!shouldScroll) return;
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
@@ -259,7 +267,7 @@ const AdvancedTableBlockTemplate = ({
     setIsHovered(true);
   };
 
-  const handleTouchMove = e => {
+  const handleTouchMove = (e) => {
     if (
       !shouldScroll ||
       touchStartY.current === null ||
@@ -289,7 +297,7 @@ const AdvancedTableBlockTemplate = ({
     return isInternalURL(url) ? (
       <Link to={flattenToAppURL(url)}>{text || url}</Link>
     ) : (
-      <a href={url} target='_blank' rel='noopener noreferrer'>
+      <a href={url} target="_blank" rel="noopener noreferrer">
         {text || url}
       </a>
     );
@@ -302,7 +310,11 @@ const AdvancedTableBlockTemplate = ({
     { key: 'title', label: 'Title', visible: showTitle },
     { key: 'description', label: 'Description', visible: showDescription },
     { key: 'effectiveDate', label: 'Effective Date', visible: effectiveDate },
-    { key: 'expirationDate', label: 'Expiration Date', visible: expirationDate },
+    {
+      key: 'expirationDate',
+      label: 'Expiration Date',
+      visible: expirationDate,
+    },
     { key: 'eventDate', label: 'Date', visible: eventDate },
     { key: 'eventTime', label: 'Time', visible: eventTime },
     { key: 'eventLocation', label: 'Location', visible: eventLocation },
@@ -310,14 +322,14 @@ const AdvancedTableBlockTemplate = ({
     { key: 'audio', label: 'Audio', visible: showAudio },
   ];
 
-  const visibleColumns = columnHeaders.filter(col => col.visible);
+  const visibleColumns = columnHeaders.filter((col) => col.visible);
 
   const getCellContent = (item, key, isDuplicate = false) => {
     let content;
     switch (key) {
       case 'title':
         content = (
-          <strong className='threelines'>
+          <strong className="threelines">
             {!isEditMode ? (
               <Link to={item.url} tabIndex={isDuplicate ? -1 : undefined}>
                 {item.title ? item.title : item.id}
@@ -329,29 +341,39 @@ const AdvancedTableBlockTemplate = ({
         );
         break;
       case 'description':
-        content = showDescription && item.description && <span>{item.description}</span>;
+        content = showDescription && item.description && (
+          <span>{item.description}</span>
+        );
         break;
       case 'effectiveDate':
-        content = effectiveDate && <span>{new Date(item.effective).toLocaleDateString()}</span>;
+        content = effectiveDate && (
+          <span>{new Date(item.effective).toLocaleDateString()}</span>
+        );
         break;
       case 'expirationDate':
-        content = expirationDate && <span>Expiration: {new Date(item.expires).toLocaleDateString()}</span>;
+        content = expirationDate && (
+          <span>Expiration: {new Date(item.expires).toLocaleDateString()}</span>
+        );
         break;
       case 'eventDate':
         content = eventDate && getEventDate(item);
         break;
       case 'eventTime':
-        content = eventTime && (getEventTime(item) === '12:00 AM - 11:59 PM' ? 'All Day' : getEventTime(item));
+        content =
+          eventTime &&
+          (getEventTime(item) === '12:00 AM - 11:59 PM'
+            ? 'All Day'
+            : getEventTime(item));
         break;
       case 'eventLocation':
         content = eventLocation && item.location;
         break;
       case 'creatorauthor':
-        content = creatorauthor && <p className='author'>{item.Creator}</p>;
+        content = creatorauthor && <p className="author">{item.Creator}</p>;
         break;
       case 'audio':
         content = showAudio && (
-          <div className='audio-player-block'>
+          <div className="audio-player-block">
             <audio
               controls
               style={{ width: '100%' }}
@@ -359,7 +381,13 @@ const AdvancedTableBlockTemplate = ({
               tabIndex={isDuplicate ? -1 : undefined}
             >
               <source src={`${flattenToAppURL(item['@id'])}/@@download/file`} />
-              <track kind="captions" src={createVttDataUri(item.audio_transcript)} srcLang="en" label="English" default />
+              <track
+                kind="captions"
+                src={createVttDataUri(item.audio_transcript)}
+                srcLang="en"
+                label="English"
+                default
+              />
               Your browser does not support the audio element.
             </audio>
           </div>
@@ -372,7 +400,7 @@ const AdvancedTableBlockTemplate = ({
   };
 
   const renderHeaderCell = (col, index) => (
-    <th key={index} className='advanced-table-header' scope='col'>
+    <th key={index} className="advanced-table-header" scope="col">
       {col.label}
     </th>
   );
@@ -380,18 +408,18 @@ const AdvancedTableBlockTemplate = ({
   const renderBodyCell = (item, col, colIndex, isDuplicate = false) => {
     const content = getCellContent(item, col.key, isDuplicate);
     return (
-      <td key={colIndex} className='advanced-table-cell'>
+      <td key={colIndex} className="advanced-table-cell">
         {content}
       </td>
     );
   };
 
   const renderTable = () => (
-    <table className={`ui celled table ${shouldScroll ? 'advanced-table-scrolling' : ''}`}>
+    <table
+      className={`ui celled table ${shouldScroll ? 'advanced-table-scrolling' : ''}`}
+    >
       <thead>
-        <tr>
-          {visibleColumns.map(renderHeaderCell)}
-        </tr>
+        <tr>{visibleColumns.map(renderHeaderCell)}</tr>
       </thead>
       <tbody ref={shouldScroll ? tbodyRef : undefined}>
         {processedItems.map((item, index) => (
@@ -418,15 +446,20 @@ const AdvancedTableBlockTemplate = ({
   );
 
   return (
-    <div className='ui twelve column grid advanced-table'>
-      {headerLink && <HeaderTag className='listing-header'>{headerLink}</HeaderTag>}
+    <div className="ui twelve column grid advanced-table">
+      {headerLink && (
+        <HeaderTag className="listing-header">{headerLink}</HeaderTag>
+      )}
       {shouldScroll ? (
         <div
           ref={containerRef}
-          className='advanced-table-scroll-wrapper'
+          className="advanced-table-scroll-wrapper"
           style={
             containerHeight
-              ? { height: `${containerHeight}px`, maxHeight: `${containerHeight}px` }
+              ? {
+                  height: `${containerHeight}px`,
+                  maxHeight: `${containerHeight}px`,
+                }
               : undefined
           }
           onMouseEnter={() => setIsHovered(true)}
@@ -445,20 +478,32 @@ const AdvancedTableBlockTemplate = ({
       )}
 
       {shouldScroll && (
-        <div className='table-controls'>
+        <div className="table-controls">
           <button
-            type='button'
-            className='ui circular button table-playpause'
-            onClick={() => setIsManualPaused(prev => !prev)}
-            aria-label={isPaused ? 'Play scrolling table' : 'Pause scrolling table'}
+            type="button"
+            className="ui circular button table-playpause"
+            onClick={() => setIsManualPaused((prev) => !prev)}
+            aria-label={
+              isPaused ? 'Play scrolling table' : 'Pause scrolling table'
+            }
             title={isPaused ? 'Play' : 'Pause'}
           >
             {isPaused ? (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M8 5v14l11-7z" />
               </svg>
             ) : (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
               </svg>
             )}
@@ -466,7 +511,7 @@ const AdvancedTableBlockTemplate = ({
         </div>
       )}
 
-      {moreLink && <div className='more-link'>{moreLink}</div>}
+      {moreLink && <div className="more-link">{moreLink}</div>}
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import {flattenToAppURL} from '@plone/volto/helpers';
-import {isInternalURL} from '@plone/volto/helpers/Url/Url';
-import {Link} from 'react-router-dom';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import { isInternalURL } from '@plone/volto/helpers/Url/Url';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
-import {useIntl} from 'react-intl';
-import {getEventCard, getEventDate, getEventTime} from './sharedUtils';
+import { useIntl } from 'react-intl';
+import { getEventCard, getEventDate, getEventTime } from './sharedUtils';
 import processItemsForRecurrence from './processItemsForRecurrence';
 import RenderImage from './renderImage';
 import messages from './messages';
-import display from "volto-facultycv/src/customizations/components/manage/Display/Display";
+import display from 'volto-facultycv/src/customizations/components/manage/Display/Display';
 
 const columnClassMap = {
   1: 'one',
@@ -27,29 +27,29 @@ const columnClassMap = {
 };
 
 const CommonItemRenderer = ({
-                              items,
-                              showRecurrence,
-                              quote,
-                              showTitle: showTitle = true,
-                              eventCard,
-                              titleTag: TitleTag = 'h2',
-                              eventDate,
-                              eventTime,
-                              eventLocation,
-                              showDescription: showDescription = true,
-                              effectiveDate,
-                              expirationDate,
-                              isEditMode,
-                              imageSide: imageSide = 'up',
-                              imageWidth: imageWidth = 4,
-                              howManyColumns: howManyColumns = 1,
-                              fetchPriority,
-                              slidesToScroll: slidesToScroll = 1,
-                              autoPlay: autoPlay = true,
-                              autoplaySpeed: autoplaySpeed = 5,
-                              creatorauthor,
-                              readMore,
-                            }) => {
+  items,
+  showRecurrence,
+  quote,
+  showTitle: showTitle = true,
+  eventCard,
+  titleTag: TitleTag = 'h2',
+  eventDate,
+  eventTime,
+  eventLocation,
+  showDescription: showDescription = true,
+  effectiveDate,
+  expirationDate,
+  isEditMode,
+  imageSide: imageSide = 'up',
+  imageWidth: imageWidth = 4,
+  howManyColumns: howManyColumns = 1,
+  fetchPriority,
+  slidesToScroll: slidesToScroll = 1,
+  autoPlay: autoPlay = true,
+  autoplaySpeed: autoplaySpeed = 5,
+  creatorauthor,
+  readMore,
+}) => {
   const intl = useIntl();
 
   // Process items based on recurrence setting
@@ -57,7 +57,7 @@ const CommonItemRenderer = ({
     if (showRecurrence) {
       return processItemsForRecurrence(items); // Sort by next recurrence date
     }
-    return items.map(item => ({
+    return items.map((item) => ({
       ...item,
       url: flattenToAppURL(item['@id']),
       imageSrc: item.image_field
@@ -67,93 +67,101 @@ const CommonItemRenderer = ({
   }, [items, showRecurrence]);
 
   const renderMetadata = useMemo(() => {
-    return item => (
+    return (item) => (
       <>
-        {eventDate && <span className='start-date'>{getEventDate(item)}</span>}
+        {eventDate && <span className="start-date">{getEventDate(item)}</span>}
         {eventTime && eventDate && <span> | </span>}
         {eventTime && (
-          <span className='start-time'>
-            {getEventTime(item) === '12:00 AM - 11:59 PM' ? 'All Day' : getEventTime(item)}
+          <span className="start-time">
+            {getEventTime(item) === '12:00 AM - 11:59 PM'
+              ? 'All Day'
+              : getEventTime(item)}
           </span>
         )}
       </>
     );
   }, [eventDate, eventTime]);
 
-  const renderContent = item => (
+  const renderContent = (item) => (
     <>
       {quote && (
         <>
           <blockquote>{item.description}</blockquote>
-          <div className='styled-slate right has--align--right align styled'>
+          <div className="styled-slate right has--align--right align styled">
             {item.title || item.id}
           </div>
         </>
       )}
 
       {eventCard && getEventCard(item)}
-      <div style={{display: 'grid'}}>
-      {showTitle && (
-        <TitleTag className='threelines'>
-          {imageSide === 'background' ? (
-            item.title || item.id
-          ) : (
-            !isEditMode ? (
-              <Link to={item.url}>
-                {item.title ? item.title : item.id}
-              </Link>
+      <div style={{ display: 'grid' }}>
+        {showTitle && (
+          <TitleTag className="threelines">
+            {imageSide === 'background' ? (
+              item.title || item.id
+            ) : !isEditMode ? (
+              <Link to={item.url}>{item.title ? item.title : item.id}</Link>
             ) : (
               item.title || item.id
-            )
-          )}
-        </TitleTag>
-      )}
-      {(eventDate || eventTime || eventLocation) &&
-        <div className='advancedDatetime'>{renderMetadata(item)}{eventLocation &&
-          <span className='location'> | {item.location}</span>}</div>}
-      {effectiveDate && <p className='effectiveDate'>{moment(item.effective).format('L')}</p>}
+            )}
+          </TitleTag>
+        )}
+        {(eventDate || eventTime || eventLocation) && (
+          <div className="advancedDatetime">
+            {renderMetadata(item)}
+            {eventLocation && (
+              <span className="location"> | {item.location}</span>
+            )}
+          </div>
+        )}
+        {effectiveDate && (
+          <p className="effectiveDate">{moment(item.effective).format('L')}</p>
+        )}
 
-      {creatorauthor && <p className='author'>{item.Creator}</p>}
+        {creatorauthor && <p className="author">{item.Creator}</p>}
 
-      {expirationDate && <p>Expiration: {moment(item.expires).format('L')}</p>}
-      {showDescription && item.description && <p>{item.description}</p>}
-      {readMore && (
-        <div className='read-more'>
-          {isInternalURL(item.url) ? (
-            <Link
-              to={item.url}
-              className='ui button basic'
-              aria-label={intl.formatMessage(messages.readMoreLabel, {
-                title: item.title,
-              })}
-            >
-              {intl.formatMessage(messages.readMoreButton)}
-            </Link>
-          ) : (
-            <a
-              href={item.url}
-              className='ui button basic'
-              aria-label={intl.formatMessage(messages.readMoreLabel, {
-                title: item.title,
-              })}
-            >
-              {intl.formatMessage(messages.readMoreButton)}
-            </a>
-          )}
-        </div>
-      )}</div>
+        {expirationDate && (
+          <p>Expiration: {moment(item.expires).format('L')}</p>
+        )}
+        {showDescription && item.description && <p>{item.description}</p>}
+        {readMore && (
+          <div className="read-more">
+            {isInternalURL(item.url) ? (
+              <Link
+                to={item.url}
+                className="ui button basic"
+                aria-label={intl.formatMessage(messages.readMoreLabel, {
+                  title: item.title,
+                })}
+              >
+                {intl.formatMessage(messages.readMoreButton)}
+              </Link>
+            ) : (
+              <a
+                href={item.url}
+                className="ui button basic"
+                aria-label={intl.formatMessage(messages.readMoreLabel, {
+                  title: item.title,
+                })}
+              >
+                {intl.formatMessage(messages.readMoreButton)}
+              </a>
+            )}
+          </div>
+        )}
+      </div>
     </>
   );
 
   return (
-    <div className='fade-in loaded'>
-      {processedItems.map(item => (
-        <div key={item['@id']} className='ui one column grid advanced-item'>
+    <div className="fade-in loaded">
+      {processedItems.map((item) => (
+        <div key={item['@id']} className="ui one column grid advanced-item">
           <div className={`column ${imageSide}`}>
             {imageSide === 'background' ? (
-              <div className='backgroundimage'>
+              <div className="backgroundimage">
                 <Link to={item.url} condition={!isEditMode}>
-                  <div className='focuspoint'>
+                  <div className="focuspoint">
                     {item.imageSrc ? (
                       <Link to={item.url}>
                         <img
@@ -170,14 +178,13 @@ const CommonItemRenderer = ({
                             ${item.url}/@@images/${item.image_field}/great 1200w,
                             ${item.url}/@@images/${item.image_field}/huge 1600w
                           `}
-
                           alt={item.title || ''}
-                          className='ui image listImage'
+                          className="ui image listImage"
                           loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
                           fetchpriority={fetchPriority}
-                          width='100%'
-                          height='auto'
-                          style={{aspectRatio: '16/9'}}
+                          width="100%"
+                          height="auto"
+                          style={{ aspectRatio: '16/9' }}
                         />
                       </Link>
                     ) : (
@@ -189,11 +196,11 @@ const CommonItemRenderer = ({
                       />
                     )}
                   </div>
-                  <div className='info-text'>{renderContent(item)}</div>
+                  <div className="info-text">{renderContent(item)}</div>
                 </Link>
               </div>
             ) : (
-              <div className='ui grid advanced-item-inner'>
+              <div className="ui grid advanced-item-inner">
                 {['up', 'left'].includes(imageSide) && (
                   <div
                     className={`${
@@ -214,7 +221,8 @@ const CommonItemRenderer = ({
                 )}
                 <div
                   className={`${
-                    ['up', 'down'].includes(imageSide) || !['left', 'right'].includes(imageSide)
+                    ['up', 'down'].includes(imageSide) ||
+                    !['left', 'right'].includes(imageSide)
                       ? 'twelve wide'
                       : `${columnClassMap[12 - imageWidth] || 'eight'} wide computer ${columnClassMap[12 - imageWidth] || 'eight'} wide tablet twelve wide mobile`
                   } column advancedContent`}
