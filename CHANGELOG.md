@@ -2,6 +2,15 @@
 
 All notable changes to `volto-advanced-variations` will be documented in this file.
 
+## [0.10.6] - 2026-11-11
+
+### Row & Column Side Padding Alignment (`Advanced.css`, `MosaicListing.css`)
+- **Mosaic Listing Side Padding Alignment (`MosaicListing.css`):**
+  - Removed extra `padding: 0 20px` and `max-width: 1400px` from `.mosaic-listing` so standalone and row-nested mosaic listings align flush with the `1.5rem` horizontal gutter of rows, columns, and adjacent blocks.
+- **Slider & Carousel Side Padding Alignment (`Advanced.css`):**
+  - Removed horizontal slide padding (`padding-left: 0 !important; padding-right: 0 !important;`) from `.advancedSlider .slick-slide` when `slidesToShow === 1` (single-slide carousels and carousels inside `.row-column` / `.block.row`), preventing `12px` inset misalignment inside columns and rows.
+  - Added `margin-left: -12px; margin-right: -12px;` compensation on multi-slide `.slick-list` containers so outer cards align flush with the container edge while preserving `24px` (`12px` per side) inter-slide gaps.
+
 ## [0.10.5] - 2026-10-29
 
 ### ADA Contrast & Dark Mode Accessibility
